@@ -43,17 +43,19 @@ class TravelCards extends Component {
   .catch()
   }
 
-  searchField = (event)=>{
+  searchField = (event) => {
     this.setState({input: event.target.value})
     // console.log(event.target.value)
   }
 
   getCountrys = () => { 
-    if (this.state.input.length > 0) {
-      const result = this.state.travelsStore.filter(travel => 
-        travel.destination.toLowerCase() === this.state.input.toLowerCase())
+    const { travelsStore, input } = this.state;
+    if (input.length > 0) {
+      const result = travelsStore.filter(travel => 
+        travel.destination.toLowerCase() === this.state.input.toLowerCase()
+      )
       this.setState({travelsTemp: result})
-    } else {this.setState({travelsTemp: this.state.travelsStore})}
+    } else {this.setState({travelsTemp: travelsStore})}
   }
 
 
@@ -61,19 +63,19 @@ class TravelCards extends Component {
     return (
       <div className='travel-cards'>
         <div className='title-and-home'>
-        <div className='title-travel-cards'>Tuk-tuk proposés</div>
-        <div>
-        <Link className='link-back-arrow' to="/logout">
-          <figure className='fig-back-arrow-travelcards'>
-            <img className='back-arrow' src={back} alt='Arrow to back'/>
-          </figure>
-        </Link>
-        </div>
+          <div className='title-travel-cards'>Tuk-tuk proposés</div>
+          <div>
+            <Link className='link-back-arrow' to="/logout">
+              <figure className='fig-back-arrow-travelcards'>
+                <img className='back-arrow' src={back} alt='Arrow to back'/>
+              </figure>
+            </Link>
+          </div>
         </div>
         <SearchField searchField={this.searchField} input={this.state.input} getCountrys={this.getCountrys}/>
-        {React.Children.toArray(this.state.travelsTemp.map(travel =>{
-          return <div className='liste-travel'>
-              
+        {React.Children.toArray(this.state.travelsTemp.map(travel => {
+          return (
+            <div className='liste-travel'>
               <figure className='fig-img-travel-cards'>
                 <img className='img-travel-cards' alt={travel.cityPic} src={travel.cityPic}></img>
               </figure>
@@ -86,11 +88,11 @@ class TravelCards extends Component {
                   IDuser_creator: travel.IDuser_creator,
                   start_date: travel.start_date,
                   end_date: travel.end_date,
-                  description: travel.description
+                  description: travel.description,
                 }
               }}>
               <div>
-              <h1 className='travel-cards-title'>{travel.destination}</h1>
+                <h1 className='travel-cards-title'>{travel.destination}</h1>
               </div>
               </Link>
               <div className='liste-description-travel-cards'>
@@ -99,12 +101,12 @@ class TravelCards extends Component {
                   <span className='travel-date'>  - </span>
                   <Moment format="DD/MM/YYYY">{travel.end_date}</Moment>
                 </div>
-              <p>Places: {travel.number_of_travelers_max}</p>
+                <p>Places: {travel.number_of_travelers_max}</p>
               </div>
-              
-            
-              </div>}))}
-              <NavFooter/>
+            </div>
+          )
+        }))}
+        <NavFooter/>
       </div>
     )
   }

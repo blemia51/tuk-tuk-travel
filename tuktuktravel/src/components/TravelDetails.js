@@ -63,14 +63,16 @@ class TravelDetails extends Component {
   }
   
   render() {
+    const { location } = this.props;
+    const { state: { cityPic, destination, start_date, end_date, description, travelID } } = location
     return (
 
       <div className='travel-details'>
         <div className='img-travel-details'>
           <figure className='container-city-picture'>
-            <img className='city-picture' src={this.props.location.state.cityPic} alt={this.props.location.state.cityPic}/>
+            <img className='city-picture' src={cityPic} alt={cityPic}/>
           </figure>
-          <p className='travel-cards-link travel-cards-title'>{this.props.location.state.destination} </p>
+          <p className='travel-cards-link travel-cards-title'>{destination} </p>
         </div>
         
         <div className='travel-creator'>
@@ -85,9 +87,9 @@ class TravelDetails extends Component {
             <p className='firstname-traveldetails'>{this.state.userCreator.firstname}</p>
             <p>Contact: {this.state.userCreator.email}</p>
             <div className='dates'>
-              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{this.props.location.state.start_date}</Moment> </p>
+              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{start_date}</Moment> </p>
               <span className= 'traveldetails-date'> - </span>
-              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{this.props.location.state.end_date}</Moment> </p>
+              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{end_date}</Moment> </p>
             </div>
 
             <div className='travel-user-avatar-container'>
@@ -101,11 +103,11 @@ class TravelDetails extends Component {
               ))}
             </div>
             <div className='traveldetail-description'>
-              <p className='descr-traveldetails'>{this.props.location.state.description} </p> 
+              <p className='descr-traveldetails'>{description} </p> 
             </div>
           </div>
           <div className='reserve'>
-            <Reservation userID={this.props.userID} travelID={this.props.location.state.travelID} />
+            <Reservation userID={this.props.userID} travelID={travelID} />
           </div>
         </div>
         <NavFooter />

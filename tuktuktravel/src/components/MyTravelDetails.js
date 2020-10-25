@@ -14,8 +14,11 @@ class TravelDetails extends Component {
       users: []
     }
   }
+
   componentDidMount() {
-    fetch(`http://localhost:8000/api/users/${this.props.location.state.IDuser_creator}`,
+    const { location } = this.props;
+    const { state: { IDuser_creator} } = location
+    fetch(`http://localhost:8000/api/users/${IDuser_creator}`,
     {
       method:'GET',
       headers:{
@@ -33,7 +36,7 @@ class TravelDetails extends Component {
     })
     .then(data => {
       this.setState({
-        userCreator: data[0]
+        userCreator: data[0],
     })
   })
   .catch()
@@ -56,47 +59,49 @@ class TravelDetails extends Component {
   })
   .then(data => {
     this.setState({
-      users: data
+      users: data,
+    })
   })
-})
-.catch()
-  }
+  .catch()
+}
   
   render() {
+    const { location } = this.props;
+    const { state: { cityPic, destination, start_date, end_date, description} } = location
     return (
-
       <div className='travel-details'>
         <div className='img-travel-details'>
           <figure className='container-city-picture'>
-            <img className='city-picture' src={this.props.location.state.cityPic} alt={this.props.location.state.cityPic}/>
+            <img className='city-picture' src={cityPic} alt={cityPic}/>
           </figure>
-          <p className='travel-cards-link travel-cards-title'>{this.props.location.state.destination} </p>
+          <p className='travel-cards-link travel-cards-title'>{destination} </p>
         </div>
-
         <div className='travel-creator'>
           <img src={this.state.userCreator.avatar} alt='Avatar' className='user-creator-avatar' ></img>
           <div className='travel-detail-container'>
-          <div className='link-back-arrow-details'>
-          <Link to="/mytravels">
-            <img className='back-arrow' src={back} alt='Arrow to back'/>
-          </Link>
-        </div>
+            <div className='link-back-arrow-details'>
+              <Link to="/mytravels">
+                <img className='back-arrow' src={back} alt='Arrow to back'/>
+              </Link>
+            </div>
             <p className='firstname-traveldetails'>{this.state.userCreator.firstname}</p>
             <p>Contact: {this.state.userCreator.email}</p>
             <div className='dates'>
-              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{this.props.location.state.start_date}</Moment> </p>
+              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{start_date}</Moment> </p>
               <span className='traveldetails-date'>  - </span>
-              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{this.props.location.state.end_date}</Moment> </p>
+              <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{end_date}</Moment> </p>
             </div>
-          <div className='travel-user-avatar-container'>
-            {this.state.users.map(user=> 
-            <div className='travel-user-description'>
-            <div className='travel-user-avatar-box'>
-          <img src={user.avatar}  alt='avatar' className='travel-user-avatar' />
-          </div>
-          <p className='travel-user-avatar-firstname'>{user.firstname}</p></div>)}
-          </div>
-          <p className='descr-traveldetails'>{this.props.location.state.description} </p> 
+            <div className='travel-user-avatar-container'>
+            {this.state.users.map(user  => 
+              <div className='travel-user-description'>
+                <div className='travel-user-avatar-box'>
+                  <img src={user.avatar}  alt='avatar' className='travel-user-avatar' />
+                </div>
+                <p className='travel-user-avatar-firstname'>{user.firstname}</p>
+              </div>
+            )}
+            </div>
+            <p className='descr-traveldetails'>{description} </p> 
           </div>
         </div>
         <NavFooter />
@@ -111,5 +116,5 @@ function  mapStateToProps(state) {
       userID: state.auth.userID
   }
 }
-export default connect(mapStateToProps)(TravelDetails)
 
+export default connect(mapStateToProps)(TravelDetails);

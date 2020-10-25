@@ -294,7 +294,15 @@
 
 
 /* -------------------------------------------------------------------------- USER CONNEXION ------------------------------------------------------------------------------ */
-
+.card__body,
+.card__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 24px;
+  margin-bottom: 8px;
+}
 
 .title-user-connexion{
   font-family: 'Bebas Neue', cursive;
@@ -310,6 +318,74 @@
   font-weight: 900;
   content: '\f30c';
 }
+
+.select--material label {
+  display: block;
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: #999;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  -webkit-transition: all cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
+  transition: all cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
+  cursor: text;
+  pointer-events: none; 
+}
+
+.select--material label:after {
+  content: attr(data-label);
+  color: #999;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: -.2px;
+  text-transform: none;
+  position: absolute;
+  width: 200%;
+  left: 0;
+  opacity: 0;
+  -webkit-transition: opacity cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
+  transition: opacity cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s; 
+}
+
+.select--material select {
+  padding-top: 24px;
+  padding-bottom: 8px; }
+
+.input--material input,
+.input--material textarea {
+  padding-top: 8px;
+  line-height: 22px;
+  margin-bottom: 8px;
+}
+
+.input.has-error .icon-info {
+  display: block; }
+
+.input.has-error ~ .input__error {
+  display: block; }
+
+.input .icon-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 56px;
+  line-height: 56px;
+  font-size: 20px;
+  display: none;
+  color: #F2362F;
+  border-radius: 0 4px 4px 0; }
+
+.input__error {
+  display: none;
+  margin-top: -8px;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  color: #F2362F; }
 
 .user_connexion{
   display: flex;

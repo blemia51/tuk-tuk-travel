@@ -1,24 +1,22 @@
-import  React, { Component } from  'react';
-import { connect } from  'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export  default  function (ComposedComponent) {
-    class  Authentication  extends  Component {
-        componentDidMount() {
-            if (!this.props.authenticated)
-                this.props.history.push('/userconnexion');
-        }
-        componentDidUpdate() {
-            if (!this.props.authenticated)
-                this.props.history.push('/userconnexion');
-        }
-        render() {
-            return  <ComposedComponent  {...this.props}  />
-        }
+export default function (ComposedComponent) {
+  class Authentication extends Component {
+    componentDidMount() {
+      if (!this.props.authenticated) this.props.history.push("/userconnexion");
     }
-
-    function  mapStateToProps(state) {
-        return { authenticated:  state.auth.token?true:false };
+    componentDidUpdate() {
+      if (!this.props.authenticated) this.props.history.push("/userconnexion");
     }
+    render() {
+      return <ComposedComponent {...this.props} />;
+    }
+  }
 
-    return  connect(mapStateToProps)(Authentication);
+  function mapStateToProps(state) {
+    return { authenticated: state.auth.token ? true : false };
+  }
+
+  return connect(mapStateToProps)(Authentication);
 }
