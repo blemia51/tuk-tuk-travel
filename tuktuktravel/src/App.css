@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap");
 
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500&display=swap");
 
 /* ---------------------------------------------------------------------------- ALL APP --------------------------------------------------------------------------------- */
-
 
 .App {
   text-align: center;
@@ -29,46 +28,43 @@
   color: #09d3ac;
 }
 
-
-
 /* ------------------------------------------------------------------------------ HOME INTRO ---------------------------------------------------------------------------------- */
 
 /* ----- first page ----- */
 
-.figure-img-first-page{
+.figure-img-first-page {
   width: 93%;
 }
 
-.img-first-page{
-  width: 100%; 
+.img-first-page {
+  width: 100%;
   margin-top: 5.5em;
 }
 
-
 /* ----- second page ----- */
 
-.figure-img-sec-page{
+.figure-img-sec-page {
   width: 100%;
   margin-left: 2.5em;
 }
 
-.img-sec-page{
-  width: 40%; 
+.img-sec-page {
+  width: 40%;
   margin-top: 3em;
 }
 
 /*----------------*/
 
-.home-intro{
+.home-intro {
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 100%; 
+  width: 100%;
   align-items: center;
 }
 
 .title-intro {
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   font-size: 3em;
   margin-top: 0.4em;
   margin-left: 0.3em;
@@ -78,7 +74,7 @@
 .text-intro {
   width: 90%;
   font-size: 1.3em;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin-top: 2.7em;
 }
 
@@ -87,20 +83,17 @@
 }
 
 .intro-link a {
-  border:none;
+  border: none;
   padding: 1em 2em 1em 2em;
-  border-radius:12px;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
 }
 
-
-
 /* ------------------------------------------------------------------------------- HOME ------------------------------------------------------------------------------------- */
 
-
-.firstpage{
+.firstpage {
   background: white;
   display: flex;
   flex-direction: column;
@@ -111,14 +104,15 @@
   margin-bottom: 4em;
 }
 
-.home-link{
+.home-link {
   display: flex;
   flex-direction: column;
-  width: 100%; 
+  width: 100%;
   font-size: 1.5em;
 }
 
-.Nav .tuk-tuk-home, .fa-home {
+.Nav .tuk-tuk-home,
+.fa-home {
   font-size: 2em;
   color: grey;
   display: flex;
@@ -126,27 +120,24 @@
   margin-top: 0.5em;
 }
 
-.home-link a{
-  border:none;
+.home-link a {
+  border: none;
   padding: 1em 0 1em 0;
-  border-radius:12px;
+  border-radius: 12px;
   margin: 1em 1em 0em 1em;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
 }
 
-.home-link a:hover{
+.home-link a:hover {
   background: rgb(13, 66, 134);
 }
 
-
-
 /* --------------------------------------------------------------------------- FORM USER ------------------------------------------------------------------------------------ */
 
-
-.title-form-user{
-  font-family: 'Bebas Neue', cursive;
+.title-form-user {
+  font-family: "Bebas Neue", cursive;
   font-size: 2em;
   display: flex;
   margin-top: 0.4em;
@@ -163,25 +154,12 @@
   margin-bottom: 0;
 }
 
-.send-form-users{
-  font-family: 'Roboto', sans-serif;
-  border:none;
-  padding: 0.8em 2em 0.8em 2em;
-  border-radius:12px;
-  margin-top: 1.2em;
-  background: rgb(0, 145, 255);
-  color:#fff;
-  text-decoration: none;
-  font-size: 1em;
-}
-
-.div-add-user > label{
-  font-family: 'Roboto', sans-serif;
-
+.div-add-user > label {
+  font-family: "Roboto", sans-serif;
 }
 
 .div-add-user > input {
-  border-radius:7px;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -190,20 +168,16 @@
   margin-top: 1em;
 }
 
-
-
-
-
 /*------ First Part ------*/
 
 .page-form-user {
   text-align: right;
   margin-right: 0.5em;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
-.input-birthday > input{
-  border-radius:7px;
+.input-birthday > input {
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -212,54 +186,55 @@
   margin-top: 1em;
 }
 
-.sex-form-user > select {
-  border-radius:7px;
+/* .sex-form-user > select {
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
   height: 2.8em;
   margin-bottom: 0.6em;
   margin-top: 0.5em;
-}
+} */
 
 .nextButton {
-  font-family: 'Roboto', sans-serif;
-  border:none;
+  font-family: "Roboto", sans-serif;
+  border: none;
   padding: 1em 2em 1em 2em;
-  border-radius:12px;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
   margin-top: 2em;
   font-size: 0.8em;
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 /*------ Second Part ------*/
 
 .sec-page-form-user {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: right;
   margin-right: 0.5em;
   margin-top: 0.5em;
 }
 
-.fig-back-arrow  {
+.fig-back-arrow {
   border: none;
   cursor: pointer;
 }
 
 .send-form-users {
-  font-family: 'Roboto', sans-serif;
-  border:none;
+  font-family: "Roboto", sans-serif;
+  border: none;
   padding: 1em 2em 1em 2em;
-  border-radius:12px;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
-  margin-top: 2em;
   font-size: 0.8em;
-  margin-bottom: 1em;
+  margin-bottom: 3em;
+  cursor: pointer;
 }
 
 .div-add-user > a {
@@ -270,42 +245,48 @@
   margin-bottom: 0;
 }
 
-.okUser{
+.okUser {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.logo-ok{
-  Width: 30%;
+.logo-ok {
+  width: 30%;
   margin-left: 2em;
   margin-top: 0.3em;
 }
-.logo-ok img{
+.logo-ok img {
   width: 50%;
   margin: 0;
 }
-.user-added{
+.user-added {
   font-size: 0.8em;
 }
 .logoOk {
   width: 2em;
 }
 
+.form-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
 
 /* -------------------------------------------------------------------------- USER CONNEXION ------------------------------------------------------------------------------ */
 .card__body,
 .card__footer {
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
-  left: 0;
+  left: 0; */
+  display: flex;
   width: 100%;
   padding: 16px 24px;
   margin-bottom: 8px;
 }
 
-.title-user-connexion{
-  font-family: 'Bebas Neue', cursive;
+.title-user-connexion {
+  font-family: "Bebas Neue", cursive;
   font-size: 2em;
   text-align: left;
   margin-top: 0.5em;
@@ -313,10 +294,52 @@
   margin-bottom: 0.3em;
 }
 
-#lastname ,#password {
-  font-family: 'Font Awesome\ 5 Free','Roboto';
+#lastname,
+#password {
+  font-family: "Font Awesome\ 5 Free", "Roboto";
   font-weight: 900;
-  content: '\f30c';
+  content: "\f30c";
+}
+
+.select {
+	position: relative;
+	overflow: hidden;
+	color: #292929;
+	border-radius: 4px;
+  background: #fff;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.select::after {
+	content: '\e906';
+	position: absolute;
+	right: 24px;
+	top: 50%;
+	font-family: "icon";
+	font-size: 8px;
+	color: #7D93A8;
+	pointer-events: none;
+	margin-top: -5px;
+	text-align: center;
+}
+
+.select select {
+	display: block;
+	width: 100%;
+	box-shadow: none;
+	background: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	padding-left: 16px;
+	padding-right: 48px;
+	color: #999;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 .select--material label {
@@ -332,7 +355,7 @@
   -webkit-transition: all cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
   transition: all cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
   cursor: text;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .select--material label:after {
@@ -341,32 +364,62 @@
   font-size: 14px;
   line-height: 24px;
   font-weight: 400;
-  letter-spacing: -.2px;
+  letter-spacing: -0.2px;
   text-transform: none;
   position: absolute;
   width: 200%;
   left: 0;
   opacity: 0;
   -webkit-transition: opacity cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
-  transition: opacity cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s; 
+  transition: opacity cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s;
 }
 
 .select--material select {
   padding-top: 24px;
-  padding-bottom: 8px; }
+  padding-bottom: 8px;
+}
+
+.input {
+  position: relative;
+  margin-bottom: 16px;
+  display: flex;
+  width: 100%;
+}
+
+.input input,
+.input textarea {
+  display: block;
+  width: 100%;
+  padding: 8px 22px 8px 16px;
+  background: #fff;
+  color: #292929;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-appearance: none; 
+}
 
 .input--material input,
 .input--material textarea {
-  padding-top: 8px;
+  padding-top: 24px;
   line-height: 22px;
-  margin-bottom: 8px;
+  width: 100%;
+  
+}
+
+.input input:focus, .input input:hover,
+.input textarea:focus,
+.input textarea:hover {
+  border-color: #999;
+  outline: 0; 
 }
 
 .input.has-error .icon-info {
-  display: block; }
+  display: block;
+}
 
 .input.has-error ~ .input__error {
-  display: block; }
+  display: block;
+}
 
 .input .icon-info {
   position: absolute;
@@ -377,27 +430,29 @@
   line-height: 56px;
   font-size: 20px;
   display: none;
-  color: #F2362F;
-  border-radius: 0 4px 4px 0; }
+  color: #f2362f;
+  border-radius: 0 4px 4px 0;
+}
 
 .input__error {
   display: none;
   margin-top: -8px;
   margin-bottom: 16px;
   padding-left: 16px;
-  color: #F2362F; }
+  color: #f2362f;
+}
 
-.user_connexion{
+.user_connexion {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 5em;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1.5em;
 }
 
 .user_connexion > input {
-  border-radius:7px;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -407,40 +462,43 @@
   font-size: 0.7em;
 }
 
-.submit-button input{
-  border:none;
-  padding: 1.2em 1em 1.2em 1em;
-  border-radius:8px;
-  margin: 1em 1em 1em 1em;
+.submit-button input {
+  font-family: "Roboto", sans-serif;
+  border: none;
+  padding: 1em 2em 1em 2em;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
+  margin-top: 2em;
+  font-size: 0.8em;
+  margin-bottom: 0;
   cursor: pointer;
 }
 
-.noConnexion{
+.noConnexion {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  margin-left: 3em
+  margin-left: 3em;
 }
 .error {
-    height: 30px;
-    padding: 5px;
+  height: 30px;
+  padding: 5px;
 }
-.erreurConnexion{
+.erreurConnexion {
   font-size: 1em;
   margin-right: 0.3em;
 }
 
 
+
 /* ----------------------------------------------------------------------------  USER PROFILE    ----------------------------------------------------------------------------- */
 
-
 .profile-input-img > input {
-  border-radius:7px;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -458,7 +516,7 @@
 }
 
 .profile-input-img > select {
-  border-radius:7px;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -480,37 +538,27 @@
   padding: 0;
 }
 
-.profile-input-img{
+.profile-input-img {
   display: flex;
   justify-content: space-around;
   padding-left: 4em;
 }
 
-.profile-sex > select{
-  border-radius:7px;
+/* .profile-sex > select {
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
   height: 2.5em;
   margin-bottom: 0.6em;
   margin-top: 0.5em;
-}
+} */
 
 .profile-sex {
   padding-right: 0.5em;
 }
 
-
-
 /* --------------------------------------------------------------------------- TRAVEL FORM --------------------------------------------------------------------------------- */
-
-
-.add-travel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 2em;
-}
 
 .title-travel-form {
   display: flex;
@@ -519,12 +567,12 @@
   margin-top: 0.9em;
   margin-left: 0.5em;
   font-size: 2em;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
 .input-add-travel {
-  font-family: 'Roboto', sans-serif;
-  border-radius:7px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 15em;
@@ -537,15 +585,15 @@
   background: #bebebe;
 }
 
-.add-tuktuk{
-  border:none;
+.add-tuktuk {
+  border: none;
   padding: 0.7em 2em 0.7em 2em;
-  border-radius:12px;
+  border-radius: 12px;
   margin: 1em 1em 0em 1em;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
 }
 
@@ -562,16 +610,15 @@
 }
 .tuktuk-added {
   font-size: 0.8em;
-  width:70%;
+  width: 70%;
   margin-right: 3em;
-  
 }
 .logo-ok-tuktuk {
-  Width: 30%;
+  width: 30%;
   margin-left: 1.5em;
   margin-top: 0.3em;
 }
-.logo-ok-tuktuk img{
+.logo-ok-tuktuk img {
   width: 80%;
   margin: 0;
 }
@@ -581,7 +628,7 @@
   margin-bottom: 0.5em;
 }
 .title-travel-cards {
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
   font-size: 2.2em;
   text-align: left;
   text-decoration: none;
@@ -590,24 +637,24 @@
   margin-left: 0.3em;
 }
 .search-field {
-  margin-bottom : 1em;
+  margin-bottom: 1em;
 }
 #searchField {
-  background-color: rgb(235,229,229);
+  background-color: rgb(235, 229, 229);
   border-radius: 7px;
   height: 1.5em;
 }
 .travel-date {
   margin: 0 0.5em 0 0.5em;
 }
-.liste-travel  {
+.liste-travel {
   width: 100%;
   margin-bottom: 2em;
   display: flex;
   flex-direction: column;
   box-shadow: 2px 5px 10px rgb(156, 152, 152);
   position: relative;
-} 
+}
 a {
   text-decoration: none;
 }
@@ -616,10 +663,10 @@ a {
   width: 100%;
   margin: auto;
 }
-.liste-description-travel-cards{
+.liste-description-travel-cards {
   display: flex;
-  justify-content:space-between ;
-  font-family: 'Roboto', sans-serif;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -639,30 +686,26 @@ a {
   top: 1rem;
   bottom: initial;
 }
-.travel-cards-title{
-  font-family: 'Montserrat', sans-serif;
+.travel-cards-title {
+  font-family: "Montserrat", sans-serif;
   font-size: 1.8em;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   color: white;
   text-align: start;
   font-weight: normal;
-  background-color:#fa8c17 ; 
+  background-color: #fa8c17;
   opacity: 90%;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
-
 }
-.img-travel-cards{
+.img-travel-cards {
   width: 100%;
   margin: auto;
 }
 .title-and-home {
   display: flex;
   justify-content: space-between;
-
 }
-
-
 
 /* --------------------------------------------------------------------------- TRAVEL DETAILS --------------------------------------------------------------------------------- */
 
@@ -676,7 +719,7 @@ a {
   margin-top: -2.5em;
   margin-left: 0.5em;
   margin-bottom: 2em;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 2em;
   text-shadow: 3px 1px 2px rgb(66, 66, 66);
 }
@@ -693,9 +736,8 @@ a {
   display: flex;
   margin: 0;
   width: 100%;
-  overflow: hidden; 
+  overflow: hidden;
   box-shadow: 2px 5px 10px rgb(156, 152, 152);
-  border-radius: 0em 0em 1em 1em;
 }
 
 .city-picture {
@@ -703,14 +745,14 @@ a {
 }
 
 .firstname-traveldetails {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1.5em;
   margin: auto;
 }
 
 .date-traveldetails {
   display: inline;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .travel-details > .date-traveldetails {
@@ -725,7 +767,7 @@ a {
   margin: 1em;
   margin-top: 2em;
   text-align: justify;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .travel-creator {
@@ -739,26 +781,22 @@ a {
 }
 
 .reserve-button > button {
-  border:none;
+  border: none;
   padding: 0.7em 2em 0.7em 2em;
-  border-radius:12px;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
-  color:#fff;
+  color: #fff;
   text-decoration: none;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
   cursor: pointer;
 }
 
-
-
 .travel-user-avatar-container {
   display: flex;
-  justify-content:center ;
+  justify-content: center;
   width: 70%;
   margin: auto;
-  border-bottom: dotted #bcb8b8;
-
 }
 
 .user-creator-avatar {
@@ -774,15 +812,13 @@ a {
   height: 68px;
   margin-top: 10px;
 }
-.travel-user-avatar-firstname{
+.travel-user-avatar-firstname {
   margin: auto;
 }
 .dates {
-  border-top: dotted #bcb9b9;
-  border-bottom: dotted #bcb9b9;
   display: flex;
   justify-content: center;
-  margin:auto ;
+  margin: auto;
   width: 70%;
 }
 .traveldetail-description {
@@ -800,25 +836,23 @@ a {
   width: 100%;
 }
 
-
 /* --------------------------------------------------------------------------- UPLOAD FILE --------------------------------------------------------------------------------- */
 
-
-.upload-avatar{
-  font-family: 'Roboto', sans-serif;
+.upload-avatar {
+  font-family: "Roboto", sans-serif;
   font-size: 1em;
   text-decoration: none;
-  color:#fff;
-  border:none;
-  border-radius:12px;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
   background: rgb(0, 145, 255);
   padding: 0.8em 2em 0.8em 2em;
   margin-top: 1.2em;
   margin-bottom: 1em;
 }
 
-.title-add-avatar{
-  font-family: 'Bebas Neue', cursive;
+.title-add-avatar {
+  font-family: "Bebas Neue", cursive;
   font-size: 2em;
   text-align: left;
   margin-top: 0.5em;
@@ -826,16 +860,13 @@ a {
   margin-bottom: 0.3em;
 }
 
-
-
 /* ------------------------------------------------------------------------------    CGU    ---------------------------------------------------------------------------------- */
 
-
-.back-arrow{
+.back-arrow {
   width: 2em;
 }
 
-.fig-back-arrow{
+.fig-back-arrow {
   margin: 0;
   margin-left: 0.5em;
   text-align: left;
@@ -849,24 +880,28 @@ a {
 }
 
 .add-user > a {
-  text-decoration: none; color: black; font-size: 0.7em;
+  text-decoration: none;
+  color: black;
+  font-size: 0.7em;
 }
 
 .add-user > a:hover {
-  text-decoration: none; color: grey;
+  text-decoration: none;
+  color: grey;
 }
 
-.title-cgu{
+.title-cgu {
   margin-top: 1em;
 }
 
-
+.cgu {
+  font-size: 12px;
+}
 
 /* ----------------------------------------------------------------------------  COUNTRY LIST    ----------------------------------------------------------------------------- */
 
-
 .list-of-country > select {
-  border-radius:7px;
+  border-radius: 7px;
   background-color: rgb(235, 229, 229);
   border: none;
   width: 18em;
@@ -876,6 +911,18 @@ a {
 }
 
 /* ----------------------------------------------------------------------------------USER PROFILE--------------------------------------------------------------------*/
+.profil--general-container {
+  display: flex;
+  width: 100%;
+}
+
+.profil--container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  width: 100%;
+}
 
 .title-user-profile {
   display: flex;
@@ -884,10 +931,10 @@ a {
   margin-top: 0.9em;
   margin-left: 0.5em;
   font-size: 2em;
-  font-family: 'Bebas Neue', cursive;
+  font-family: "Bebas Neue", cursive;
 }
 
-.user-profile{
+.user-profile {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -898,17 +945,64 @@ a {
   border-radius: 12px;
   line-height: 2em;
   font-size: 1.2em;
-  background-color: rgb(243, 241, 241)
+  background-color: rgb(243, 241, 241);
 }
 
-.profile-picture{
-  margin-left: 4em;
-  width: 40%;
+.profile-picture {
+  width: 30%;
   border-radius: 50%;
 }
 
-/* ------------------------------------------------------------------------------ NAV FOOTER ---------------------------------------------------------------------------------- */
+.profile-picture-container {
+  display: flex;
+  margin: 12px 24px;
+  align-items: baseline;
+}
 
+.input--picture {
+	display: flex;
+	align-items: baseline;
+}
+
+.input--picture .upload-file {
+	position: relative;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	background-color: #999;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+.input--picture label {
+	position: relative;
+	display: block;
+	padding-left: 8px;
+	color: #999;
+  font-weight: 500;
+  font-size: 12px;
+	cursor: pointer;
+}
+
+.input--picture label:hover {
+  color: #0091ff;
+}
+
+.input--picture input {
+	position: absolute;
+	display: block;
+	left: 50%;
+	height: 100%;
+	top: 0;
+	transform: translateX(-50%);
+	opacity: 0;
+	cursor: pointer;
+	z-index: 1;
+}
+
+/* ------------------------------------------------------------------------------ NAV FOOTER ---------------------------------------------------------------------------------- */
 
 .footer {
   display: flex;
@@ -917,63 +1011,63 @@ a {
   margin-top: 1em;
   position: fixed;
   z-index: 100;
-  bottom: 0; 
+  bottom: 0;
   padding-bottom: 0.5em;
   padding-top: 0.25em;
-  width: 100%; 
+  width: 100%;
   height: 10%;
   background-color: rgb(243, 241, 241);
   box-shadow: 0 0 10px rgb(156, 152, 152);
- }
+}
 
- .title_footer {
-   font-size: 0.9em;
-   margin-top: 0.1em;
-   margin-bottom: 0;
-   color: black;
- }
+.title_footer {
+  font-size: 0.9em;
+  margin-top: 0.1em;
+  margin-bottom: 0;
+  color: black;
+}
 
- .link-footer {
-   color: black;
-   text-decoration: none;
-   margin: 0;
- }
+.link-footer {
+  color: black;
+  text-decoration: none;
+  margin: 0;
+}
 
- .img-footer {
-   width: auto;
-   height: 3em;
-   margin: 0;
- }
+.img-footer {
+  width: auto;
+  height: 3em;
+  margin: 0;
+}
 
- .logos-footer {
-   margin: 0;
-   padding: 0;
- }
+.logos-footer {
+  margin: 0;
+  padding: 0;
+}
 
- /* ----- PURPOSE -----*/
- 
- .logos-purpose{
+/* ----- PURPOSE -----*/
+
+.logos-purpose {
   margin: 0;
   padding: 0;
   margin-top: -1.3em;
   margin-bottom: 0em;
- }
+}
 
- .img-footer-purpose{
-   width: auto;
-   height: 4em;
-   margin-top: 0.1em;
- }
+.img-footer-purpose {
+  width: auto;
+  height: 4em;
+  margin-top: 0.1em;
+}
 
- .title_footer_purpose {
+.title_footer_purpose {
   font-size: 0.9em;
   margin-top: 0.4em;
   margin-bottom: 0;
- }
+}
 
- /*---RESERVATION---*/
+/*---RESERVATION---*/
 
- .tuktuk-booked {
+.tuktuk-booked {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -983,4 +1077,33 @@ a {
   margin: auto;
   margin-top: 1em;
 }
- 
+
+/*--------Button-----------*/
+.btn.is-disabled,
+.btn[disabled] {
+  pointer-events: none;
+  background: #fafafa;
+	color: #ccc;
+	border-color: #ccc;
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+/*--------OTHER-------------*/
+
+.form-separator {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #ebebeb; }
+
+.mt-2 {
+  margin-top: 16px; }
+  
+.mb-2 {
+  margin-bottom: 16px; }
+
+.w-70 {
+  width: 70%;
+  margin: auto;
+}

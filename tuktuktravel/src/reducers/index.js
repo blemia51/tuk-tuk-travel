@@ -6,7 +6,7 @@ import userReducer from "./userReducer"
 
 const allReducers = combineReducers({
   auth: authReducer,
-  avatar: avatarReducer,
+  avatarState: avatarReducer,
 	cityPic: cityPicReducer,
 	userState: userReducer,
 });

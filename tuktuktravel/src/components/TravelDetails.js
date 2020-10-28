@@ -64,7 +64,8 @@ class TravelDetails extends Component {
   
   render() {
     const { location } = this.props;
-    const { state: { cityPic, destination, start_date, end_date, description, travelID } } = location
+    const { state: { cityPic, destination, start_date, end_date, description, travelID, IDuser_creator } } = location
+    const { userCreator } = this.state;
     return (
 
       <div className='travel-details'>
@@ -76,7 +77,7 @@ class TravelDetails extends Component {
         </div>
         
         <div className='travel-creator'>
-          <img src={this.state.userCreator.avatar} alt='Avatar' className='user-creator-avatar' ></img>
+          <img src={userCreator.avatar} alt='Avatar' className='user-creator-avatar' ></img>
           <div className='travel-detail-container'>
             <div className='link-back-arrow-details'>
               <Link to="/travelcards">
@@ -84,14 +85,18 @@ class TravelDetails extends Component {
               </Link>
             </div>
 
-            <p className='firstname-traveldetails'>{this.state.userCreator.firstname}</p>
-            <p>Contact: {this.state.userCreator.email}</p>
+            <p className='firstname-traveldetails'>{userCreator.firstname}</p>
+            {/* <p>Contact: {userCreator.email}</p> */}
+            
+            <a href={`mailto:${userCreator.email}`}><i class="far fa-envelope"></i></a>
+            <span className='form-separator w-70' />
+            
             <div className='dates'>
               <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{start_date}</Moment> </p>
               <span className= 'traveldetails-date'> - </span>
               <p className='date-traveldetails'><Moment format="DD/MM/YYYY">{end_date}</Moment> </p>
             </div>
-
+            <span className='form-separator w-70 mt-2' />
             <div className='travel-user-avatar-container'>
               {React.Children.toArray(this.state.users.map(
                 user => <div className='travel-user-description'>
@@ -99,7 +104,9 @@ class TravelDetails extends Component {
                     <img src={user.avatar} alt='avatar' className='travel-user-avatar'></img>
                   </div>
                   <p className='travel-user-avatar-firstname'>{user.firstname}</p>
+                  <span className='form-separator mt-2' />
                 </div>
+                
               ))}
             </div>
             <div className='traveldetail-description'>
@@ -107,7 +114,7 @@ class TravelDetails extends Component {
             </div>
           </div>
           <div className='reserve'>
-            <Reservation userID={this.props.userID} travelID={travelID} />
+            <Reservation userID={this.props.userID} travelID={travelID} IDuser_creator={IDuser_creator} />
           </div>
         </div>
         <NavFooter />

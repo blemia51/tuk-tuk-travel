@@ -294,26 +294,25 @@ app.post('/api/login', function(req, res)  {
 })
 
 
-
-
 // UPLOAD FILE
-const upload = multer({ dest: 'tmp/',
-limits: {
-  files: 1, // allow only 1 file per request,
-  fieldSize: 3* 1024 * 1024 // 3 MB (max file size)
-},
-fileFilter: (req, file, cb) => {
-  // allow jpg jpeg png gif svg only
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
-    return cb(('Only images are allowed.'), false);
-  }
-  cb(null, true);
-} 
+const upload = multer({ 
+  dest: 'tmp/',
+  limits: {
+    files: 1, // allow only 1 file per request,
+    fieldSize: 3* 1024 * 1024 // 3 MB (max file size)
+  },
+  fileFilter: (req, file, cb) => {
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
+      return cb(('Only images are allowed.'), false);
+    }
+    cb(null, true);
+  } 
 });
 
 app.post('/uploaddufichier', upload.single('file'), function (req, res, next) {
   fs.rename(req.file.path, '../tuktuktravel/public/' + req.file.originalname, function(err){
-    if (err) {res.redirect(targetUrl)
+    if (err) {
+      res.redirect(targetUrl)
       res.send('problème durant le transfert');
     } else {
         res.send('Fichier transféré avec succès');

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Button from './fragments/Button'
 import logoOk from "../img/logoOk.png";
 
 class Reservation extends Component {
@@ -33,9 +34,13 @@ class Reservation extends Component {
   }
 
   render() {
+    const { IDuser_creator, userID } = this.props;
     return (
       <div className="reserve-button">
-        <button onClick={this.onReservation}>Réserver</button>
+        <Button onClick={this.onReservation}
+          label='Réserver'
+          isDisabled={IDuser_creator === userID}
+        />
         <div className="tuktuk-booked">
           {this.state.isBooked ? (
             <div

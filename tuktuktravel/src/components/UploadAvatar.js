@@ -1,69 +1,80 @@
-import React from 'react'
-import { post } from 'axios';
-import { connect } from  'react-redux';
-import logoOk from '../img/logoOk.png';
+import React from "react";
+import { post } from "axios";
+//import { connect } from "react-redux";
+import { getPublicAssets } from 'utils/assetsUtils'
+import logoOk from "../img/logoOk.png";
+import userReducer from "reducers/userReducer";
 
 class UploadAvatar extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
-      file:'',
-      isUpload: false
-    }
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.state = {
+      file: "",
+      isUpload: false,
+    };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onFormSubmit(e){
-    e.preventDefault()
-    const url = 'http://localhost:8000/uploaddufichier'
+  onFormSubmit(e) {
+    e.preventDefault();
+    const { uploadAvatar } = this.props
+    const url = "http://localhost:8000/uploaddufichier";
     const formData = new FormData();
-    formData.append('file',this.state.file)
+    formData.append("file", this.state.file);
     const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
 
     post(url, formData, config).then((response) => {
-      console.log(response.data);
-      //console.log(this.state.file.name);
-      this.props.dispatch( 
-        {
-          type : "SEND_AVATAR",
-          avatar : this.state.file.name,
-        }
-      )
-      this.setState ({
+      uploadAvatar(this.state.file.name);
+      this.setState({
         isUpload: true,
-      })
-    })
+      });
+    });
   }
-  onChange(e) {
-    this.setState({file: e.target.files[0]})
+  handleChange = (e) => {
+    this.setState({ file: e.target.files[0] });
   }
 
-  render() {
+  render() { 
+    const { userProfileAvatar } = this.props;
+    const isAvatar = !userProfileAvatar ? 'placeholder-profil.png' : userProfileAvatar;
     return (
-      <div className="upload-file">
-        <p className="title-add-avatar">Change ton avatar</p>
-        <input type="file" name='file' className='avatar' onChange={this.onChange} id='avatar' />
-        <button className='send-form-users' onClick={this.onFormSubmit}>Changer</button>
+      <div className="input--picture ">
+      <div className="upload-file" style={{ backgroundImage: `url(${isAvatar})` }}>
+        {/* <p className="title-add-avatar">Change ton avatar</p> */}
+        <input
+          type="file"
+          name="file"
+          className="avatar"
+          onChange={this.handleChange}
+          id="avatar"
+        />
+        </div>
+        <label htmlFor="avatar">Modifier</label>
+        {/* <button className="send-form-users" onClick={this.onFormSubmit}>
+          Changer
+        </button> */}
         {this.state.isUpload && (
-          <div className='okUser'>
-            <img src={logoOk} alt='logoOk' className='logoOk'/>
+          <div className="okUser">
+            <img src={logoOk} alt="logoOk" className="logoOk" />
             <p className="user-added">Fichier transféré avec succès</p>
           </div>
         )}
+      
       </div>
-    )
+    );
   }
 }
 
-function  mapStateToProps(state) {
-  return {
-    avatar: state.avatar.avatar,
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     avatar: state.avatar.avatar,
+//   };
+// }
 
-export  default  connect(mapStateToProps)(UploadAvatar);
+// export default connect(mapStateToProps)(UploadAvatar);
+
+export default UploadAvatar;

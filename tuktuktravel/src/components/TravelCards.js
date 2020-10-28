@@ -41,6 +41,33 @@ class TravelCards extends Component {
     })
   })
   .catch()
+  
+  fetch(
+    `http://localhost:8000/api/users/${this.props.userID}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((res) => {
+      if (!res.ok) {
+        this.props.history.push("/userconnexion");
+      } else {
+        return res.json();
+      }
+    })
+    .then((data) => {
+      this.props.fetchUserProfileSuccess(...data)
+      this.setState({
+        user: data,
+      });
+    })
+    .catch();
+
+
   }
 
   searchField = (event) => {

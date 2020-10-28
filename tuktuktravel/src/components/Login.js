@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import TextInputMaterial from "components/input/TextInputMaterial";
+import TextInput from "components/input/TextInput";
 import { validateEmail } from "utils/validatorUtils";
 import back from "../img/arrowb.png";
 import logoFaux from "../img/logoFaux.png";
@@ -63,6 +63,7 @@ class Login extends Component {
         }
       })
       .then((res) => {
+        console.log(res)
         this.props.saveToken(res.token, res.user.userID)
         this.props.history.push("/travelcards");
         this.setState({ flash: res.flash });
@@ -77,7 +78,6 @@ class Login extends Component {
       acc.push(input);
       return acc;
     }, []);
-    console.log(inputs)
     return (
       <div>
         <div className="title-user-connexion">Connecte - toi ! </div>
@@ -89,10 +89,12 @@ class Login extends Component {
         
         <form className="user_connexion" onSubmit={this.submitForm}>
           <div>
-            <div className='card__body'>
+            <div className='profil--general-container'>
+              <div className="profil--container">
               {inputs.map((input) => {
                 return (
-                  <TextInputMaterial
+                  <TextInput
+                    key={`input_${input}`}
                     type={input}
                     label={input}
                     placeholder={input}
@@ -104,6 +106,7 @@ class Login extends Component {
                   />
                 )
               })}
+            </div>
             </div>
           </div>
           <div className="submit-button">

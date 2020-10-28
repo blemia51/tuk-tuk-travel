@@ -10,8 +10,11 @@ import FormUsers from './components/FormUsers'
 import UserProfileContainer from './container/UserProfileContainer'
 //import Login from './components/Login';
 import LoginContainer from './container/LoginContainer'
-import TravelForm from './components/TravelForm'
-import TravelCards from './components/TravelCards'
+//import TravelForm from './components/TravelForm'
+import TravelFormContainer from './container/TravelFormContainer'
+//import TravelCards from './components/TravelCards'
+import TravelCardContainer from './container/TravelCardContainer'
+
 import TravelDetails from './components/TravelDetails'
 import MyTravels from './components/MyTravels'
 import MyTravelDetails from './components/MyTravelDetails'
@@ -20,20 +23,20 @@ import './App.css'
 import { connect } from 'react-redux';
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-    resetToken: () => dispatch({
-      type : "DESTROY_SESSION"
-    }),
-    resetAvatar: () => dispatch({
-      type : "DESTROY_AVATAR"
-    }),
-    resetCitypic: () => dispatch({
-      type : "DESTROY_CITYPIC"
-    })
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     resetToken: () => dispatch({
+//       type : "DESTROY_SESSION"
+//     }),
+//     resetAvatar: () => dispatch({
+//       type : "DESTROY_AVATAR"
+//     }),
+//     resetCitypic: () => dispatch({
+//       type : "DESTROY_CITYPIC"
+//     })
     
-  }
-}
+//   }
+// }
 
 function App(props) {
   const appRef = useRef(null)
@@ -58,8 +61,8 @@ function App(props) {
 
         <Route path="/cgu"component={Cgu}/>
         <Route path="/userconnexion" component={requireNotAuth(LoginContainer)}/>
-        <Route exact path="/travelcards" component={requireAuth(TravelCards)}/>
-        <Route exact path="/travelform" component={TravelForm}/>
+        <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
+        <Route exact path="/travelform" component={TravelFormContainer}/>
         <Route exact path="/traveldetails" render={(props) => <TravelDetails {...props}/>} />
         <Route exact path="/mytravels" component={MyTravels}/>
         <Route exact path="/mytraveldetails" component={MyTravelDetails} />
@@ -69,4 +72,6 @@ function App(props) {
 }
 
 
-export default connect(null, mapDispatchToProps)(App)
+// export default connect(null, mapDispatchToProps)(App)
+export default App
+

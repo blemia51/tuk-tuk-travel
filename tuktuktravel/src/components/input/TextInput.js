@@ -82,7 +82,7 @@ class TextInputMaterial extends PureComponent {
             type={type}
             id={id}
             disabled={disable}
-            className={!defaultValue && !placeholder ? 'is-empty' : '' }
+            className={!defaultValue && !placeholder ? 'is-empty' : ''}
             onChange={this._handleInputChanged}
             onFocus={(event) => {
               this._onInputStatusChange(event, true);
@@ -108,13 +108,13 @@ class TextInputMaterial extends PureComponent {
 
 TextInputMaterial.propTypes = {
   className: PropTypes.string,
-  defaultValue: PropTypes.any,
+  defaultValue: PropTypes.string,
   disable: PropTypes.bool,
   errorMessage: PropTypes.string,
-  hasError: PropTypes.func,
+  hasError: PropTypes.bool,
   id: PropTypes.string,
-  isDark: PropTypes.func,
-  isLight: PropTypes.func,
+  isDark: PropTypes.bool,
+  isLight: PropTypes.bool,
   label: PropTypes.string,
   noEdit: PropTypes.bool,
   onBlur: PropTypes.func,
