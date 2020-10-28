@@ -413,12 +413,18 @@
   outline: 0; 
 }
 
+.input.has-error input {
+	border-color: #F2362F;
+}
+
 .input.has-error .icon-info {
   display: block;
 }
 
 .input.has-error ~ .input__error {
   display: block;
+  width: 100%;
+  text-align: left;
 }
 
 .input .icon-info {
@@ -440,6 +446,7 @@
   margin-bottom: 16px;
   padding-left: 16px;
   color: #f2362f;
+  font-size: 12px;
 }
 
 .user_connexion {

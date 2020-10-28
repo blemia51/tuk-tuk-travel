@@ -13,7 +13,7 @@ class ErrorMessage extends PureComponent {
 
     return (
       <span 
-        //style={forceDisplay ? { display: 'block' } : {}} 
+        style={forceDisplay ? { display: 'block' } : {}} 
         className={classNames.build()}>{message}</span>
     );
   }

@@ -4,7 +4,7 @@ import { connect } from  'react-redux';
 import axios from 'axios';
 import TextInput from 'components/input/TextInput'
 import SelectInput from 'components/input/SelectInput'
-import { validatePhone } from '../utils/validatorUtils'
+import { validateEmail, validatePhone } from '../utils/validatorUtils'
 import CountryList from './CountryList';
 import back from '../img/arrowb.png'
 import logoOk from '../img/logoOk.png';
@@ -33,12 +33,22 @@ class FormUsers extends Component {
         avatar: '',
       },
       errors: {
-        phone_number: ''
+        lastname: '',
+        firstname: '',
+        sex: '',
+        password: '',
+        comfirm_password: '',
+        birthday: '',
+        country: '',
+        city: '',
+        email: '',
+        phone_number: '',
+        description: '',
+        avatar: '',
       },
       isAdded: false,
       firstSection: true,
       secondSection: false,
-      
     };
   }
 
@@ -64,14 +74,23 @@ class FormUsers extends Component {
 
   handleChange = (value, type) => {
     const { profilStepOne, profilStepTwo, profil, errors } = this.state
+    if (type === 'email' && value !== '' && !validateEmail(value)) {
+      this.setState({
+        errors: {
+          ...errors,
+          [type] : 'Veillez insérer un email valide'
+        }
+      });
+      return;
+    }
     if (type === 'phone_number' && value !== '' && !validatePhone(value)) {
       this.setState({
         errors: {
           ...errors,
           [type] : 'Veillez insérer un numéro de téléphone valide'
         }
-       });
-       return;
+      });
+      return;
     }
     this.setState({
       profil: {
@@ -88,7 +107,7 @@ class FormUsers extends Component {
   }
 
   renderInputsStepOne = () => {
-    const { profilStepOne: stateProfilStepOne } = this.state;
+    const { profilStepOne: stateProfilStepOne, errors } = this.state;
     const inputsStepOne = Object.keys(stateProfilStepOne).reduce((acc, input) => {
       acc.push(input);
       return acc;
@@ -126,8 +145,8 @@ class FormUsers extends Component {
           isLight
           //={stateProfil[input] || ''}
           onChange={(value) => this.handleChange(value, input)}
-          // hasError={input === 'email' && error !== ''}
-          // errorMessage={error}
+          errorMessage={errors[input]}
+          hasError={errors[input] !== ''}
         />
       )
     })
@@ -153,7 +172,7 @@ class FormUsers extends Component {
           //={stateProfil[input] || ''}
           onChange={(value) => this.handleChange(value, input)}
           errorMessage={errors[input]}
-          hasError={input === 'phone_number' && errors[input] !== ''}
+          hasError={errors[input] !== ''}
         />
     )});
   }
@@ -190,6 +209,7 @@ class FormUsers extends Component {
               </Link>
               <div className="page-form-user">1/2</div>
             </div>
+            <span className='form-separator mb-2 mt-2' />
             <div className="profil--general-container">
               <div className="profil--container">
                 {this.renderInputsStepOne()}
@@ -200,13 +220,16 @@ class FormUsers extends Component {
             </div>
           </div>
           :
-          <div style={{display:'flex', flexDirection:'column', marginTop:'24px'}}>
+          <div style={{display:'flex', flexDirection:'column'}}>
+            <div className="title-form-user">INFOS PERSONNELLES</div>
+
             <div>
               <figure className='fig-back-arrow link-back-arrow'>
                 <img className='back-arrow' src={back} alt='Arrow to back' onClick = {this.previousPage}/>
               </figure>
               <div className="sec-page-form-user">2/2</div>
             </div>
+            <span className='form-separator mb-2 mt-2' />
             <div className="profil--general-container">
               <div className='profil--container'>
                 {this.renderInputsStepTwo()}
