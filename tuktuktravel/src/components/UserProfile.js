@@ -125,7 +125,6 @@ class UserProfile extends Component {
     }, []);
     console.log(userProfile)
     return (
-      
       <div>
         <div className="title-user-profile">PROFIL</div>
         <span className='form-separator mb-2 mt-2' />
@@ -166,31 +165,29 @@ class UserProfile extends Component {
         )))}
         <div className="profil--general-container">
           <div className="profil--container">
-        {React.Children.toArray(inputs.map((input) => {
-          return (
-            <TextInput
-              type={input}
-              label={input}
-              placeholder={input}
-              className='select--material'
-              name={input}
-              isLight
-              defaultValue={stateProfil[input] || ''}
-              onChange={(value) => this.handleChange(value, input)}
-              // hasError={input === 'email' && error !== ''}
-              // errorMessage={error}
-            />
-          )
-        }))}
-        </div>
+            {React.Children.toArray(inputs.map((input) => {
+              return (
+                <TextInput
+                  type={input}
+                  label={input}
+                  placeholder={input}
+                  className='select--material'
+                  name={input}
+                  isLight
+                  defaultValue={stateProfil[input] || ''}
+                  onChange={(value) => this.handleChange(value, input)}
+                  // hasError={input === 'email' && error !== ''}
+                  // errorMessage={error}
+                />
+              )
+            }))}
+          </div>
         </div>
         <Button
           className="send-form-users"
           onClick={this.submit}
           label='Enregistrer les modifications'
         />
-
-        
         {this.state.isAdded && (
           <div className="okUser">
             <img src={logoOk} alt="logoOk" className="logoOk" />

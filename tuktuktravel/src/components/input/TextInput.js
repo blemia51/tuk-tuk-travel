@@ -98,7 +98,7 @@ class TextInputMaterial extends PureComponent {
           <label htmlFor={id} data-label={label}>
             {label}
           </label>
-          {hasError && <i className="icon icon-info" />}
+          {hasError && <i className="icon icon-info fas fa-info-circle " />}
         </div>
         {hasError && errorMessage && <ErrorMessage message={errorMessage} />}
       </Fragment>

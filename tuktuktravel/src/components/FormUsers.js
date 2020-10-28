@@ -4,6 +4,7 @@ import { connect } from  'react-redux';
 import axios from 'axios';
 import TextInput from 'components/input/TextInput'
 import SelectInput from 'components/input/SelectInput'
+import { validatePhone } from '../utils/validatorUtils'
 import CountryList from './CountryList';
 import back from '../img/arrowb.png'
 import logoOk from '../img/logoOk.png';
@@ -30,6 +31,9 @@ class FormUsers extends Component {
         phone_number: '',
         description: '',
         avatar: '',
+      },
+      errors: {
+        phone_number: ''
       },
       isAdded: false,
       firstSection: true,
@@ -59,13 +63,26 @@ class FormUsers extends Component {
   }
 
   handleChange = (value, type) => {
-    const { profilStepOne, profilStepTwo, profil } = this.state
+    const { profilStepOne, profilStepTwo, profil, errors } = this.state
+    if (type === 'phone_number' && value !== '' && !validatePhone(value)) {
+      this.setState({
+        errors: {
+          ...errors,
+          [type] : 'Veillez insérer un numéro de téléphone valide'
+        }
+       });
+       return;
+    }
     this.setState({
       profil: {
         ...profilStepOne,
         ...profilStepTwo,
         ...profil,
         [type]: value,
+      },
+      errors: {
+        ...errors,
+        [type] : '',
       },
     })
   }
@@ -76,7 +93,6 @@ class FormUsers extends Component {
       acc.push(input);
       return acc;
     }, []);
-
 
     return inputsStepOne.map((input) => {
       if (input === 'sex') {
@@ -118,7 +134,7 @@ class FormUsers extends Component {
   }
 
   renderInputsStepTwo = () => {
-    const { profilStepTwo: stateProfilStepTwo } = this.state;
+    const { profilStepTwo: stateProfilStepTwo, errors } = this.state;
     const inputsStepTwo = Object.keys(stateProfilStepTwo).reduce((acc, input) => {
       if (input !== 'avatar') {
         acc.push(input);
@@ -136,8 +152,8 @@ class FormUsers extends Component {
           isLight
           //={stateProfil[input] || ''}
           onChange={(value) => this.handleChange(value, input)}
-          // hasError={input === 'email' && error !== ''}
-          // errorMessage={error}
+          errorMessage={errors[input]}
+          hasError={input === 'phone_number' && errors[input] !== ''}
         />
     )});
   }
