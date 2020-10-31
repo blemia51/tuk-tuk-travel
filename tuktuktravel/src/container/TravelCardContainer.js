@@ -9,6 +9,7 @@ export default connect(
     userProfile: state.userState.userProfile,
     userID: state.auth.userID,
     token: state.auth.token,
+    travels: state.travelsState.travels,
   }),
   (dispatch) => ({
     fetchUserProfileSuccess: (data) => dispatch(fetchUserProfileSuccess(data)),

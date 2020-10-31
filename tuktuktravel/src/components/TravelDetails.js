@@ -66,29 +66,27 @@ class TravelDetails extends Component {
     const { location } = this.props;
     const {
       state: {
-        cityPic,
-        destination,
-        start_date,
-        end_date,
-        description,
         travelID,
-        IDuser_creator,
-        numberOfTravelersMax
       },
     } = location;
+
+    const travelDetail = this.props.travels.find((travelDetail) => 
+      travelDetail.travelID === travelID
+    )
+    console.log('travel', travelDetail)
     const { userCreator, users } = this.state;
     return (
       <div className="travel-details">
         <div className="img-travel-details">
           <figure className="container-city-picture">
-            <img className="city-picture" src={cityPic} alt={cityPic} />
+            <img className="city-picture" src={travelDetail.cityPic} alt={travelDetail.cityPic} />
           </figure>
-          <p className="travel-cards-link travel-cards-title">{destination} </p>
+          <p className="travel-cards-link travel-cards-title">{travelDetail.destination} </p>
         </div>
 
         <div className="travel-creator">
           <img
-            src={userCreator.avatar}
+            src={!userCreator.avatar ? 'placeholder-profil.png' : userCreator.avatar}
             alt="Avatar"
             className="user-creator-avatar"
           ></img>
@@ -103,17 +101,18 @@ class TravelDetails extends Component {
             {/* <p>Contact: {userCreator.email}</p> */}
 
             <a href={`mailto:${userCreator.email}`}>
-              <i class="far fa-envelope"></i>
+              <i className="far fa-envelope"></i>
+              {' '}{userCreator.email}
             </a>
             <span className="form-separator w-70" />
 
             <div className="dates">
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{start_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.start_date}</Moment>{" "}
               </p>
               <span className="traveldetails-date"> - </span>
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{end_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.end_date}</Moment>{" "}
               </p>
             </div>
             <span className="form-separator w-70 mt-2" />
@@ -137,7 +136,7 @@ class TravelDetails extends Component {
               )}
             </div>
             <div className="traveldetail-description">
-              <p className="descr-traveldetails">{description} </p>
+              <p className="descr-traveldetails">{travelDetail.description} </p>
             </div>
           </div>
           <div className="reserve">
@@ -145,8 +144,8 @@ class TravelDetails extends Component {
               users={users}
               userID={this.props.userID}
               travelID={travelID}
-              IDuser_creator={IDuser_creator}
-              numberOfTravelersMax={numberOfTravelersMax}
+              IDuser_creator={travelDetail.IDuser_creator}
+              numberOfTravelersMax={travelDetail.number_of_travelers_max}
             />
           </div>
         </div>

@@ -10,7 +10,7 @@ import { validateEmail, validatePhone } from '../utils/validatorUtils'
 import CountryList from './CountryList';
 import back from '../img/arrowb.png'
 import logoOk from '../img/logoOk.png';
-import '../App.css'
+
 
 
 class FormUsers extends Component {

@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Moment from "react-moment";
-import "../App.css";
 import NavFooter from "./NavFooter";
-import SearchField from "./SearchField"
+//import SearchField from "./SearchField"
+import SearchInput from "components/input/SearchInput";
 import { Link } from "react-router-dom";
 import back from "../img/arrowb.png";
 
@@ -64,17 +64,24 @@ class TravelCards extends Component {
       .catch();
   }
 
-  searchField = (event) => {
-    this.setState({ input: event.target.value });
-    // console.log(event.target.value)
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.input !== this.state.input) {
+      this.searchCity()
+    }
+  }
+
+  searchField = (e) => {
+    // this.setState((state) => {
+    // // Important : lisez `state` au lieu de `this.state` lors de la mise à jour.
+    // return {count: state.count + 1}
+    this.setState({ input: e.target.value });
   };
 
-  getCountrys = () => {
+  searchCity = (e) => {
     const { travelsStore, input } = this.state;
-    if (input.length > 0) {
-      const result = travelsStore.filter(
-        (travel) =>
-          travel.destination.toLowerCase() === this.state.input.toLowerCase()
+    if (input.length > 2) {
+      const result = travelsStore.filter((travel) =>
+        travel.destination.toLowerCase().includes(input.toLowerCase())
       );
       this.setState({ travelsTemp: result });
     } else {
@@ -95,10 +102,10 @@ class TravelCards extends Component {
             </Link>
           </div>
         </div>
-        <SearchField
-          searchField={this.searchField}
-          input={this.state.input}
-          getCountrys={this.getCountrys}
+        <SearchInput
+          className='search'
+          placeholder='Veuillez saisir une destination'
+          onChange={this.searchField}
         />
         {React.Children.toArray(
           this.state.travelsTemp.map((travel) => {
@@ -116,14 +123,8 @@ class TravelCards extends Component {
                   to={{
                     pathname: "/traveldetails",
                     state: {
-                      cityPic: travel.cityPic,
                       travelID: travel.travelID,
-                      destination: travel.destination,
                       IDuser_creator: travel.IDuser_creator,
-                      start_date: travel.start_date,
-                      end_date: travel.end_date,
-                      description: travel.description,
-                      numberOfTravelersMax: travel.number_of_travelers_max,
                     },
                   }}
                 >

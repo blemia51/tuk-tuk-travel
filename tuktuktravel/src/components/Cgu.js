@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import back from '../img/arrow-back.png'
 import Logo from '../img/tuk-tuk logo.png';
-import '../App.css'
+
 
 
 function Cgu() {

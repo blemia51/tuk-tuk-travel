@@ -1,9 +1,10 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import axios from 'axios';
 import TextInput from '../components/input/TextInput';
 import UploadCityPic from "./UploadCityPic";
 import NavFooter from "./NavFooter";
-import '../App.css';
+
 
 class TravelForm extends Component {
   constructor(props) {
@@ -93,6 +94,14 @@ class TravelForm extends Component {
       </div>     
     )
   }
+}
+
+TravelForm.propTypes = {
+  cityPic: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  userID: PropTypes.number,
 }
 
 export default TravelForm;

@@ -7,7 +7,7 @@ import NavFooter from "./NavFooter";
 import UploadAvatarContainer from "../container/UploadAvatarContainer";
 import TextInput from "./input/TextInput";
 import logoOk from "../img/logoOk.png";
-import "../App.css";
+
 
 class UserProfile extends Component {
   constructor(props) {

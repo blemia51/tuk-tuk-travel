@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>animations</title>
+    <desc>Created with Sketch.</desc>
+    <g id="animations" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10.2288572,2.8 L12.25,2.8 C13.2164983,2.8 14,3.60588745 14,4.6 L14,11.2 C14,12.1941125 13.2164983,13 12.25,13 L1.75,13 C0.783501688,13 1.94289029e-16,12.1941125 0,11.2 L0,4.6 C-1.2952602e-16,3.60588745 0.783501688,2.8 1.75,2.8 L3.77114281,2.8 L4.76463733,1.26717988 C4.8728257,1.10026068 5.05496064,1 5.25,1 L8.75,1 C8.94503936,1 9.1271743,1.10026068 9.23536267,1.26717988 L10.2288572,2.8 Z M7,10.6 C8.61083052,10.6 9.91666667,9.25685425 9.91666667,7.6 C9.91666667,5.94314575 8.61083052,4.6 7,4.6 C5.38916948,4.6 4.08333333,5.94314575 4.08333333,7.6 C4.08333333,9.25685425 5.38916948,10.6 7,10.6 Z" id="Combined-Shape" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>

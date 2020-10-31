@@ -10,6 +10,6 @@ const allReducers = combineReducers({
   avatarState: avatarReducer,
 	cityPic: cityPicReducer,
   userState: userReducer,
-  travelState: travelsReducer,
+  travelsState: travelsReducer,
 });
 export default allReducers;

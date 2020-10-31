@@ -77,7 +77,7 @@ class SelectInput extends PureComponent {
             </option>
             {this.renderOptions(options)}
           </select>
-          { id && (
+          {id && (
             <label htmlFor={id} data-label={label}>
               {label}
             </label>

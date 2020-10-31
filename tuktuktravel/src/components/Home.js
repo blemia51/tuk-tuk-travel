@@ -1,7 +1,6 @@
 import React from 'react';
 import myLogo from '../img/tuk-tuk logo.png';
 import { Link } from 'react-router-dom';
-import '../App.css'
 
 const Home = () => {
   return (

@@ -5,7 +5,6 @@ import TextInput from "components/input/TextInput";
 import { validateEmail } from "utils/validatorUtils";
 import back from "../img/arrowb.png";
 import logoFaux from "../img/logoFaux.png";
-import "../App.css";
 
 class Login extends Component {
   constructor(props) {

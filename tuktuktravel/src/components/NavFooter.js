@@ -5,7 +5,6 @@ import compass from '../img/compass.png'
 import folder from '../img/folder.png'
 import profile from '../img/profile.png'
 
-import '../App.css'
 
 
 const NavFooter = () => {
