@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Moment from "react-moment";
 import axios from "axios";
@@ -30,19 +31,21 @@ class UserProfile extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { lastname, firstname, city, email, phone_number } = props.userProfile;
+    const { lastname, firstname, city, email, phone_number, description } = props.userProfile;
     const { 
       lastname: stateNom, 
       firstname: statePrenom, 
       city: stateCity, 
       email: stateEmail, 
-      phone_number: statePhone
+      phone_number: statePhone,
+      description: stateDescription,
     } = state.profil;
     const stateNotHydrated = statePrenom === '' && 
         stateNom === '' && 
         stateCity === '' && 
         stateEmail === '' && 
-        statePhone === '';
+        statePhone === '' &&
+        stateDescription === '';
     if (stateNotHydrated) {
       return {
         profil: {
@@ -51,9 +54,11 @@ class UserProfile extends Component {
           city, 
           email, 
           phone_number,
+          description,
         }
       };
     }
+    console.log('state', state)
     return state;
   }
 
@@ -77,7 +82,6 @@ class UserProfile extends Component {
         }
       })
       .then((data) => {
-        console.log(data)
         this.setState({
           user: data,
         });
@@ -85,13 +89,16 @@ class UserProfile extends Component {
       .catch();
   }
 
-  // UPDATE AVATAR
-  submit = (e) => {
+  // UPDATE PROFIL
+  handleSubmit = (e) => {
+    const { profil } = this.state
     e.preventDefault();
     const update = {
+      ...profil,
       userID: this.props.userID,
       avatar: this.props.avatar,
     };
+    console.log('update', update)
     axios
       .put(`http://localhost:8000/api/users`, update)
       .then((res) => {
@@ -116,14 +123,14 @@ class UserProfile extends Component {
 
   render() {
     const { userProfile } = this.props
-    const { profil: stateProfil, user } = this.state;
+    const { profil: stateProfil } = this.state;
     const inputs = Object.keys(stateProfil).reduce((acc, input) => {
       if (input !== 'password') {
         acc.push(input);
       }
       return acc;
     }, []);
-    console.log(userProfile)
+    //console.log(userProfile)
     return (
       <div>
         <div className="title-user-profile">PROFIL</div>
@@ -153,21 +160,16 @@ class UserProfile extends Component {
               </div>
             ))
         )} */}
-        {React.Children.toArray(user.map((res) => (
-          <div className="profile-picture-container">
-            {/* <img
-              src={res.avatar}
-              alt="profil"
-              className="profile-picture"
-            ></img> */}
-            <UploadAvatarContainer userProfileAvatar={userProfile.avatar}/>
-          </div>
-        )))}
+        
+        <div className="profile-picture-container">
+          <UploadAvatarContainer userProfileAvatar={userProfile.avatar}/>
+        </div>
         <div className="profil--general-container">
           <div className="profil--container">
             {React.Children.toArray(inputs.map((input) => {
               return (
                 <TextInput
+                  noEdit
                   type={input}
                   label={input}
                   placeholder={input}
@@ -185,13 +187,13 @@ class UserProfile extends Component {
         </div>
         <Button
           className="send-form-users"
-          onClick={this.submit}
+          onClick={this.handleSubmit}
           label='Enregistrer les modifications'
         />
         {this.state.isAdded && (
           <div className="okUser">
             <img src={logoOk} alt="logoOk" className="logoOk" />
-            <p className="user-added">Avatar changé</p>
+            <p className="user-added">Modifications enregistrées</p>
           </div>
         )}
         <NavFooter />
@@ -200,14 +202,16 @@ class UserProfile extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     userID: state.auth.userID,
-//     avatar: state.avatar.avatar,
-//   };
-// }
-
-// export default connect(mapStateToProps)(UserProfile);
+UserProfile.propTypes = {
+  avatar: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  token: PropTypes.string,
+  userID: PropTypes.number,
+  userProfile: PropTypes.shape({
+    avatar: PropTypes.string
+  })
+}
 
 export default UserProfile;
-

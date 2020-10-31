@@ -41,8 +41,8 @@ class MyTravels extends Component {
     axios
       .delete(`http://localhost:8000/api/travel_user/${id}`)
       .then((res) => {
-        const myTravels = this.state.travel_user.filter(
-          (travel) => travel.travel_user_id !== id
+        const myTravels = this.state.travel_user.filter((travel) => 
+          travel.travel_user_id !== id
         );
         this.setState({ travel_user: myTravels });
         //alert(`tuk-tuk supprimé`)

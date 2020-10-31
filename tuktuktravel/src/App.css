@@ -168,6 +168,13 @@
   margin-top: 1em;
 }
 
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
 /*------ First Part ------*/
 
 .page-form-user {
@@ -233,7 +240,7 @@
   color: #fff;
   text-decoration: none;
   font-size: 0.8em;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   cursor: pointer;
 }
 
@@ -448,6 +455,10 @@
   color: #f2362f;
   font-size: 12px;
 }
+
+.input--no-edit input {
+  background-color: #fafafa;
+  pointer-events: none; }
 
 .user_connexion {
   display: flex;
@@ -876,8 +887,6 @@ a {
 .fig-back-arrow {
   margin: 0;
   margin-left: 0.5em;
-  text-align: left;
-  position: fixed;
 }
 
 .text-cgu {
@@ -1086,6 +1095,7 @@ a {
 }
 
 /*--------Button-----------*/
+
 .btn.is-disabled,
 .btn[disabled] {
   pointer-events: none;
@@ -1106,9 +1116,15 @@ a {
 
 .mt-2 {
   margin-top: 16px; }
+
+.mt-1 {
+  margin-top: 8px; }
   
 .mb-2 {
   margin-bottom: 16px; }
+
+.mb-1 {
+  margin-bottom: 8px; }
 
 .w-70 {
   width: 70%;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "components/input/TextInput";
@@ -23,23 +24,24 @@ class Login extends Component {
   handleChange = (value, type) => {
     const { login } = this.state;
     console.log(login)
-    if (type === 'email' && !validateEmail(value) && value !== '') {
+    if (type === 'email' && value !== '' && !validateEmail(value)) {
       this.setState({
         error: 'Veuillez insérer un email valide'
       });
-     // return;
+     return;
     }
-    if (type === 'email' && (validateEmail(value) || value === '')) {
-      this.setState({
-        error: ''
-      });
-      //return;
-    }
+    // if (type === 'email' && (validateEmail(value) || value === '')) {
+    //   this.setState({
+    //     error: ''
+    //   });
+    //   //return;
+    // }
     this.setState({
       login: {
         ...login,
         [type]: value,
       },
+      error: '',
     })
   }
 
@@ -58,7 +60,7 @@ class Login extends Component {
         } else {
           this.props.history.push("/userconnexion");
           this.setState({
-            isNotAdded: true,
+          isNotAdded: true,
           });
         }
       })
@@ -66,7 +68,7 @@ class Login extends Component {
         console.log(res)
         this.props.saveToken(res.token, res.user.userID)
         this.props.history.push("/travelcards");
-        this.setState({ flash: res.flash });
+        //this.setState({ flash: res.flash });
       })
       .catch((err) => this.setState({ flash: err.flash }));
   }
@@ -123,6 +125,13 @@ class Login extends Component {
       </div>
     );
   }
+}
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  saveToken: PropTypes.func
 }
 
 export default Login;

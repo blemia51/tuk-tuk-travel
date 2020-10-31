@@ -1,11 +1,11 @@
 export default function (state = {}, action) {
   switch (action.type) {
-    case "SEND_CITY_PIC":
+    case "UPLOAD_CITY_PIC":
       return {
         ...state,
-        cityPic: action.cityPic,
+        cityPic: action.paylod.cityPic,
       };
-    case "DESTROY_CITYPIC":
+    case "DELETE_CITY_PIC":
       let newState = { ...state }
       delete newState.cityPic
       return newState

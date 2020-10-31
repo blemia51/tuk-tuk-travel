@@ -15,11 +15,12 @@ import TravelFormContainer from './container/TravelFormContainer'
 //import TravelCards from './components/TravelCards'
 import TravelCardContainer from './container/TravelCardContainer'
 
-import TravelDetails from './components/TravelDetails'
+//import TravelDetails from './components/TravelDetails'
+import TravelDetailContainer from './container/TravelDetailContainer'
 import MyTravels from './components/MyTravels'
 import MyTravelDetails from './components/MyTravelDetails'
 import Cgu from './components/Cgu'
-import './App.css'
+//import './App.css'
 import { connect } from 'react-redux';
 
 
@@ -63,7 +64,7 @@ function App(props) {
         <Route path="/userconnexion" component={requireNotAuth(LoginContainer)}/>
         <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
         <Route exact path="/travelform" component={TravelFormContainer}/>
-        <Route exact path="/traveldetails" render={(props) => <TravelDetails {...props}/>} />
+        <Route exact path="/traveldetails" render={(props) => <TravelDetailContainer {...props}/>} />
         <Route exact path="/mytravels" component={MyTravels}/>
         <Route exact path="/mytraveldetails" component={MyTravelDetails} />
       </Switch> 

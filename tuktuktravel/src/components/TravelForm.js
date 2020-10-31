@@ -42,11 +42,16 @@ class TravelForm extends Component {
     }, []);
 
     return inputs.map((input) => {
+      let date = ''
+      if (input.split('_').join(' ').includes('date')) {
+         date = 'JJ/MM/AAAA'
+      }
+
       return (
         <TextInput
           type={input}
-          label={input}
-          //placeholder={input}
+          label={input.split('_').join(' ')}
+          placeholder={date}
           className='select--material'
           name={input}
           isLight
@@ -62,11 +67,8 @@ class TravelForm extends Component {
     const {...destination} = this.state.travelForm;
     const { cityPic, userID } = this.props;
     Object.assign(destination, {cityPic: cityPic, IDuser_creator: userID});
-    // destination.cityPic = this.props.cityPic
-    // destination.IDuser_creator = this.props.userID
-    //delete destination.isAdded
-    console.log(destination)
-    axios.post('http://localhost:8000/api/travels/',destination)
+    //console.log('destination', destination)
+    axios.post('http://localhost:8000/api/travels/', destination)
     .then(res => {
       this.props.history.push('/travelcards')
     }).catch(event => {
@@ -85,10 +87,10 @@ class TravelForm extends Component {
               {this.renderInputs()}
             </div>
           </div>    
-        <UploadCityPic onUpload={this.handleSubmit} />
-        <NavFooter/>
-      </div>
-    </div>     
+          <UploadCityPic onUpload={this.handleSubmit} />
+          <NavFooter />
+        </div>
+      </div>     
     )
   }
 }
