@@ -2,6 +2,7 @@ import React from "react";
 import { post } from "axios";
 import { connect } from "react-redux";
 import logoOk from "../img/logoOk.png";
+import { uploadCityPic } from "actions/cityPicActions";
 
 class UploadCityPic extends React.Component {
   constructor(props) {
@@ -10,11 +11,9 @@ class UploadCityPic extends React.Component {
       file: "",
       isUpload: false,
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
   }
 
-  onFormSubmit(e) {
+  onFormSubmit = (e) => {
     e.preventDefault();
     const url = "http://localhost:8000/uploaddufichier";
     const formData = new FormData();
@@ -26,10 +25,11 @@ class UploadCityPic extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      this.props.dispatch({
-        type: "SEND_CITY_PIC",
-        cityPic: this.state.file.name,
-      });
+      // this.props.dispatch({
+      //   type: "SEND_CITY_PIC",
+      //   cityPic: this.state.file.name,
+      // });
+      uploadCityPic(this.state.file.name)
       this.setState({
         isUpload: true,
       });
@@ -37,7 +37,7 @@ class UploadCityPic extends React.Component {
     });
   }
 
-  onChange(e) {
+  handleChange = (e) => {
     this.setState({ file: e.target.files[0] });
   }
 
@@ -50,7 +50,7 @@ class UploadCityPic extends React.Component {
           type="file"
           name="file"
           className="avatar"
-          onChange={this.onChange}
+          onChange={this.handleChange}
           id="cityPic"
         />
         <button onClick={this.onFormSubmit} className="upload-avatar">
@@ -69,10 +69,4 @@ class UploadCityPic extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    cityPic: state.cityPic.cityPic,
-  };
-}
-
-export default connect(mapStateToProps)(UploadCityPic);
+export default UploadCityPic;

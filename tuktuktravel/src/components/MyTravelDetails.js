@@ -1,6 +1,8 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Button from "./fragments/Button"
 import back from "../img/arrowb.png";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
@@ -62,10 +64,24 @@ class TravelDetails extends Component {
       .catch();
   }
 
+  cancelTravelReservation = (id) => {
+    const { confirm } = window;
+    confirm('Êtes vous sûr(e) de vouloir supprimer vôtre réservation ?') &&
+    axios
+      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .then((res) => {
+        this.props.history.push("/mytravels");
+      })
+      .catch((event) => {
+        console.error(event);
+        alert("tuk-tuk non supprimé");
+      });
+  }
+
   render() {
     const { location } = this.props;
     const {
-      state: { cityPic, destination, start_date, end_date, description },
+      state: { cityPic, destination, start_date, end_date, description, travelUserId },
     } = location;
     const { userCreator, users } = this.state;
     return (
@@ -117,6 +133,13 @@ class TravelDetails extends Component {
             </div>
             <p className="descr-traveldetails">{description} </p>
           </div>
+          <div className='reserve-button'>
+          <Button
+            onClick={() => this.cancelTravelReservation(travelUserId)}
+            label='Annuler ma réservation'
+            //isDisabled={!isUserBooked}
+          />
+          </div>
         </div>
         <NavFooter />
       </div>
@@ -124,11 +147,12 @@ class TravelDetails extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    token: state.auth.token,
-    userID: state.auth.userID,
-  };
+TravelDetails.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  location: PropTypes.string,
+  token: PropTypes.number,
 }
 
-export default connect(mapStateToProps)(TravelDetails);
+export default TravelDetails;

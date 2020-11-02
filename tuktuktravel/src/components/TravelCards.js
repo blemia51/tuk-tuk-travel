@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
-//import SearchField from "./SearchField"
 import SearchInput from "components/input/SearchInput";
 import { Link } from "react-router-dom";
 import back from "../img/arrowb.png";
@@ -104,20 +103,22 @@ class TravelCards extends Component {
         </div>
         <SearchInput
           className='search'
-          placeholder='Veuillez saisir une destination'
+          placeholder='Ou part on?'
           onChange={this.searchField}
         />
+        <div className="travel--container">
         {React.Children.toArray(
           this.state.travelsTemp.map((travel) => {
             return (
+              
               <div className="liste-travel">
-                <figure className="fig-img-travel-cards">
-                  <img
+                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${travel.cityPic})` }}>
+                  {/* <img
                     className="img-travel-cards"
                     alt={travel.cityPic}
                     src={travel.cityPic}
-                  ></img>
-                </figure>
+                  ></img> */}
+                </div>
                 <Link
                   className="travel-cards-link"
                   to={{
@@ -143,9 +144,12 @@ class TravelCards extends Component {
                   <p>Places: {travel.number_of_travelers_max}</p>
                 </div>
               </div>
+              
             );
           })
         )}
+        </div>
+
         <NavFooter />
       </div>
     );

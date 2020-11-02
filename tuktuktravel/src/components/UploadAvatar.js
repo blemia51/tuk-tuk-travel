@@ -69,12 +69,4 @@ class UploadAvatar extends React.Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     avatar: state.avatar.avatar,
-//   };
-// }
-
-// export default connect(mapStateToProps)(UploadAvatar);
-
 export default UploadAvatar;

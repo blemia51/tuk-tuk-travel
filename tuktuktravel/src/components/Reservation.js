@@ -20,6 +20,7 @@ class Reservation extends Component {
       id_user: this.props.userID,
       id_travel: this.props.travelID,
     };
+    const { isUserBooked } = this.state;
 
     axios
       .post("http://localhost:8000/api/travel_user", reservation)
@@ -27,11 +28,29 @@ class Reservation extends Component {
         //alert('TukTuk reservé');
         this.setState({
           isBooked: true,
+          isUserBooked: !isUserBooked,
         });
       })
       .catch((event) => {
         console.error(event);
         //alert(`Erreur lors de la réservation du TukTuk`);
+      });
+  }
+
+  cancelReservation = (id) => {
+    const { isUserBooked } = this.state;
+    axios
+      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .then((res) => {
+        // const myTravels = this.state.travel_user.filter((travel) => 
+        //   travel.travel_user_id !== id
+        // );
+        this.setState({ isUserBooked: !isUserBooked });
+        //alert(`tuk-tuk supprimé`)
+      })
+      .catch((event) => {
+        console.error(event);
+        alert("tuk-tuk non supprimé");
       });
   }
 
@@ -42,9 +61,9 @@ class Reservation extends Component {
     if (users !== prevProps.users ) {
       const user = users.filter((user) => user.userID === userID)
       user.length > 0 && 
-        this.setState({ isUserBooked: !isUserBooked })
+        this.setState({ isUserBooked: !isUserBooked });
       users.length === numberOfTravelersMax &&
-        this.setState({travelersMax: !travelersMax}, () => console.log('rororo', travelersMax))
+        this.setState({travelersMax: !travelersMax});
     }
   }
 
@@ -59,9 +78,13 @@ class Reservation extends Component {
           label='Réserver'
           isDisabled={IDuser_creator === userID || isUserBooked || travelersMax}
         />
-        {isUserBooked &&
-          <Button label='Annuler ma réservation' />
-        }
+        {/* {isUserBooked &&
+          <Button
+            onClick={this.cancelReservation}
+            label='Annuler ma réservation'
+            isDisabled={!isUserBooked}
+          />
+        } */}
         <div className="tuktuk-booked">
           {this.state.isBooked ? (
             <div

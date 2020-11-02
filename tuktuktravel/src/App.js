@@ -1,25 +1,27 @@
 import React, {useEffect, useRef} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import requireAuth from './hoc/requireAuth'
-import requireNotAuth from './hoc/requireNotAuth'
+import requireAuth from './hoc/requireAuth';
+import requireNotAuth from './hoc/requireNotAuth';
 import HomeIntroFirst from './components/HomeIntroFirst';
 import HomeIntroSec from './components/HomeIntroSec';
 import Home from './components/Home';
-import FormUsers from './components/FormUsers'
+import FormUsers from './components/FormUsers';
 //import UserProfile from './components/UserProfile'
-import UserProfileContainer from './container/UserProfileContainer'
+import UserProfileContainer from './container/UserProfileContainer';
 //import Login from './components/Login';
-import LoginContainer from './container/LoginContainer'
+import LoginContainer from './container/LoginContainer';
 //import TravelForm from './components/TravelForm'
-import TravelFormContainer from './container/TravelFormContainer'
+import TravelFormContainer from './container/TravelFormContainer';
 //import TravelCards from './components/TravelCards'
-import TravelCardContainer from './container/TravelCardContainer'
+import TravelCardContainer from './container/TravelCardContainer';
 
 //import TravelDetails from './components/TravelDetails'
-import TravelDetailContainer from './container/TravelDetailContainer'
-import MyTravels from './components/MyTravels'
-import MyTravelDetails from './components/MyTravelDetails'
-import Cgu from './components/Cgu'
+import TravelDetailContainer from './container/TravelDetailContainer';
+//import MyTravels from './components/MyTravels'
+import MyTravelsContainer from './container/MyTravelsContainer';
+//import MyTravelDetails from './components/MyTravelDetails'
+import MyTravelDetailContainer from './container/MyTravelDetailContainer';
+import Cgu from './components/Cgu';
 //import './App.css'
 import { connect } from 'react-redux';
 
@@ -65,8 +67,8 @@ function App(props) {
         <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
         <Route exact path="/travelform" component={TravelFormContainer}/>
         <Route exact path="/traveldetails" render={(props) => <TravelDetailContainer {...props}/>} />
-        <Route exact path="/mytravels" component={MyTravels}/>
-        <Route exact path="/mytraveldetails" component={MyTravelDetails} />
+        <Route exact path="/mytravels" component={MyTravelsContainer}/>
+        <Route exact path="/mytraveldetails" component={MyTravelDetailContainer} />
       </Switch> 
     </div>
   );

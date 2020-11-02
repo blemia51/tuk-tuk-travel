@@ -1,9 +1,9 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
-import del from "../img/delete.png";
+//import del from "../img/delete.png";
 import axios from "axios";
 
 class MyTravels extends Component {
@@ -37,7 +37,7 @@ class MyTravels extends Component {
       .catch();
   }
 
-  handleDelete(id) {
+  cancelTravelReservation = (id) => {
     axios
       .delete(`http://localhost:8000/api/travel_user/${id}`)
       .then((res) => {
@@ -54,78 +54,84 @@ class MyTravels extends Component {
   }
 
   render() {
+    console.log("travel_user", this.state.travel_user)
     return (
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
-        {React.Children.toArray(
-          this.state.travel_user.map((res) => {
-            return (
-              <div className="liste-travel">
-                <figure
-                  style={{
-                    position: "relative",
-                    top: "70px",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  <img
-                    style={{ width: "30px", cursor: "pointer" }}
-                    onClick={this.handleDelete.bind(this, res.travel_user_id)}
-                    src={del}
-                    alt="del"
-                  ></img>
-                </figure>
-                <figure className="fig-img-travel-cards">
-                  <img
-                    className="img-travel-cards"
-                    alt={res.cityPic}
-                    src={res.cityPic}
-                  ></img>
-                </figure>
-
-                <Link
-                  className="travel-cards-link"
-                  to={{
-                    pathname: "/mytraveldetails",
-                    state: {
-                      cityPic: res.cityPic,
-                      travelID: res.travelID,
-                      destination: res.destination,
-                      IDuser_creator: res.IDuser_creator,
-                      start_date: res.start_date,
-                      end_date: res.end_date,
-                      description: res.description,
-                    },
-                  }}
-                >
-                  <h1 className="travel-cards-title">{res.destination}</h1>
-                </Link>
-                <div className="liste-description-travel-cards">
-                  <div
-                    style={{ display: "flex", justifyContent: "flex-start" }}
+        <span className='form-separator mb-2 mt-2' />
+        <div className="travel--container">
+          {React.Children.toArray(
+            this.state.travel_user.map((res) => {
+              return (
+                <div className="liste-travel">
+                  {/* <figure
+                    style={{
+                      position: "relative",
+                      top: "70px",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
                   >
-                    <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
-                    <span className="travel-date"> - </span>
-                    <Moment format="DD/MM/YYYY">{res.end_date}</Moment>
+                    <img
+                      style={{ width: "30px", cursor: "pointer" }}
+                      onClick={() => this.cancelTravelReservation(res.travel_user_id)}
+                      src={del}
+                      alt="del"
+                    ></img>
+                  </figure> */}
+                  <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${res.cityPic})` }}>
+                    {/* <img
+                      className="img-travel-cards"
+                      alt={res.cityPic}
+                      src={res.cityPic}
+                    ></img> */}
                   </div>
-                  <p>Places: {res.number_of_travelers_max}</p>
+                  
+                  <Link
+                    className="travel-cards-link"
+                    to={{
+                      pathname: "/mytraveldetails",
+                      state: {
+                        cityPic: res.cityPic,
+                        travelID: res.travelID,
+                        destination: res.destination,
+                        IDuser_creator: res.IDuser_creator,
+                        start_date: res.start_date,
+                        end_date: res.end_date,
+                        description: res.description,
+                        travelUserId: res.travel_user_id,
+                      },
+                    }}
+                  >
+                    <h1 className="travel-cards-title">{res.destination}</h1>
+                  </Link>
+                  <div className="liste-description-travel-cards">
+                    <div
+                      style={{ display: "flex", justifyContent: "flex-start" }}
+                    >
+                      <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
+                      <span className="travel-date"> - </span>
+                      <Moment format="DD/MM/YYYY">{res.end_date}</Moment>
+                    </div>
+                    <p>Places: {res.number_of_travelers_max}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        )}
+              );
+            })
+          )}
+        </div>
         <NavFooter />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    token: state.auth.token,
-    userID: state.auth.userID,
-  };
+MyTravels.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  token: PropTypes.number,
+  userID: PropTypes.number,
 }
 
-export default connect(mapStateToProps)(MyTravels);
+export default MyTravels;

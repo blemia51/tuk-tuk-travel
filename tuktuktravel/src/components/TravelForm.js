@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import axios from 'axios';
 import TextInput from '../components/input/TextInput';
-import UploadCityPic from "./UploadCityPic";
+import UploadCityPicContainer from "../container/UploadCityPicContainer";
 import NavFooter from "./NavFooter";
 
 
@@ -88,7 +88,7 @@ class TravelForm extends Component {
               {this.renderInputs()}
             </div>
           </div>    
-          <UploadCityPic onUpload={this.handleSubmit} />
+          <UploadCityPicContainer onUpload={this.handleSubmit} />
           <NavFooter />
         </div>
       </div>     
