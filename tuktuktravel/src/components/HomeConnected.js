@@ -81,15 +81,14 @@ class HomeConnected extends PureComponent {
         });
       })
       .catch();
-
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.input !== this.state.input) {
-      this.searchCity()
+      this.searchCity();
     }
     if (prevProps.userProfile !== this.props.userProfile ) {
-      this.setState({userProfileToto: this.props.userProfile})
+      this.setState({userProfileToto: this.props.userProfile});
     }
   }
 
@@ -235,7 +234,7 @@ class HomeConnected extends PureComponent {
         </div>
         <SearchInput
           className='search'
-          placeholder={`On part ou ${this.props.userProfile.firstname} ?`}
+          placeholder={`On part où ${this.props.userProfile.firstname} ?`}
           onChange={this.searchField}
         />
         <div className='travel--container' >

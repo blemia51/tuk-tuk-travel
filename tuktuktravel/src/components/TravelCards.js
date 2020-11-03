@@ -106,7 +106,7 @@ class TravelCards extends Component {
         </div>
         <SearchInput
           className='search'
-          placeholder={`On part ou ${this.props.userProfile.firstname} ?`}
+          placeholder={`On part où ${this.props.userProfile.firstname} ?`}
           onChange={this.searchField}
         />
         <div className="travel--container">
