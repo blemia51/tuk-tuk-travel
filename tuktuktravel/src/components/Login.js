@@ -80,13 +80,17 @@ class Login extends Component {
       return acc;
     }, []);
     return (
-      <div>
-        <div className="title-user-connexion">Connecte - toi ! </div>
-        <Link className="link-cgu-to-formuser" to="/Home">
-          <figure className="fig-back-arrow">
-            <img className="back-arrow" src={back} alt="Arrow to back" />
-          </figure>
-        </Link>
+      <div className="travel-cards">
+        <div className="title-and-home">
+          <div className="title-travel-cards">Connecte - toi ! </div>
+          <div>
+            <Link className="link-back-arrow" to="/Home">
+              <figure className="fig-back-arrow-travelcards">
+                <img className="back-arrow" src={back} alt="Arrow to back" />
+              </figure>
+            </Link>
+          </div>
+        </div>
         
         <form className="user_connexion" onSubmit={this.submitForm}>
           <div>

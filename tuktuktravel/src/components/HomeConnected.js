@@ -8,10 +8,6 @@ import back from "../img/arrowb.png";
 
 class HomeConnected extends PureComponent {
 
-  // static defaultProps = {
-  //   userProfile: {}
-  // }
-
   state = {
     travelsTemp: [],
     travelsStore: [],
@@ -117,16 +113,16 @@ class HomeConnected extends PureComponent {
   };
 
   renderMyNextTravel = () => {
-    if (!this.props.myTravels) {
+    if (!this.props.myTravels || this.props.myTravels === [] ) {
       return null;
     }
     return (
       <div className="travel--container">
-          {React.Children.toArray(
-            this.props.myTravels.map((res) => {
-              return (
-                <div className="liste-travel my-next-travel">
-                  <div className="row-70" style={{width: '70%'}}>
+        {React.Children.toArray(
+          this.props.myTravels.map((res) => {
+            return (
+              <div className="liste-travel my-next-travel">
+                <div className="row-70" style={{width: '70%'}}>
                   <div
                     className="fig-img-travel-cards"
                     style={{ backgroundImage: `url(${res.cityPic})` }}>
@@ -147,28 +143,28 @@ class HomeConnected extends PureComponent {
                       },
                     }}
                   >
-                    {/* <h1 className="travel-cards-title">{res.destination}</h1> */}
+                  {/* <h1 className="travel-cards-title">{res.destination}</h1> */}
                   </Link>
-                  </div>
-                  <div className="row-30" style={{width: '30%'}}>
-                    <h3>{res.destination}</h3>
-                    <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
-                  </div>
-                  {/* <div className="liste-description-travel-cards">
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-start" }}
-                    >
-                      <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
-                      <span className="travel-date"> - </span>
-                      <Moment format="DD/MM/YYYY">{res.end_date}</Moment>
-                    </div>
-                    <p>Places: {res.number_of_travelers_max}</p>
-                  </div> */}
                 </div>
-              );
-            })
-          )}
-        </div>
+                <div className="row-30" style={{width: '30%'}}>
+                  <h3>{res.destination}</h3>
+                  <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
+                </div>
+                {/* <div className="liste-description-travel-cards">
+                  <div
+                    style={{ display: "flex", justifyContent: "flex-start" }}
+                  >
+                    <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
+                    <span className="travel-date"> - </span>
+                    <Moment format="DD/MM/YYYY">{res.end_date}</Moment>
+                  </div>
+                  <p>Places: {res.number_of_travelers_max}</p>
+                </div> */}
+              </div>
+            );
+          })
+        )}
+      </div>
     )
   }
 
@@ -176,7 +172,7 @@ class HomeConnected extends PureComponent {
     return (
       <div className="travel--container">
         {React.Children.toArray(
-          this.state.travelsTemp.slice(0, 2).map((travel) => {
+          this.state.travelsTemp.slice(0, 3).map((travel) => {
             return (
               
               <div className="liste-travel">
@@ -216,7 +212,7 @@ class HomeConnected extends PureComponent {
             );
           })
         )}
-        </div>
+      </div>
     )
   }
 
@@ -225,8 +221,6 @@ class HomeConnected extends PureComponent {
       return null 
     }
 
-   // console.log(this.props)
-     
     return (
       <div className="travel-cards">
         <div className="title-and-home">
@@ -245,12 +239,12 @@ class HomeConnected extends PureComponent {
           onChange={this.searchField}
         />
         <div className='travel--container' >
-        <div className="title-travel-cards">Prochain Tuk-tuk Prévu</div>
-        <span className="form-separator mb-2 mt-2" />
-        {this.renderMyNextTravel()}
-        <div className="title-travel-cards">A découvrir !</div>
-        <span className="form-separator mb-2 mt-2" />
-        {this.renderNewTravels()}
+          <div className="title-travel-cards">Prochain Tuk-tuk Prévu</div>
+          <span className="form-separator mb-2 mt-2" />
+          {this.renderMyNextTravel()}
+          <div className="title-travel-cards">A découvrir !</div>
+          <span className="form-separator mb-2 mt-2" />
+          {this.renderNewTravels()}
         </div>
         <NavFooter />
       </div>

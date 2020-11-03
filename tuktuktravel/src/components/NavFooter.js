@@ -1,9 +1,10 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 import logoProposer from '../img/logoProposer.png';
-import compass from '../img/compass.png'
-import folder from '../img/folder.png'
-import profile from '../img/profile.png'
+import compass from '../img/compass.png';
+import folder from '../img/folder.png';
+import profile from '../img/profile.png';
+import accueil from '../img/accueil.png'
 
 
 
@@ -13,7 +14,7 @@ const NavFooter = () => {
       <div>
         <Link className='link-footer' to="/Accueil">
           <figure className='logos-footer'>
-            <img className='img-footer' src={compass} alt='logo explorer'/>
+            <img className='img-footer' src={accueil} alt='logo accueil'/>
           </figure>
           <p className="title_footer">Accueil</p>
         </Link>

@@ -65,7 +65,7 @@ class TravelCards extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.input !== this.state.input) {
-      this.searchCity()
+      this.searchCity();
     }
   }
 
@@ -89,6 +89,9 @@ class TravelCards extends Component {
   };
 
   render() {
+    if (!this.props.userProfile) {
+      return null;
+    }
     return (
       <div className="travel-cards">
         <div className="title-and-home">
@@ -103,7 +106,7 @@ class TravelCards extends Component {
         </div>
         <SearchInput
           className='search'
-          placeholder='Ou part on?'
+          placeholder={`On part ou ${this.props.userProfile.firstname} ?`}
           onChange={this.searchField}
         />
         <div className="travel--container">

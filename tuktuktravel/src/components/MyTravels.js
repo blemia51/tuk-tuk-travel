@@ -74,7 +74,7 @@ class MyTravels extends Component {
           <i className="fas fa-heart favorites" />
         </div>
         <div className="favorites-placeholder-text">
-          <p>Vous n'avez pas sauvegardé d'annonces</p>
+          <p>Vous n'avez pas sauvegardé d'annonces...</p>
           <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
         </div>
       </div>
