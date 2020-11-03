@@ -248,7 +248,7 @@ class HomeConnected extends PureComponent {
         <div className="title-travel-cards">Prochain Tuk-tuk Prévu</div>
         <span className="form-separator mb-2 mt-2" />
         {this.renderMyNextTravel()}
-        <div className="title-travel-cards">Nouveautés !</div>
+        <div className="title-travel-cards">A découvrir !</div>
         <span className="form-separator mb-2 mt-2" />
         {this.renderNewTravels()}
         </div>

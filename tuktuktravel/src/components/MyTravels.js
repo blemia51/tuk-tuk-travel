@@ -69,10 +69,14 @@ class MyTravels extends Component {
           )
         })
       :
-      <div style={{marginLeft: '8px', textAlign: 'left'}}>
-      <span className="fas fa-heart favorites" />
-      <span style={{padding: '8px', fontSize: '12px'}}>Vous n'avez pas sauvegardé d'annonces</span>
-
+      <div className="favorites-placeholder mt-2" >
+        <div>
+          <i className="fas fa-heart favorites" />
+        </div>
+        <div className="favorites-placeholder-text">
+          <p>Vous n'avez pas sauvegardé d'annonces</p>
+          <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
+        </div>
       </div>
       }
       </div>
