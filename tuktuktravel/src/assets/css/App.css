@@ -920,6 +920,36 @@ a {
   width: 100%;
 }
 
+.favorites {
+  color: red;
+  font-size: 24px;
+  padding: 8px;
+  border: solid 1px lightgrey;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.is-favorites {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.btn--travel-detail {
+  display: flex;
+  width: 55%;
+  justify-content: space-around;
+}
+
+.tuktuk--favorites-image {
+    width: 134px;
+    height: auto;
+    padding: 11px;
+}
+
+.tuktuk--favorites {
+  display: flex;
+}
+
 /* --------------------------------------------------------------------------- UPLOAD FILE --------------------------------------------------------------------------------- */
 
 .upload-avatar {

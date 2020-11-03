@@ -7,6 +7,7 @@ export default connect(
     userID: state.auth.userID,
     token: state.auth.token,
     travels: state.travelsState.travels,
+    favorites: state.favoritesState.favorites,
   }),
  
 )(MyTravels);

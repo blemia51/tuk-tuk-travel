@@ -5,6 +5,6 @@ export default connect(
   (state) => ({
     userProfile: state.userState.userProfile,
     userID: state.auth.userID,
-    cityPic: state.cityPic.cityPic
+    cityPic: state.cityPicState.cityPic
   }),
 )(TravelForm);

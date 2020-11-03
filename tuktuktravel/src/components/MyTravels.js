@@ -53,13 +53,42 @@ class MyTravels extends Component {
       });
   }
 
+  renderFavorites = () => {
+    const { favorites, travels } = this.props;
+    const favoris = favorites.map((favorite => travels.find(travel => travel.travelID === favorite)))
+    console.log("favoris", favoris)
+    return (
+      <div>
+        <div className="title-travel-cards">Mes Tuk-tuk sauvegardés</div>
+        {favoris.length > 0 ? favoris.map(favori => {
+          return (
+            <div className="tuktuk--favorites">
+              <img src={favori.cityPic} className="tuktuk--favorites-image"/>
+              <h4>{favori.destination}</h4>
+            </div>
+          )
+        })
+      :
+      <div style={{marginLeft: '8px', textAlign: 'left'}}>
+      <span className="fas fa-heart favorites" />
+      <span style={{padding: '8px'}}>Vous n'avez pas sauvegardé d'annonces</span>
+
+      </div>
+      }
+      </div>
+    )
+  }
+
   render() {
-    console.log("travel_user", this.state.travel_user)
+    // console.log("travel_user", this.state.travel_user)
+    // console.log('tadada', this.props.favorites)
+    const { favorites, travels } = this.props;
     return (
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
         <span className='form-separator mb-2 mt-2' />
         <div className="travel--container">
+        <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
           {React.Children.toArray(
             this.state.travel_user.map((res) => {
               return (
@@ -119,7 +148,9 @@ class MyTravels extends Component {
               );
             })
           )}
+          
         </div>
+        {this.renderFavorites()}
         <NavFooter />
       </div>
     );

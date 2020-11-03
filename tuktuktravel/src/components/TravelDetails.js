@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import back from "../img/arrowb.png";
 import Moment from "react-moment";
 import Reservation from "./Reservation";
+import FavoritesContainer from "../container/FavoritesContainer"
 import NavFooter from "./NavFooter";
 
 class TravelDetails extends Component {
@@ -12,6 +13,7 @@ class TravelDetails extends Component {
     this.state = {
       userCreator: [],
       users: [],
+      hasFavorites: false,
     };
   }
   componentDidMount() {
@@ -62,6 +64,26 @@ class TravelDetails extends Component {
       .catch();
   }
 
+  handleAddFavorites = () => {
+    const { location } = this.props;
+    const {
+      state: {
+        travelID,
+      },
+    } = location;
+    const { hasFavorites } = this.state;
+    const fav = this.props.favorites
+    console.log('favorites', fav)
+    console.log('travelID', travelID)
+
+    if (fav.indexOf(travelID) === -1) {
+      fav.push(travelID)
+      console.log('favorites', fav)
+      this.props.uploadFavorite(fav)
+      this.setState({ hasFavorites: !hasFavorites })
+    }
+  }
+
   render() {
     const { location } = this.props;
     const {
@@ -74,7 +96,7 @@ class TravelDetails extends Component {
       travelDetail.travelID === travelID
     )
     console.log('travel', travelDetail)
-    const { userCreator, users } = this.state;
+    const { userCreator, users, hasFavorites } = this.state;
     return (
       <div className="travel-details">
         <div className="img-travel-details">
@@ -139,7 +161,14 @@ class TravelDetails extends Component {
               <p className="descr-traveldetails">{travelDetail.description} </p>
             </div>
           </div>
-          <div className="reserve">
+          
+          <div className="btn--travel-detail">
+            <FavoritesContainer
+              travelID={travelID}
+              className='fas fa-heart'
+              onClick={this.handleAddFavorites}
+              isDisabled={hasFavorites}
+            />
             <Reservation
               users={users}
               userID={this.props.userID}
