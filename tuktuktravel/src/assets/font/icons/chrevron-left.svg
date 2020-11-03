@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>chrevron-left</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="chrevron-left" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7.1372583,7 L3.46862915,2.98743687 C2.84379028,2.30401936 2.84379028,1.19598064 3.46862915,0.512563133 C4.09346802,-0.170854378 5.10653198,-0.170854378 5.73137085,0.512563133 L10.5313708,5.76256313 C11.1562097,6.44598064 11.1562097,7.55401936 10.5313708,8.23743687 L5.73137085,13.4874369 C5.10653198,14.1708544 4.09346802,14.1708544 3.46862915,13.4874369 C2.84379028,12.8040194 2.84379028,11.6959806 3.46862915,11.0125631 L7.1372583,7 Z" fill="#000000" fill-rule="nonzero" transform="translate(7.000000, 7.000000) rotate(-180.000000) translate(-7.000000, -7.000000) "></path>
+    </g>
+</svg>

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom';
 import imgSecPage from '../img/imgSecPage.png'
-import '../App.css'
+
 
 class HomeIntroSec extends Component {
 

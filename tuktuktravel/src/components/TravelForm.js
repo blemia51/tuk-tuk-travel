@@ -1,40 +1,75 @@
-import React, { Component } from "react"
-import { connect } from  'react-redux';
-import axios from 'axios'
-import UploadCityPic from "./UploadCityPic"
-import NavFooter from "./NavFooter"
-import '../App.css'
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import axios from 'axios';
+import TextInput from '../components/input/TextInput';
+import UploadCityPicContainer from "../container/UploadCityPicContainer";
+import NavFooter from "./NavFooter";
 
 
 class TravelForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      IDuser_creator: '',
-      destination : '',
-      start_date : '',
-      end_date : '',
-      number_of_travelers_max : '',
-      description : '',
-      cityPic: '',
+      travelForm: {
+        IDuser_creator: '',
+        destination : '',
+        start_date : '',
+        end_date : '',
+        number_of_travelers_max : '',
+        description : '',
+        cityPic: '',
+    },
       //isAdded: false
     }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleInputChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+  handleChange = (value, type) => {
+    const { travelForm } = this.state;
+    this.setState({
+      travelForm: {
+        ...travelForm,
+        [type]: value,
+      },
+    })
   }
 
-  handleSubmit() {
+  renderInputs = () => {
+    const { travelForm: stateTravelForm } = this.state;
+    const inputs = Object.keys(stateTravelForm).reduce((acc, input) => {
+      if (input !== 'IDuser_creator' && input !== 'cityPic') {
+        acc.push(input);
+      }
+      return acc;
+    }, []);
 
-    const {...destination} = this.state
-    destination.cityPic = this.props.cityPic
-    destination.IDuser_creator = this.props.userID
-    //delete destination.isAdded
-    
-    axios.post('http://localhost:8000/api/travels/',destination)
+    return inputs.map((input) => {
+      let date = ''
+      if (input.split('_').join(' ').includes('date')) {
+         date = 'JJ/MM/AAAA'
+      }
+
+      return (
+        <TextInput
+          type={input}
+          label={input.split('_').join(' ')}
+          placeholder={date}
+          className='select--material'
+          name={input}
+          isLight
+          onChange={(value) => this.handleChange(value, input)}
+          // hasError={input === 'email' && error !== ''}
+          // errorMessage={error}
+        />
+      )
+    })
+  }
+
+  handleSubmit = () => {
+    const {...destination} = this.state.travelForm;
+    const { cityPic, userID } = this.props;
+    Object.assign(destination, {cityPic: cityPic, IDuser_creator: userID});
+    //console.log('destination', destination)
+    axios.post('http://localhost:8000/api/travels/', destination)
     .then(res => {
       this.props.history.push('/travelcards')
     }).catch(event => {
@@ -43,47 +78,30 @@ class TravelForm extends Component {
   }
 
   render() {
-    console.log(this.state)
-    return(
+    return (
       <div className='travel-form'>
         <div className='title-travel-form'>PROPOSE UN TUK-TUK</div>
+        <span className='form-separator mb-2 mt-2' />
         <div className = 'add-travel'>
-          <label htmlFor='destination'>Destination: </label>
-            <input className = 'input-add-travel' id='destination' type='text' name='destination' placeholder='Votre destination..'
-            value={this.state.destination} onChange={this.handleInputChange}
-            maxLength="20" size="20"/>
-          
-          <label htmlFor='start_date'>Date de départ: </label>
-            <input className = 'input-add-travel' id='start_date' type='date' name='start_date' 
-            value={this.state.start_date} onChange={this.handleInputChange}
-            ></input>
-          
-          <label htmlFor='end_date'>Date de retour: </label>
-            <input className = 'input-add-travel' type='date' id='end_date' name='end_date' 
-            date={this.state.current} value={this.state.end_date} onChange={this.handleInputChange}/>
-            
-            <label htmlFor='number_of_travelers_max'>Nombre de voyageurs: </label>
-            <input className = 'input-add-travel' id='number_of_travelers_max' type='text' name='number_of_travelers_max' placeholder='Voyageurs'
-            value={this.state.number_of_travelers_max} onChange={this.handleInputChange}
-            maxLength="6" size="6"/>
-
-          <label htmlFor='description'>Description: </label>
-            <textarea  className = 'input-add-travel' name ='description' placeholder = 'Projets, activités durant le voyage..'
-            rows="5" cols="33" value={this.state.description} onChange={this.handleInputChange}></textarea>
-                
-        <UploadCityPic onUpload={this.handleSubmit} />
-        <NavFooter/>
-      </div>
-    </div>     
+          <div className="profil--general-container">
+            <div className="profil--container">
+              {this.renderInputs()}
+            </div>
+          </div>    
+          <UploadCityPicContainer onUpload={this.handleSubmit} />
+          <NavFooter />
+        </div>
+      </div>     
     )
   }
 }
 
-function  mapStateToProps(state) {
-  return {
-      cityPic:  state.cityPic.cityPic,
-      userID: state.auth.userID
-  }
-};
+TravelForm.propTypes = {
+  cityPic: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func
+  }),
+  userID: PropTypes.number,
+}
 
-export  default  connect(mapStateToProps)(TravelForm)
+export default TravelForm;

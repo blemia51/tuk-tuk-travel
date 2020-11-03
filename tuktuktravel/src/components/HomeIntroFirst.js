@@ -1,7 +1,7 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import imgFirstPage from '../img/imgFirstPage.png'
-import '../App.css'
+import imgFirstPage from '../img/imgFirstPage.png';
+
 
 class HomeIntroFirst extends Component {
 
@@ -18,7 +18,7 @@ class HomeIntroFirst extends Component {
           Le monde est plus ouvert que jamais, autant en profiter
         </div>
         <div className='intro-link'>
-        <Link  to="/introsecond">Suivant</Link>
+          <Link  to="/introsecond">Suivant</Link>
         </div>
       </div>
     )

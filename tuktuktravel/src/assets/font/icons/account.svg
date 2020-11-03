@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>account</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="account" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7,0 C5.42205714,0 4.14285714,1.30583542 4.14285714,2.91666667 C4.14285714,4.52749792 5.42205714,5.83333333 7,5.83333333 C8.57794286,5.83333333 9.85714286,4.52749792 9.85714286,2.91666667 C9.85714286,1.30583542 8.57794286,0 7,0 Z M7,7.875 C3.676,7.875 1,9.36422083 1,11.375 L1,14 L13,14 L13,11.375 C13,9.36422083 10.3240286,7.875 7,7.875 Z" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>

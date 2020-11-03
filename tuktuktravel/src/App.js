@@ -1,37 +1,46 @@
 import React, {useEffect, useRef} from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import requireAuth from './hoc/requireAuth'
-import requireNotAuth from './hoc/requireNotAuth'
+import requireAuth from './hoc/requireAuth';
+import requireNotAuth from './hoc/requireNotAuth';
 import HomeIntroFirst from './components/HomeIntroFirst';
 import HomeIntroSec from './components/HomeIntroSec';
 import Home from './components/Home';
-import FormUsers from './components/FormUsers'
-import UserProfile from './components/UserProfile'
-import UserConnexion from './components/UserConnexion';
-import TravelForm from './components/TravelForm'
-import TravelCards from './components/TravelCards'
-import TravelDetails from './components/TravelDetails'
-import MyTravels from './components/MyTravels'
-import MyTravelDetails from './components/MyTravelDetails'
-import Cgu from './components/Cgu'
-import './App.css'
-import { connect } from  'react-redux';
+import HomeConnectedContainer from './container/HomeConnectedContainer';
+import FormUsers from './components/FormUsers';
+//import UserProfile from './components/UserProfile'
+import UserProfileContainer from './container/UserProfileContainer';
+//import Login from './components/Login';
+import LoginContainer from './container/LoginContainer';
+//import TravelForm from './components/TravelForm'
+import TravelFormContainer from './container/TravelFormContainer';
+//import TravelCards from './components/TravelCards'
+import TravelCardContainer from './container/TravelCardContainer';
+
+//import TravelDetails from './components/TravelDetails'
+import TravelDetailContainer from './container/TravelDetailContainer';
+//import MyTravels from './components/MyTravels'
+import MyTravelsContainer from './container/MyTravelsContainer';
+//import MyTravelDetails from './components/MyTravelDetails'
+import MyTravelDetailContainer from './container/MyTravelDetailContainer';
+import Cgu from './components/Cgu';
+//import './App.css'
+import { connect } from 'react-redux';
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-    resetToken: () => dispatch({
-      type : "DESTROY_SESSION"
-    }),
-    resetAvatar: () => dispatch({
-      type : "DESTROY_AVATAR"
-    }),
-    resetCitypic: () => dispatch({
-      type : "DESTROY_CITYPIC"
-    })
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     resetToken: () => dispatch({
+//       type : "DESTROY_SESSION"
+//     }),
+//     resetAvatar: () => dispatch({
+//       type : "DESTROY_AVATAR"
+//     }),
+//     resetCitypic: () => dispatch({
+//       type : "DESTROY_CITYPIC"
+//     })
     
-  }
-}
+//   }
+// }
 
 function App(props) {
   const appRef = useRef(null)
@@ -51,18 +60,25 @@ function App(props) {
         <Route exact path="/introsecond" component={HomeIntroSec}/>
         <Route exact path="/home" component={Home}/>
         <Route path="/formusers"component={FormUsers}/>
-        <Route path="/profile"component={UserProfile}/>
+        {/* <Route path="/profile"component={requireAuth(UserProfileContainer)}/> */}
+        <Route path="/profile"component={UserProfileContainer}/>
+
         <Route path="/cgu"component={Cgu}/>
-        <Route path="/userconnexion" component={requireNotAuth(UserConnexion)}/>
-        <Route exact path="/travelcards" component={requireAuth(TravelCards)}/>
-        <Route exact path="/travelform" component={TravelForm}/>
-        <Route exact path="/traveldetails" render={(props) => <TravelDetails {...props}/>} />
-        <Route exact path="/mytravels" component={MyTravels}/>
-        <Route exact path="/mytraveldetails" component={MyTravelDetails} />
+        <Route path="/userconnexion" component={requireNotAuth(LoginContainer)}/>
+
+        <Route path="/Accueil" component={HomeConnectedContainer} />
+
+        <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
+        <Route exact path="/travelform" component={TravelFormContainer}/>
+        <Route exact path="/traveldetails" render={(props) => <TravelDetailContainer {...props}/>} />
+        <Route exact path="/mytravels" component={MyTravelsContainer}/>
+        <Route exact path="/mytraveldetails" component={MyTravelDetailContainer} />
       </Switch> 
     </div>
   );
 }
 
 
-export default connect(null, mapDispatchToProps)(App)
+// export default connect(null, mapDispatchToProps)(App)
+export default App
+

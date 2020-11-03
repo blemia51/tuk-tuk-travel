@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>zoom_plus</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="zoom_plus" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M6.125,6.125 L6.125,0.875 C6.125,0.391750844 6.51675084,-3.69332646e-15 7,-3.66373598e-15 C7.48324916,-3.5231232e-15 7.875,0.391750844 7.875,0.875 L7.875,6.125 L13.125,6.125 C13.6082492,6.125 14,6.51675084 14,7 C14,7.48324916 13.6082492,7.875 13.125,7.875 L7.875,7.875 L7.875,13.125 C7.875,13.6082492 7.48324916,14 7,14 C6.51675084,14 6.125,13.6082492 6.125,13.125 L6.125,7.875 L0.875,7.875 C0.391750844,7.875 -5.18413492e-17,7.48324916 -1.11022302e-16,7 C-5.91809532e-17,6.51675084 0.391750844,6.125 0.875,6.125 L6.125,6.125 Z" fill="#000000"></path>
+    </g>
+</svg>
