@@ -71,7 +71,7 @@ class MyTravels extends Component {
       :
       <div style={{marginLeft: '8px', textAlign: 'left'}}>
       <span className="fas fa-heart favorites" />
-      <span style={{padding: '8px'}}>Vous n'avez pas sauvegardé d'annonces</span>
+      <span style={{padding: '8px', fontSize: '12px'}}>Vous n'avez pas sauvegardé d'annonces</span>
 
       </div>
       }

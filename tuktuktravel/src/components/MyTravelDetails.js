@@ -79,6 +79,9 @@ class TravelDetails extends Component {
   }
 
   render() {
+    if (this.state.userCreator === []) {
+      return null
+    }
     const { location } = this.props;
     const {
       state: { cityPic, destination, start_date, end_date, description, travelUserId },

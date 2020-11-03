@@ -5,6 +5,7 @@ import requireNotAuth from './hoc/requireNotAuth';
 import HomeIntroFirst from './components/HomeIntroFirst';
 import HomeIntroSec from './components/HomeIntroSec';
 import Home from './components/Home';
+import HomeConnectedContainer from './container/HomeConnectedContainer';
 import FormUsers from './components/FormUsers';
 //import UserProfile from './components/UserProfile'
 import UserProfileContainer from './container/UserProfileContainer';
@@ -64,6 +65,9 @@ function App(props) {
 
         <Route path="/cgu"component={Cgu}/>
         <Route path="/userconnexion" component={requireNotAuth(LoginContainer)}/>
+
+        <Route path="/Accueil" component={HomeConnectedContainer} />
+
         <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
         <Route exact path="/travelform" component={TravelFormContainer}/>
         <Route exact path="/traveldetails" render={(props) => <TravelDetailContainer {...props}/>} />

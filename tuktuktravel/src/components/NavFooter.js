@@ -11,6 +11,14 @@ const NavFooter = () => {
   return (
     <div className='footer'>
       <div>
+        <Link className='link-footer' to="/Accueil">
+          <figure className='logos-footer'>
+            <img className='img-footer' src={compass} alt='logo explorer'/>
+          </figure>
+          <p className="title_footer">Accueil</p>
+        </Link>
+      </div>
+      <div>
         <Link className='link-footer' to="/TravelCards">
           <figure className='logos-footer'>
             <img className='img-footer' src={compass} alt='logo explorer'/>

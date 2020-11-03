@@ -66,7 +66,7 @@ class Login extends Component {
       .then((res) => {
         console.log(res)
         this.props.saveToken(res.token, res.user.userID)
-        this.props.history.push("/travelcards");
+        this.props.history.push("/Accueil");
         //this.setState({ flash: res.flash });
       })
       .catch((err) => this.setState({ flash: err.flash }));

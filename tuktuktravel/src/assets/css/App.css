@@ -685,6 +685,12 @@
   box-shadow: 2px 5px 10px rgb(156, 152, 152);
   position: relative;
 }
+
+.my-next-travel {
+  width: 100%;
+  flex-direction: row;
+}
+
 a {
   text-decoration: none;
 }

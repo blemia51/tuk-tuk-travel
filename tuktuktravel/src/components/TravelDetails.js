@@ -85,6 +85,9 @@ class TravelDetails extends Component {
   }
 
   render() {
+    if (this.state.userCreator === []) {
+      return null
+    }
     const { location } = this.props;
     const {
       state: {
