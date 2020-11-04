@@ -17,6 +17,7 @@ class TravelDetails extends Component {
     };
   }
   componentDidMount() {
+    const { hasFavorites } = this.state;
     const { location } = this.props;
     const {
       state: { IDuser_creator, travelID },
@@ -62,6 +63,10 @@ class TravelDetails extends Component {
         });
       })
       .catch();
+
+      if (this.props.favorites.indexOf(travelID) !== -1) {
+        this.setState({ hasFavorites: !hasFavorites });
+      } 
   }
 
   handleAddFavorites = () => {

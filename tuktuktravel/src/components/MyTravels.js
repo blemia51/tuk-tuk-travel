@@ -59,14 +59,14 @@ class MyTravels extends Component {
     console.log("favoris", favoris)
     return (
       <div>
-        <div className="title-travel-cards">Mes Tuk-tuk sauvegardés</div>
+        <div className="title-travel-cards">Mes Annonces sauvegardées</div>
         {favoris.length > 0 ? favoris.map(favori => {
           return (
             <div className="tuktuk--favorites">
               <img src={favori.cityPic} className="tuktuk--favorites-image"/>
               <h4>{favori.destination}</h4>
             </div>
-          )
+          );
         })
       :
       <div className="favorites-placeholder mt-2" >
@@ -77,16 +77,32 @@ class MyTravels extends Component {
           <p>Vous n'avez pas sauvegardé d'annonces...</p>
           <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
         </div>
-      </div>
+      </div> 
       }
       </div>
     )
   }
 
+  renderMyTravels = () => {
+    const { travels, userID } = this.props;
+    const myTravels = travels.filter((travel) => travel.IDuser_creator === userID)
+    console.log(myTravels)
+    return (
+      <div>
+        {myTravels.length > 0 && React.Children.toArray(
+          myTravels.map((myTravel) => {
+            return (
+              <div className="liste-travel">
+                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${myTravel.cityPic})` }}/>
+              </div>
+            )
+          })
+        )}
+      </div>
+    )
+  }
+
   render() {
-    // console.log("travel_user", this.state.travel_user)
-    // console.log('tadada', this.props.favorites)
-    const { favorites, travels } = this.props;
     return (
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
@@ -154,6 +170,8 @@ class MyTravels extends Component {
           )}
           
         </div>
+        <div className="title-travel-cards">Mes Annonces</div>
+        {this.renderMyTravels()}
         {this.renderFavorites()}
         <NavFooter />
       </div>
@@ -162,11 +180,13 @@ class MyTravels extends Component {
 }
 
 MyTravels.propTypes = {
+  favorites: PropTypes.array,
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  token: PropTypes.number,
-  userID: PropTypes.number,
+  token: PropTypes.string,
+  travels: PropTypes.array,
+  userID: PropTypes.number
 }
 
 export default MyTravels;
