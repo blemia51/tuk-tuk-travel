@@ -1,10 +1,10 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import logoProposer from '../img/logoProposer.png';
-import compass from '../img/compass.png';
-import folder from '../img/folder.png';
-import profile from '../img/profile.png';
-import accueil from '../img/accueil.png'
+import logoProposer from '../assets/img/logoProposer.png';
+import compass from '../assets/img/compass.png';
+import folder from '../assets/img/folder.png';
+import profile from '../assets/img/profile.png';
+import accueil from '../assets/img/accueil.png'
 
 
 

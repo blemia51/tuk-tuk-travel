@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 import Moment from "react-moment";
 import Reservation from "./Reservation";
-import FavoritesContainer from "../container/FavoritesContainer"
+import FavoritesContainer from "../container/FavoritesContainer";
 import NavFooter from "./NavFooter";
 
 class TravelDetails extends Component {
@@ -22,7 +22,7 @@ class TravelDetails extends Component {
     const {
       state: { IDuser_creator, travelID },
     } = location;
-    fetch(`http://localhost:8000/api/users/${IDuser_creator}`, {
+    fetch(`/api/users/${IDuser_creator}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -43,7 +43,7 @@ class TravelDetails extends Component {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/travels/${travelID}/users`, {
+    fetch(`/api/travels/${travelID}/users`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -85,7 +85,7 @@ class TravelDetails extends Component {
       fav.push(travelID)
       console.log('favorites', fav)
       this.props.uploadFavorite(fav)
-      this.setState({ hasFavorites: !hasFavorites })
+      this.setState({ hasFavorites: !hasFavorites });
     }
   }
 
@@ -115,16 +115,18 @@ class TravelDetails extends Component {
         </div>
 
         <div className="travel-creator">
+        <Link to="/chat">
           <img
             src={!userCreator.avatar ? 'placeholder-profil.png' : userCreator.avatar}
             alt="Avatar"
             className="user-creator-avatar"
           ></img>
+          </Link>
           <div className="travel-detail-container">
             <div className="link-back-arrow-details">
-              <Link to="/travelcards">
-                <img className="back-arrow" src={back} alt="Arrow to back" />
-              </Link>
+              {/* <Link to="/travelcards"> */}
+                <img className="back-arrow" src={back} alt="Arrow to back" onClick={()=>this.props.history.goBack()}/>
+              {/* </Link> */}
             </div>
 
             <p className="firstname-traveldetails">{userCreator.firstname}</p>

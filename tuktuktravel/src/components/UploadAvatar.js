@@ -2,7 +2,7 @@ import React from "react";
 import { post } from "axios";
 //import { connect } from "react-redux";
 import { getPublicAssets } from 'utils/assetsUtils'
-import logoOk from "../img/logoOk.png";
+import logoOk from "../assets/img/logoOk.png";
 import userReducer from "reducers/userReducer";
 
 class UploadAvatar extends React.Component {
@@ -18,7 +18,7 @@ class UploadAvatar extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
     const { uploadAvatar } = this.props
-    const url = "http://localhost:8000/uploaddufichier";
+    const url = "/uploaddufichier";
     const formData = new FormData();
     formData.append("file", this.state.file);
     const config = {

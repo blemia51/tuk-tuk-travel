@@ -3,7 +3,7 @@ import Moment from "react-moment";
 import SearchInput from "components/input/SearchInput";
 import NavFooter from "./NavFooter";
 import { Link } from "react-router-dom";
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 
 
 class HomeConnected extends PureComponent {
@@ -15,7 +15,7 @@ class HomeConnected extends PureComponent {
   };
 
   componentDidMount() {
-    fetch("http://localhost:8000/api/travels", {
+    fetch("/api/travels", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -38,7 +38,7 @@ class HomeConnected extends PureComponent {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/users/${this.props.userID}`, {
+    fetch(`/api/users/${this.props.userID}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -60,7 +60,7 @@ class HomeConnected extends PureComponent {
       })
       .catch();
 
-      fetch(`http://localhost:8000/api/travel_user/${this.props.userID}`, {
+      fetch(`/api/travel_user/${this.props.userID}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,

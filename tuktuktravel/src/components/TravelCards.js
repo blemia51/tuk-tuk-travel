@@ -4,7 +4,7 @@ import Moment from "react-moment";
 import NavFooter from "./NavFooter";
 import SearchInput from "components/input/SearchInput";
 import { Link } from "react-router-dom";
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 
 class TravelCards extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class TravelCards extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8000/api/travels", {
+    fetch("/api/travels", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -40,7 +40,7 @@ class TravelCards extends Component {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/users/${this.props.userID}`, {
+    fetch(`/api/users/${this.props.userID}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,

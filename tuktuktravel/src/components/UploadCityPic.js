@@ -1,7 +1,7 @@
 import React from "react";
 import { post } from "axios";
 import { connect } from "react-redux";
-import logoOk from "../img/logoOk.png";
+import logoOk from "../assets/img/logoOk.png";
 import { uploadCityPic } from "actions/cityPicActions";
 
 class UploadCityPic extends React.Component {
@@ -15,7 +15,7 @@ class UploadCityPic extends React.Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:8000/uploaddufichier";
+    const url = "/uploaddufichier";
     const formData = new FormData();
     formData.append("file", this.state.file);
     const config = {

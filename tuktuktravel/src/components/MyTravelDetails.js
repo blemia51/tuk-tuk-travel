@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "./fragments/Button"
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
 
@@ -21,7 +21,7 @@ class TravelDetails extends Component {
     const {
       state: { IDuser_creator, travelID },
     } = location;
-    fetch(`http://localhost:8000/api/users/${IDuser_creator}`, {
+    fetch(`/api/users/${IDuser_creator}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -42,7 +42,7 @@ class TravelDetails extends Component {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/travels/${travelID}/users`, {
+    fetch(`/api/travels/${travelID}/users`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -68,7 +68,7 @@ class TravelDetails extends Component {
     const { confirm } = window;
     confirm('Êtes vous sûr(e) de vouloir supprimer vôtre réservation ?') &&
     axios
-      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .delete(`/api/travel_user/${id}`)
       .then((res) => {
         this.props.history.push("/mytravels");
       })

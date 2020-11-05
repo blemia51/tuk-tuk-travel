@@ -14,6 +14,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt; // npm install passport-l
 const verifyToken = require('./verifyToken');
 const key = require('./key');
 const bcrypt = require('bcrypt'); // npm install bcrypt
+const path = require('path');
+
 //const port = 8000;
 
 require('dotenv').config();
@@ -24,14 +26,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(express.static(__dirname  +  '/public'));
-app.use(cors())
+//app.use(express.static(__dirname  +  '/public'));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use((req, res, next)=> {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+
+// app.use((req, res, next)=> {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 // PASSEPORT CONFIG STRATEGY
 passport.use(new LocalStrategy(
@@ -65,6 +69,11 @@ function (jwtPayload, cb) {
 app.get('/', (req, res) => {
   res.send('Bienvenue sur Express');
 });
+
+// app.get('/*', (req, res) => {
+//   res.send(path.join(__dirname+'/client/build/index.html'));
+// });
+
 
 //GET USERS
 app.get('/api/users', (req, res) => {

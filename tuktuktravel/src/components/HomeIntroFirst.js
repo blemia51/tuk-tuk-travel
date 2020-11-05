@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import imgFirstPage from '../img/imgFirstPage.png';
+import imgFirstPage from '../assets/img/imgFirstPage.png';
 
 
 class HomeIntroFirst extends Component {

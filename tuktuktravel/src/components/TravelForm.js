@@ -69,7 +69,7 @@ class TravelForm extends Component {
     const { cityPic, userID } = this.props;
     Object.assign(destination, {cityPic: cityPic, IDuser_creator: userID});
     //console.log('destination', destination)
-    axios.post('http://localhost:8000/api/travels/', destination)
+    axios.post('/api/travels/', destination)
     .then(res => {
       this.props.history.push('/travelcards')
     }).catch(event => {

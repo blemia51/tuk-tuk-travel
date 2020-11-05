@@ -8,8 +8,8 @@ import SelectInput from 'components/input/SelectInput'
 import Button from 'components/fragments/Button'
 import { validateEmail, validatePhone } from '../utils/validatorUtils'
 import CountryList from './CountryList';
-import back from '../img/arrowb.png'
-import logoOk from '../img/logoOk.png';
+import back from '../assets/img/arrowb.png'
+import logoOk from '../assets/img/logoOk.png';
 
 
 
@@ -205,7 +205,7 @@ class FormUsers extends Component {
     const {...user} = this.state.profil
     user.avatar = this.props.avatar
     console.log(user)
-    axios.post('http://localhost:8000/api/users', user)
+    axios.post('/api/users', user)
     .then(res => {
       this.setState({
         isAdded: true,

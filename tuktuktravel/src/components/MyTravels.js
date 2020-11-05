@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
-//import del from "../img/delete.png";
+//import del from "../assets/img/delete.png";
 import axios from "axios";
 
 class MyTravels extends Component {
@@ -15,7 +15,7 @@ class MyTravels extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8000/api/travel_user/${this.props.userID}`, {
+    fetch(`/api/travel_user/${this.props.userID}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -39,7 +39,7 @@ class MyTravels extends Component {
 
   cancelTravelReservation = (id) => {
     axios
-      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .delete(`/api/travel_user/${id}`)
       .then((res) => {
         const myTravels = this.state.travel_user.filter((travel) => 
           travel.travel_user_id !== id
@@ -60,11 +60,13 @@ class MyTravels extends Component {
     return (
       <div>
         <div className="title-travel-cards">Mes Annonces sauvegardées</div>
+        <div className="tuktuk--favorites">
         {favoris.length > 0 ? favoris.map(favori => {
           return (
-            <div className="tuktuk--favorites">
+            
+            <div className="favorites--container">
               <img src={favori.cityPic} className="tuktuk--favorites-image"/>
-              <h4>{favori.destination}</h4>
+              <p>{favori.destination}</p>
             </div>
           );
         })
@@ -79,6 +81,7 @@ class MyTravels extends Component {
         </div>
       </div> 
       }
+      </div>
       </div>
     )
   }

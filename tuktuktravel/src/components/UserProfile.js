@@ -6,7 +6,7 @@ import Button from './fragments/Button'
 import NavFooter from "./NavFooter";
 import UploadAvatarContainer from "../container/UploadAvatarContainer";
 import TextInput from "./input/TextInput";
-import logoOk from "../img/logoOk.png";
+import logoOk from "../assets/img/logoOk.png";
 
 
 class UserProfile extends Component {
@@ -65,7 +65,7 @@ class UserProfile extends Component {
   // GET ONE USER
   componentDidMount() {
     fetch(
-      `http://localhost:8000/api/users/${this.props.userID}`,
+      `/api/users/${this.props.userID}`,
       {
         method: "GET",
         headers: {
@@ -100,7 +100,7 @@ class UserProfile extends Component {
     };
     console.log('update', update)
     axios
-      .put(`http://localhost:8000/api/users`, update)
+      .put(`/api/users`, update)
       .then((res) => {
         this.setState({
           isAdded: true,

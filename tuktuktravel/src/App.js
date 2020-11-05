@@ -15,6 +15,7 @@ import TravelDetail from './container/TravelDetailContainer';
 import MyTravels from './container/MyTravelsContainer';
 import MyTravelDetail from './container/MyTravelDetailContainer';
 import Cgu from './components/Cgu';
+import Chat from './components/Chat'
 //import { connect } from 'react-redux';
 
 
@@ -55,12 +56,13 @@ function App(props) {
         <Route path="/profile"component={UserProfile}/>
         <Route path="/cgu"component={Cgu}/>
         <Route path="/userconnexion" component={requireNotAuth(Login)}/>
-        <Route path="/Accueil" component={requireAuth(HomeConnected)} />
+        <Route path="/accueil" component={requireAuth(HomeConnected)} />
         <Route exact path="/travelcards" component={requireAuth(TravelCard)}/>
         <Route exact path="/travelform" component={TravelForm}/>
         <Route exact path="/traveldetails" render={(props) => <TravelDetail {...props}/>} />
         <Route exact path="/mytravels" component={MyTravels}/>
         <Route exact path="/mytraveldetails" component={MyTravelDetail} />
+        <Route path="/chat" component={Chat} />
       </Switch> 
     </div>
   );

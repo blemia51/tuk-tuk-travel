@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import axios from "axios";
 import Button from './fragments/Button'
-import logoOk from "../img/logoOk.png";
+import logoOk from "../assets/img/logoOk.png";
 
 class Reservation extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class Reservation extends Component {
     const { isUserBooked } = this.state;
 
     axios
-      .post("http://localhost:8000/api/travel_user", reservation)
+      .post("/api/travel_user", reservation)
       .then((res) => {
         //alert('TukTuk reservé');
         this.setState({
@@ -40,7 +40,7 @@ class Reservation extends Component {
   cancelReservation = (id) => {
     const { isUserBooked } = this.state;
     axios
-      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .delete(`/api/travel_user/${id}`)
       .then((res) => {
         // const myTravels = this.state.travel_user.filter((travel) => 
         //   travel.travel_user_id !== id
@@ -85,7 +85,7 @@ class Reservation extends Component {
             isDisabled={!isUserBooked}
           />
         } */}
-        <div className="tuktuk-booked">
+        <div className="tuktuk-booked" style={{display: 'none'}}>
           {this.state.isBooked ? (
             <div
               style={{

@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "components/input/TextInput";
 import { validateEmail } from "utils/validatorUtils";
-import back from "../img/arrowb.png";
-import logoFaux from "../img/logoFaux.png";
+import back from "../assets/img/arrowb.png";
+import logoFaux from "../assets/img/logoFaux.png";
 
 class Login extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Login extends Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/api/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ class Login extends Component {
       .then((res) => {
         console.log(res)
         this.props.saveToken(res.token, res.user.userID)
-        this.props.history.push("/Accueil");
+        this.props.history.push("/accueil");
         //this.setState({ flash: res.flash });
       })
       .catch((err) => this.setState({ flash: err.flash }));

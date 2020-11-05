@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom';
-import imgSecPage from '../img/imgSecPage.png'
+import imgSecPage from '../assets/img/imgSecPage.png'
 
 
 class HomeIntroSec extends Component {
