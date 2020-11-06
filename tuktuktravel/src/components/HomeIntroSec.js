@@ -1,6 +1,6 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import imgSecPage from '../assets/img/imgSecPage.png'
+import imgSecPage from '../assets/img/imgSecPage.png';
 
 
 class HomeIntroSec extends Component {
@@ -14,7 +14,7 @@ class HomeIntroSec extends Component {
         <div className='title-intro'> 
           TROUVE TON  VOYAGE IDEAL
         </div>
-        <div className='text-intro'> 
+        <div className='text-intro' style={{marginTop: '49px'}}> 
           Dis nous où tu veux aller, comment et les activités réalisées sur place
         </div>
         <div className='intro-link'>
