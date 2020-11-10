@@ -736,8 +736,9 @@ a {
   font-weight: normal;
   background-color: #fa8c17;
   opacity: 0.9;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  text-transform: capitalize;
+  /*border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px; */
 }
 .img-travel-cards {
   width: 100%;
@@ -892,6 +893,8 @@ a {
   border-radius: 50%;
   padding: 3px;
   background-color: white;
+  width: 128px;
+  height: 128px;
 }
 
 .travel-user-avatar {
@@ -1204,7 +1207,7 @@ a {
 
 .title_footer_purpose {
   font-size: 0.9em;
-  margin-top: 0.4em;
+  margin-top: 0.3em;
   margin-bottom: 0;
 }
 

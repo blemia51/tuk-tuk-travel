@@ -4,7 +4,7 @@ import Moment from "react-moment";
 import axios from "axios";
 import Button from './fragments/Button'
 import NavFooter from "./NavFooter";
-import UploadAvatarContainer from "../container/UploadAvatarContainer";
+import UploadAvatar from "../container/UploadAvatarContainer";
 import TextInput from "./input/TextInput";
 import logoOk from "../assets/img/logoOk.png";
 
@@ -31,7 +31,14 @@ class UserProfile extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { lastname, firstname, city, email, phone_number, description } = props.userProfile;
+    const { 
+      lastname,
+      firstname,
+      city,
+      email,
+      phone_number,
+      description 
+    } = props.userProfile;
     const { 
       lastname: stateNom, 
       firstname: statePrenom, 
@@ -58,7 +65,6 @@ class UserProfile extends Component {
         }
       };
     }
-    console.log('state', state)
     return state;
   }
 
@@ -98,7 +104,7 @@ class UserProfile extends Component {
       userID: this.props.userID,
       avatar: this.props.avatar,
     };
-    console.log('update', update)
+
     axios
       .put(`/api/users`, update)
       .then((res) => {
@@ -130,7 +136,7 @@ class UserProfile extends Component {
       }
       return acc;
     }, []);
-    //console.log(userProfile)
+  
     return (
       <div>
         <div className="title-user-profile">PROFIL</div>
@@ -162,7 +168,7 @@ class UserProfile extends Component {
         )} */}
         
         <div className="profile-picture-container">
-          <UploadAvatarContainer userProfileAvatar={userProfile.avatar}/>
+          <UploadAvatar userProfileAvatar={userProfile.avatar} />
         </div>
         <div className="profil--general-container">
           <div className="profil--container">
@@ -209,9 +215,7 @@ UserProfile.propTypes = {
   }),
   token: PropTypes.string,
   userID: PropTypes.number,
-  userProfile: PropTypes.shape({
-    avatar: PropTypes.string
-  })
+  userProfile: PropTypes.object,
 }
 
 export default UserProfile;

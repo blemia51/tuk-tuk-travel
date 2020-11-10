@@ -84,20 +84,35 @@ class TravelDetails extends Component {
     }
     const { location } = this.props;
     const {
-      state: { cityPic, destination, start_date, end_date, description, travelUserId },
+      state: { travelID},
     } = location;
+    const travelDetail = this.props.travels.find(
+      (travelDetail) => travelDetail.travelID === travelID
+    );
     const { userCreator, users } = this.state;
     return (
       <div className="travel-details">
         <div className="img-travel-details">
           <figure className="container-city-picture">
-            <img className="city-picture" src={cityPic} alt={cityPic} />
+            <img
+              className="city-picture" 
+              src={
+                travelDetail.cityPic.split('/').length > 1 
+                ? `https://i.ibb.co/${travelDetail.cityPic}` 
+                : travelDetail.cityPic 
+              }
+              alt={travelDetail.cityPic}
+            />
           </figure>
-          <p className="travel-cards-link travel-cards-title">{destination} </p>
+          <p className="travel-cards-link travel-cards-title">{travelDetail.destination} </p>
         </div>
         <div className="travel-creator">
           <img
-            src={userCreator.avatar}
+            src={
+              !userCreator.avatar
+                ? "placeholder-profil.png"
+                : userCreator.avatar
+            }
             alt="Avatar"
             className="user-creator-avatar"
           ></img>
@@ -111,11 +126,11 @@ class TravelDetails extends Component {
             <p>Contact: {userCreator.email}</p>
             <div className="dates">
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{start_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.start_date}</Moment>{" "}
               </p>
               <span className="traveldetails-date"> - </span>
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{end_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.end_date}</Moment>{" "}
               </p>
             </div>
             <div className="travel-user-avatar-container">
@@ -134,11 +149,11 @@ class TravelDetails extends Component {
                 </div>
               ))}
             </div>
-            <p className="descr-traveldetails">{description} </p>
+            <p className="descr-traveldetails">{travelDetail.description} </p>
           </div>
           <div className='reserve-button'>
           <Button
-            onClick={() => this.cancelTravelReservation(travelUserId)}
+            onClick={() => this.cancelTravelReservation(travelDetail.travelUserId)}
             label='Annuler ma réservation'
             //isDisabled={!isUserBooked}
           />

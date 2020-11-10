@@ -67,13 +67,13 @@ class TravelForm extends Component {
   handleSubmit = () => {
     const {...destination} = this.state.travelForm;
     const { cityPic, userID } = this.props;
+    
     Object.assign(destination, {cityPic: cityPic, IDuser_creator: userID});
-    //console.log('destination', destination)
     axios.post('/api/travels/', destination)
     .then(res => {
       this.props.history.push('/travelcards')
     }).catch(event => {
-      console.error(event)
+      return console.error(event)
     });
   }
 

@@ -204,7 +204,6 @@ class FormUsers extends Component {
     e.preventDefault();
     const {...user} = this.state.profil
     user.avatar = this.props.avatar
-    console.log(user)
     axios.post('/api/users', user)
     .then(res => {
       this.setState({

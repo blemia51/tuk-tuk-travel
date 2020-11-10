@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
+import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
 import Moment from "react-moment";
 import SearchInput from "components/input/SearchInput";
 import NavFooter from "./NavFooter";
+import CountDown from "../components/CountDown";
 import { Link } from "react-router-dom";
 import back from "../assets/img/arrowb.png";
 
-
 class HomeConnected extends PureComponent {
-
   state = {
     travelsTemp: [],
     travelsStore: [],
-    input: '',
+    input: "",
   };
 
   componentDidMount() {
@@ -60,7 +60,7 @@ class HomeConnected extends PureComponent {
       })
       .catch();
 
-      fetch(`/api/travel_user/${this.props.userID}`, {
+    fetch(`/api/travel_user/${this.props.userID}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -87,8 +87,8 @@ class HomeConnected extends PureComponent {
     if (prevState.input !== this.state.input) {
       this.searchCity();
     }
-    if (prevProps.userProfile !== this.props.userProfile ) {
-      this.setState({userProfileToto: this.props.userProfile});
+    if (prevProps.userProfile !== this.props.userProfile) {
+      this.setState({ userProfileToto: this.props.userProfile });
     }
   }
 
@@ -112,7 +112,7 @@ class HomeConnected extends PureComponent {
   };
 
   renderMyNextTravel = () => {
-    if (!this.props.myTravels || this.props.myTravels === [] ) {
+    if (!this.props.myTravels || this.props.myTravels === []) {
       return null;
     }
     return (
@@ -121,33 +121,34 @@ class HomeConnected extends PureComponent {
           this.props.myTravels.map((res) => {
             return (
               <div className="liste-travel my-next-travel">
-                <div className="row-70" style={{width: '70%'}}>
-                  <div
-                    className="fig-img-travel-cards"
-                    style={{ backgroundImage: `url(${res.cityPic})` }}>
-                  </div>
-                  <Link
-                    className="travel-cards-link"
+                <div className="row-70" style={{ width: "70%" }}>
+                <Link
                     to={{
                       pathname: "/mytraveldetails",
                       state: {
-                        cityPic: res.cityPic,
-                        travelID: res.travelID,
-                        destination: res.destination,
                         IDuser_creator: res.IDuser_creator,
-                        start_date: res.start_date,
-                        end_date: res.end_date,
-                        description: res.description,
+                        travelID: res.travelID,
                         travelUserId: res.travel_user_id,
                       },
                     }}
                   >
-                  {/* <h1 className="travel-cards-title">{res.destination}</h1> */}
+                  <div
+                    className="fig-img-travel-cards"
+                    style={{
+                      backgroundImage:
+                        res.cityPic.split("/").length > 1
+                          ? `url(https://i.ibb.co/${res.cityPic})`
+                          : `url(${res.cityPic})`,
+                    }}
+                  ></div>
+                  
+                    {/* <h1 className="travel-cards-title">{res.destination}</h1> */}
                   </Link>
                 </div>
-                <div className="row-30" style={{width: '30%'}}>
+                <div className="row-30" style={{ width: "30%" }}>
                   <h3>{res.destination}</h3>
                   <Moment format="DD/MM/YYYY">{res.start_date}</Moment>
+                  <CountDown date={res.start_date} />
                 </div>
                 {/* <div className="liste-description-travel-cards">
                   <div
@@ -164,8 +165,8 @@ class HomeConnected extends PureComponent {
           })
         )}
       </div>
-    )
-  }
+    );
+  };
 
   renderNewTravels = () => {
     return (
@@ -173,15 +174,16 @@ class HomeConnected extends PureComponent {
         {React.Children.toArray(
           this.state.travelsTemp.slice(0, 3).map((travel) => {
             return (
-              
               <div className="liste-travel">
-                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${travel.cityPic})` }}>
-                  {/* <img
-                    className="img-travel-cards"
-                    alt={travel.cityPic}
-                    src={travel.cityPic}
-                  ></img> */}
-                </div>
+                <div
+                  className="fig-img-travel-cards"
+                  style={{
+                    backgroundImage:
+                      travel.cityPic.split("/").length > 1
+                        ? `url(https://i.ibb.co/${travel.cityPic})`
+                        : `url(${travel.cityPic})`,
+                  }}
+                ></div>
                 <Link
                   className="travel-cards-link"
                   to={{
@@ -207,17 +209,16 @@ class HomeConnected extends PureComponent {
                   <p>Places: {travel.number_of_travelers_max}</p>
                 </div>
               </div>
-              
             );
           })
         )}
       </div>
-    )
-  }
+    );
+  };
 
   render() {
     if (!this.props.userProfile) {
-      return null 
+      return null;
     }
 
     return (
@@ -233,11 +234,11 @@ class HomeConnected extends PureComponent {
           </div>
         </div>
         <SearchInput
-          className='search'
+          className="search"
           placeholder={`On part où ${this.props.userProfile.firstname} ?`}
           onChange={this.searchField}
         />
-        <div className='travel--container' >
+        <div className="travel--container">
           <div className="title-travel-cards">Prochain Tuk-tuk Prévu</div>
           <span className="form-separator mb-2 mt-2" />
           {this.renderMyNextTravel()}
@@ -247,8 +248,21 @@ class HomeConnected extends PureComponent {
         </div>
         <NavFooter />
       </div>
-    )
+    );
   }
 }
+
+HomeConnected.propTypes = {
+  fetchMyTravelsSuccess: PropTypes.func,
+  fetchTravelsSuccess: PropTypes.func,
+  fetchUserProfileSuccess: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+  myTravels: PropTypes.array,
+  token: PropTypes.string,
+  userID: PropTypes.number,
+  userProfile: PropTypes.object,
+};
 
 export default HomeConnected;

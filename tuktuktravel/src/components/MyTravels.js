@@ -26,7 +26,11 @@ class MyTravels extends Component {
         if (!res.ok) {
           this.props.history.push("/userconnexion");
         } else {
-          return res.json();
+          return res.json();{/* <img
+            className="img-travel-cards"
+            alt={res.cityPic}
+            src={res.cityPic}
+          ></img> */}
         }
       })
       .then((data) => {
@@ -41,8 +45,8 @@ class MyTravels extends Component {
     axios
       .delete(`/api/travel_user/${id}`)
       .then((res) => {
-        const myTravels = this.state.travel_user.filter((travel) => 
-          travel.travel_user_id !== id
+        const myTravels = this.state.travel_user.filter(
+          (travel) => travel.travel_user_id !== id
         );
         this.setState({ travel_user: myTravels });
         //alert(`tuk-tuk supprimé`)
@@ -51,67 +55,95 @@ class MyTravels extends Component {
         console.error(event);
         alert("tuk-tuk non supprimé");
       });
-  }
+  };
 
   renderFavorites = () => {
     const { favorites, travels } = this.props;
-    const favoris = favorites.map((favorite => travels.find(travel => travel.travelID === favorite)))
-    console.log("favoris", favoris)
+    const favoris = favorites.map((favorite) =>
+      travels.find((travel) => travel.travelID === favorite)
+    );
     return (
       <div>
         <div className="title-travel-cards">Mes Annonces sauvegardées</div>
         <div className="tuktuk--favorites">
-        {favoris.length > 0 ? favoris.map(favori => {
-          return (
-            
-            <div className="favorites--container">
-              <img src={favori.cityPic} className="tuktuk--favorites-image"/>
-              <p>{favori.destination}</p>
+          {favoris.length > 0 ? (
+            favoris.map((favori) => {
+              return (
+                <div className="favorites--container">
+                  <Link
+                    to={{
+                      pathname: "/traveldetails",
+                      state: {
+                        travelID: favori.travelID,
+                        IDuser_creator: favori.IDuser_creator,
+                      },
+                    }}
+                  >
+                    <img
+                      src={
+                        favori && favori.cityPic.split("/").length > 1
+                          ? `https://i.ibb.co/${favori.cityPic}`
+                          : favori.cityPic
+                      }
+                      className="tuktuk--favorites-image"
+                    />
+                  </Link>
+                  <p>{favori.destination}</p>
+                </div>
+              );
+            })
+          ) : (
+            <div className="favorites-placeholder mt-2">
+              <div>
+                <i className="fas fa-heart favorites" />
+              </div>
+              <div className="favorites-placeholder-text">
+                <p>Vous n'avez pas sauvegardé d'annonces...</p>
+                <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
+              </div>
             </div>
-          );
-        })
-      :
-      <div className="favorites-placeholder mt-2" >
-        <div>
-          <i className="fas fa-heart favorites" />
+          )}
         </div>
-        <div className="favorites-placeholder-text">
-          <p>Vous n'avez pas sauvegardé d'annonces...</p>
-          <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
-        </div>
-      </div> 
-      }
       </div>
-      </div>
-    )
-  }
+    );
+  };
 
   renderMyTravels = () => {
     const { travels, userID } = this.props;
-    const myTravels = travels.filter((travel) => travel.IDuser_creator === userID)
-    console.log(myTravels)
+    const myTravels = travels.filter(
+      (travel) => travel.IDuser_creator === userID
+    );
     return (
       <div>
-        {myTravels.length > 0 && React.Children.toArray(
-          myTravels.map((myTravel) => {
-            return (
-              <div className="liste-travel">
-                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${myTravel.cityPic})` }}/>
-              </div>
-            )
-          })
-        )}
+        {myTravels.length > 0 &&
+          React.Children.toArray(
+            myTravels.map((myTravel) => {
+              return (
+                <div className="liste-travel">
+                  <div
+                    className="fig-img-travel-cards"
+                    style={{
+                      backgroundImage:
+                        myTravel.cityPic.split("/").length > 1
+                          ? `url(https://i.ibb.co/${myTravel.cityPic})`
+                          : `url(${myTravel.cityPic})`,
+                    }}
+                  />
+                </div>
+              );
+            })
+          )}
       </div>
-    )
-  }
+    );
+  };
 
   render() {
     return (
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
-        <span className='form-separator mb-2 mt-2' />
+        <span className="form-separator mb-2 mt-2" />
         <div className="travel--container">
-        <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
+          <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
           {React.Children.toArray(
             this.state.travel_user.map((res) => {
               return (
@@ -131,14 +163,16 @@ class MyTravels extends Component {
                       alt="del"
                     ></img>
                   </figure> */}
-                  <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${res.cityPic})` }}>
-                    {/* <img
-                      className="img-travel-cards"
-                      alt={res.cityPic}
-                      src={res.cityPic}
-                    ></img> */}
+                  <div
+                    className="fig-img-travel-cards"
+                    style={{
+                      backgroundImage:
+                        res.cityPic.split("/").length > 1
+                          ? `url(https://i.ibb.co/${res.cityPic})`
+                          : `url(${res.cityPic})`,
+                    }}
+                  >
                   </div>
-                  
                   <Link
                     className="travel-cards-link"
                     to={{
@@ -171,7 +205,6 @@ class MyTravels extends Component {
               );
             })
           )}
-          
         </div>
         <div className="title-travel-cards">Mes Annonces</div>
         {this.renderMyTravels()}
@@ -185,11 +218,11 @@ class MyTravels extends Component {
 MyTravels.propTypes = {
   favorites: PropTypes.array,
   history: PropTypes.shape({
-    push: PropTypes.func
+    push: PropTypes.func,
   }),
   token: PropTypes.string,
   travels: PropTypes.array,
-  userID: PropTypes.number
-}
+  userID: PropTypes.number,
+};
 
 export default MyTravels;

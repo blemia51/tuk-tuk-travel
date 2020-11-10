@@ -115,12 +115,15 @@ class TravelCards extends Component {
             return (
               
               <div className="liste-travel">
-                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${travel.cityPic})` }}>
-                  {/* <img
-                    className="img-travel-cards"
-                    alt={travel.cityPic}
-                    src={travel.cityPic}
-                  ></img> */}
+                <div 
+                  className="fig-img-travel-cards" 
+                  style={{ 
+                    backgroundImage: 
+                      travel.cityPic.split('/').length > 1 
+                        ? `url(https://i.ibb.co/${travel.cityPic})` 
+                        : `url(${travel.cityPic})`
+                    }}
+                  >
                 </div>
                 <Link
                   className="travel-cards-link"

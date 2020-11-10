@@ -68,10 +68,9 @@ class Reservation extends Component {
   }
 
   render() {
-    const { IDuser_creator, userID, users } = this.props;
+    const { IDuser_creator, userID } = this.props;
     const { isUserBooked, travelersMax } = this.state;
-    console.log('isUserBooked', isUserBooked)
-    console.log('users', users)
+
     return (
       <div className="reserve-button">
         <Button onClick={this.handleReservation}

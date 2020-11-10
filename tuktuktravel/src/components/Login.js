@@ -22,19 +22,12 @@ class Login extends Component {
 
   handleChange = (value, type) => {
     const { login } = this.state;
-    console.log(login)
     if (type === 'email' && value !== '' && !validateEmail(value)) {
       this.setState({
         error: 'Veuillez insérer un email valide'
       });
      return;
     }
-    // if (type === 'email' && (validateEmail(value) || value === '')) {
-    //   this.setState({
-    //     error: ''
-    //   });
-    //   //return;
-    // }
     this.setState({
       login: {
         ...login,
@@ -64,7 +57,6 @@ class Login extends Component {
         }
       })
       .then((res) => {
-        console.log(res)
         this.props.saveToken(res.token, res.user.userID)
         this.props.history.push("/accueil");
         //this.setState({ flash: res.flash });

@@ -1,9 +1,6 @@
 import React from "react";
 import { post } from "axios";
-//import { connect } from "react-redux";
-import { getPublicAssets } from 'utils/assetsUtils'
 import logoOk from "../assets/img/logoOk.png";
-import userReducer from "reducers/userReducer";
 
 class UploadAvatar extends React.Component {
   constructor(props) {
@@ -12,12 +9,10 @@ class UploadAvatar extends React.Component {
       file: "",
       isUpload: false,
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onFormSubmit(e) {
+  onFormSubmit = (e) => {
     e.preventDefault();
-    const { uploadAvatar } = this.props
     const url = "/uploaddufichier";
     const formData = new FormData();
     formData.append("file", this.state.file);
@@ -28,7 +23,7 @@ class UploadAvatar extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      uploadAvatar(this.state.file.name);
+      this.props.uploadAvatar(this.state.file.name);
       this.setState({
         isUpload: true,
       });
