@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { fetchUserProfileSuccess } from "../actions/userActions";
+import { fetchUserProfile, fetchUserProfileSuccess } from "../actions/userActions";
 import UserProfile from "../components/UserProfile";
 
 export default connect(
@@ -10,6 +10,6 @@ export default connect(
   }),
   (dispatch) => ({
     fetchUserProfileSuccess: (data) => dispatch(fetchUserProfileSuccess(data)),
+    fetchUserProfile: (userID) => dispatch(fetchUserProfile(userID))
   })
 )(UserProfile);
-

@@ -148,7 +148,7 @@ app.delete('/api/users/:userID', (req, res) => {
 
 
 // GET TRAVEL
-app.get('/api/travels', passport.authenticate('jwt', { session:  false }), (req, res) => {
+app.get('/api/travels', (req, res) => {
   connection.query('SELECT * from travels order by start_date desc', (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des voyages');

@@ -84,11 +84,12 @@ class TravelDetails extends Component {
     }
     const { location } = this.props;
     const {
-      state: { travelID},
+      state: { travelID, travelUserId },
     } = location;
     const travelDetail = this.props.travels.find(
       (travelDetail) => travelDetail.travelID === travelID
     );
+    console.log("travelDetail", travelDetail)
     const { userCreator, users } = this.state;
     return (
       <div className="travel-details">
@@ -153,7 +154,7 @@ class TravelDetails extends Component {
           </div>
           <div className='reserve-button'>
           <Button
-            onClick={() => this.cancelTravelReservation(travelDetail.travelUserId)}
+            onClick={() => this.cancelTravelReservation(travelUserId)}
             label='Annuler ma réservation'
             //isDisabled={!isUserBooked}
           />

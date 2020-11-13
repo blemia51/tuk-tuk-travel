@@ -17,50 +17,11 @@ class TravelCards extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/travels", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchTravelsSuccess(data);
-        this.setState({
-          travelsTemp: data,
-          travelsStore: data,
-        });
-      })
-      .catch();
-
-    fetch(`/api/users/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchUserProfileSuccess(...data);
-        this.setState({
-          user: data,
-        });
-      })
-      .catch();
+    const { travels } = this.props;
+    this.setState({
+      travelsTemp: travels,
+      travelsStore: travels,
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -79,10 +40,10 @@ class TravelCards extends Component {
   searchCity = (e) => {
     const { travelsStore, input } = this.state;
     if (input.length > 2) {
-      const result = travelsStore.filter((travel) =>
+      const searchResult = travelsStore.filter((travel) =>
         travel.destination.toLowerCase().includes(input.toLowerCase())
       );
-      this.setState({ travelsTemp: result });
+      this.setState({ travelsTemp: searchResult });
     } else {
       this.setState({ travelsTemp: travelsStore });
     }
@@ -113,7 +74,6 @@ class TravelCards extends Component {
         {React.Children.toArray(
           this.state.travelsTemp.map((travel) => {
             return (
-              
               <div className="liste-travel">
                 <div 
                   className="fig-img-travel-cards" 
@@ -149,13 +109,11 @@ class TravelCards extends Component {
                   </div>
                   <p>Places: {travel.number_of_travelers_max}</p>
                 </div>
-              </div>
-              
+              </div> 
             );
           })
         )}
         </div>
-
         <NavFooter />
       </div>
     );
@@ -169,6 +127,8 @@ TravelCards.propTypes = {
   }),
   token: PropTypes.string,
   userID: PropTypes.number,
+  travels: PropTypes.array,
+  userProfile: PropTypes.array
 }
 
 export default TravelCards;

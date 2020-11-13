@@ -97,7 +97,7 @@ class UserProfile extends Component {
 
   // UPDATE PROFIL
   handleSubmit = (e) => {
-    const { profil } = this.state
+    const { profil } = this.state;
     e.preventDefault();
     const update = {
       ...profil,
@@ -118,7 +118,7 @@ class UserProfile extends Component {
   };
 
   handleChange = (value, type) => {
-    const { profil } = this.state
+    const { profil } = this.state;
     this.setState({
       profil: {
         ...profil,
@@ -128,7 +128,7 @@ class UserProfile extends Component {
   }
 
   render() {
-    const { userProfile } = this.props
+    const { userProfile } = this.props;
     const { profil: stateProfil } = this.state;
     const inputs = Object.keys(stateProfil).reduce((acc, input) => {
       if (input !== 'password') {

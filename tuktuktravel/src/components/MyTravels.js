@@ -26,17 +26,14 @@ class MyTravels extends Component {
         if (!res.ok) {
           this.props.history.push("/userconnexion");
         } else {
-          return res.json();{/* <img
-            className="img-travel-cards"
-            alt={res.cityPic}
-            src={res.cityPic}
-          ></img> */}
+          return res.json();
         }
       })
       .then((data) => {
         this.setState({
           travel_user: data,
         });
+        this.props.fetchMyTravelsSuccess(data)
       })
       .catch();
   }

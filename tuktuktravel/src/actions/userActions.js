@@ -2,10 +2,10 @@ export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
 export const FETCH_USER_PROFILE_SUCCESS = 'FETCH_USER_PROFILE_SUCCESS';
 export const FETCH_USER_PROFILE_FAILURE = 'FETCH_USER_PROFILE_FAILURE';
 
-export const fetchUserProfile = (success) => ({
+export const fetchUserProfile = (userID) => ({
   type: FETCH_USER_PROFILE,
   payload: {
-    success,
+    userID: userID,
   },
 });
 
@@ -17,7 +17,7 @@ export const fetchUserProfileSuccess = (userState) => ({
 });
 
 export const fetchUserProfileFailure = (error) => ({
-  type: FETCH_USER_PROFILE_SUCCESS,
+  type: FETCH_USER_PROFILE_FAILURE,
   payload: {
     error,
   },

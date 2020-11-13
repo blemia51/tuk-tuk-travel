@@ -6,6 +6,7 @@ import NavFooter from "./NavFooter";
 import CountDown from "../components/CountDown";
 import { Link } from "react-router-dom";
 import back from "../assets/img/arrowb.png";
+import request from "../utils/request"
 
 class HomeConnected extends PureComponent {
   state = {
@@ -15,72 +16,87 @@ class HomeConnected extends PureComponent {
   };
 
   componentDidMount() {
-    fetch("/api/travels", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
+    const { fetchUserProfile, fetchTravels, fetchMyTravels, userID, travels } = this.props;
+    fetchUserProfile(userID)
+    fetchTravels()
+    this.setState({ 
+      travelsTemp: travels,
+      travelsStore: travels,
     })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchTravelsSuccess(data);
-        this.setState({
-          travelsTemp: data,
-          travelsStore: data,
-        });
-      })
-      .catch();
+    fetchMyTravels(userID)
 
-    fetch(`/api/users/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchUserProfileSuccess(...data);
-        this.setState({
-          user: data,
-        });
-      })
-      .catch();
+    const url = '/api/travels'
+    
+    //request(url)
+    //console.log(request(url))
 
-    fetch(`/api/travel_user/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchMyTravelsSuccess(data);
-        this.setState({
-          travel_user: data,
-        });
-      })
-      .catch();
+    // fetch("/api/travels", {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: "Bearer " + this.props.token,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       this.props.history.push("/userconnexion");
+    //     } else {
+    //       return res.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //     this.props.fetchTravelsSuccess(data);
+    //     this.setState({
+    //       travelsTemp: data,
+    //       travelsStore: data,
+    //     });
+    //   })
+    //   .catch();
+
+    // fetch(`/api/users/${this.props.userID}`, {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: "Bearer " + this.props.token,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       this.props.history.push("/userconnexion");
+    //     } else {
+    //       return res.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //     this.props.fetchUserProfileSuccess(...data);
+    //     this.setState({
+    //       user: data,
+    //     });
+    //   })
+    //   .catch();
+
+    // fetch(`/api/travel_user/${this.props.userID}`, {
+    //   method: "GET",
+    //   headers: {
+    //     Authorization: "Bearer " + this.props.token,
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => {
+    //     if (!res.ok) {
+    //       this.props.history.push("/userconnexion");
+    //     } else {
+    //       return res.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //     this.props.fetchMyTravelsSuccess(data);
+    //     this.setState({
+    //       travel_user: data,
+    //     });
+    //   })
+    //   .catch();
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -90,12 +106,14 @@ class HomeConnected extends PureComponent {
     if (prevProps.userProfile !== this.props.userProfile) {
       this.setState({ userProfileToto: this.props.userProfile });
     }
+    if (prevProps.travels !== this.props.travels) {
+      this.setState({ 
+        travelsTemp: this.props.travels,
+        travelsStore: this.props.travels });
+    }
   }
 
   searchField = (e) => {
-    // this.setState((state) => {
-    // // Important : lisez `state` au lieu de `this.state` lors de la mise à jour.
-    // return {count: state.count + 1}
     this.setState({ input: e.target.value });
   };
 
@@ -217,7 +235,7 @@ class HomeConnected extends PureComponent {
   };
 
   render() {
-    if (!this.props.userProfile) {
+    if (!this.props.userProfile || !this.props.travels) {
       return null;
     }
 
