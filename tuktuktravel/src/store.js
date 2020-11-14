@@ -13,6 +13,7 @@ export const store = createStore(
   {},
   compose(
     applyMiddleware(sagaMiddleware),
+    process.env.NODE_ENV !== 'production' && typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 )
