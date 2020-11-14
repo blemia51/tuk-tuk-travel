@@ -8,14 +8,24 @@ import travelsSaga from './sagas/travelsSaga'
 
 const sagaMiddleware = createSagaMiddleware();
 
+const enhancers = [
+      applyMiddleware(sagaMiddleware),
+    ]
+  
+    // If Redux DevTools Extension is installed use it, otherwise use Redux compose
+    /* eslint-disable no-underscore-dangle */
+    const composeEnhancers =
+      process.env.NODE_ENV !== 'production' &&
+      typeof window === 'object' &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+        : compose
+    /* eslint-enable */
+
 export const store = createStore(
   allReducers,
   {},
-  compose(
-    applyMiddleware(sagaMiddleware),
-    process.env.NODE_ENV !== 'production' && typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  composeEnhancers(...enhancers)
 )
 
 sagaMiddleware.run(rootSaga);
