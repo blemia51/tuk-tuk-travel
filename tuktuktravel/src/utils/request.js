@@ -57,7 +57,10 @@ export default function request(url, options) {
   //   optionsMerged = JSON.parse(JSON.stringify(options))
   // }
   // if (token && url.match('api-agregateur') === null) {
-  //   let headers = { Authorization: token }
+  //   let headers = { 
+  //     Authorization: `Bearer ${token}`,
+  //     "Content-Type": "application/json",
+  //   }
   //   if (options && options.headers) {
   //     headers = { ...headers, ...options.headers }
   //   }

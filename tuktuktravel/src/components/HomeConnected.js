@@ -6,7 +6,6 @@ import NavFooter from "./NavFooter";
 import CountDown from "../components/CountDown";
 import { Link } from "react-router-dom";
 import back from "../assets/img/arrowb.png";
-import request from "../utils/request"
 
 class HomeConnected extends PureComponent {
   state = {
@@ -19,13 +18,13 @@ class HomeConnected extends PureComponent {
     const { fetchUserProfile, fetchTravels, fetchMyTravels, userID, travels } = this.props;
     fetchUserProfile(userID)
     fetchTravels()
-    this.setState({ 
-      travelsTemp: travels,
-      travelsStore: travels,
-    })
+    if (travels) {
+      this.setState({ 
+        travelsTemp: travels,
+        travelsStore: travels,
+      });
+    }
     fetchMyTravels(userID)
-
-    const url = '/api/travels'
     
     //request(url)
     //console.log(request(url))
@@ -235,7 +234,7 @@ class HomeConnected extends PureComponent {
   };
 
   render() {
-    if (!this.props.userProfile || !this.props.travels) {
+    if (!this.props.userProfile || !this.props.travels || !this.state.travelsTemp) {
       return null;
     }
 

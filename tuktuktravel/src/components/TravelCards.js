@@ -50,7 +50,7 @@ class TravelCards extends Component {
   };
 
   render() {
-    if (!this.props.userProfile) {
+    if (!this.props.userProfile || !this.props.travels) {
       return null;
     }
     return (
@@ -128,7 +128,7 @@ TravelCards.propTypes = {
   token: PropTypes.string,
   userID: PropTypes.number,
   travels: PropTypes.array,
-  userProfile: PropTypes.array
+  userProfile: PropTypes.object
 }
 
 export default TravelCards;
