@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from 'react-router-dom';
-import logoOk from '../img/logoOk.png';
+import logoOk from '../assets/img/logoOk.png';
 import '../assets/css/App.css';
 
 const AddUser = () => {

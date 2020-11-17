@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "./fragments/Button"
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
 
@@ -21,7 +21,7 @@ class TravelDetails extends Component {
     const {
       state: { IDuser_creator, travelID },
     } = location;
-    fetch(`http://localhost:8000/api/users/${IDuser_creator}`, {
+    fetch(`/api/users/${IDuser_creator}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -42,7 +42,7 @@ class TravelDetails extends Component {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/travels/${travelID}/users`, {
+    fetch(`/api/travels/${travelID}/users`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -68,7 +68,7 @@ class TravelDetails extends Component {
     const { confirm } = window;
     confirm('Êtes vous sûr(e) de vouloir supprimer vôtre réservation ?') &&
     axios
-      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .delete(`/api/travel_user/${id}`)
       .then((res) => {
         this.props.history.push("/mytravels");
       })
@@ -84,20 +84,35 @@ class TravelDetails extends Component {
     }
     const { location } = this.props;
     const {
-      state: { cityPic, destination, start_date, end_date, description, travelUserId },
+      state: { travelID, travelUserId },
     } = location;
+    const travelDetail = this.props.travels.find(
+      (travelDetail) => travelDetail.travelID === travelID
+    );
     const { userCreator, users } = this.state;
     return (
       <div className="travel-details">
         <div className="img-travel-details">
           <figure className="container-city-picture">
-            <img className="city-picture" src={cityPic} alt={cityPic} />
+            <img
+              className="city-picture" 
+              src={
+                travelDetail.cityPic.split('/').length > 1 
+                ? `https://i.ibb.co/${travelDetail.cityPic}` 
+                : travelDetail.cityPic 
+              }
+              alt={travelDetail.cityPic}
+            />
           </figure>
-          <p className="travel-cards-link travel-cards-title">{destination} </p>
+          <p className="travel-cards-link travel-cards-title">{travelDetail.destination} </p>
         </div>
         <div className="travel-creator">
           <img
-            src={userCreator.avatar}
+            src={
+              !userCreator.avatar
+                ? "placeholder-profil.png"
+                : userCreator.avatar
+            }
             alt="Avatar"
             className="user-creator-avatar"
           ></img>
@@ -111,19 +126,23 @@ class TravelDetails extends Component {
             <p>Contact: {userCreator.email}</p>
             <div className="dates">
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{start_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.start_date}</Moment>{" "}
               </p>
               <span className="traveldetails-date"> - </span>
               <p className="date-traveldetails">
-                <Moment format="DD/MM/YYYY">{end_date}</Moment>{" "}
+                <Moment format="DD/MM/YYYY">{travelDetail.end_date}</Moment>{" "}
               </p>
             </div>
             <div className="travel-user-avatar-container">
-              {users.map((user) => (
+              {React.Children.toArray(users.map((user) => (
                 <div className="travel-user-description">
                   <div className="travel-user-avatar-box">
                     <img
-                      src={user.avatar}
+                      src={
+                        user.avatar 
+                          ? user.avatar 
+                          : 'placeholder-profil.png'
+                      }
                       alt="avatar"
                       className="travel-user-avatar"
                     />
@@ -132,9 +151,9 @@ class TravelDetails extends Component {
                     {user.firstname}
                   </p>
                 </div>
-              ))}
+              )))}
             </div>
-            <p className="descr-traveldetails">{description} </p>
+            <p className="descr-traveldetails">{travelDetail.description} </p>
           </div>
           <div className='reserve-button'>
           <Button
@@ -154,8 +173,8 @@ TravelDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  location: PropTypes.string,
-  token: PropTypes.number,
+  location: PropTypes.object,
+  token: PropTypes.string,
 }
 
 export default TravelDetails;

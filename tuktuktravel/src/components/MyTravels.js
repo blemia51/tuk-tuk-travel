@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import NavFooter from "./NavFooter";
-//import del from "../img/delete.png";
+//import del from "../assets/img/delete.png";
 import axios from "axios";
 
 class MyTravels extends Component {
@@ -15,34 +15,25 @@ class MyTravels extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8000/api/travel_user/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.setState({
-          travel_user: data,
-        });
-      })
-      .catch();
+    const { fetchMyTravels, userID, myTravels } = this.props
+    fetchMyTravels(userID);
+    if (myTravels) {
+      this.setState({ travel_user: myTravels });
+    }
   }
+
+   componentDidUpdate(prevProps) {
+     if (prevProps.myTravels !== this.props.myTravels) {
+       this.setState({ travel_user: this.props.myTravels });
+     }
+   }
 
   cancelTravelReservation = (id) => {
     axios
-      .delete(`http://localhost:8000/api/travel_user/${id}`)
+      .delete(`/api/travel_user/${id}`)
       .then((res) => {
-        const myTravels = this.state.travel_user.filter((travel) => 
-          travel.travel_user_id !== id
+        const myTravels = this.state.travel_user.filter(
+          (travel) => travel.travel_user_id !== id
         );
         this.setState({ travel_user: myTravels });
         //alert(`tuk-tuk supprimé`)
@@ -51,48 +42,101 @@ class MyTravels extends Component {
         console.error(event);
         alert("tuk-tuk non supprimé");
       });
-  }
+  };
 
   renderFavorites = () => {
     const { favorites, travels } = this.props;
-    const favoris = favorites.map((favorite => travels.find(travel => travel.travelID === favorite)))
-    console.log("favoris", favoris)
+    const favoris = favorites.map((favorite) =>
+      travels.find((travel) => travel.travelID === favorite)
+    );
+
     return (
       <div>
-        <div className="title-travel-cards">Mes Tuk-tuk sauvegardés</div>
-        {favoris.length > 0 ? favoris.map(favori => {
-          return (
-            <div className="tuktuk--favorites">
-              <img src={favori.cityPic} className="tuktuk--favorites-image"/>
-              <h4>{favori.destination}</h4>
+        <div className="title-travel-cards">Mes Annonces sauvegardées</div>
+        <div className="tuktuk--favorites">
+          {favoris.length > 0 ? (
+            favoris.map((favori) => {
+              return (
+                <div className="favorites--container" key={`id_${favori.travelID}`}>
+                  <Link
+                    to={{
+                      pathname: "/traveldetails",
+                      state: {
+                        travelID: favori.travelID,
+                        IDuser_creator: favori.IDuser_creator,
+                      },
+                    }}
+                  >
+                    <img
+                      src={
+                        favori && favori.cityPic.split("/").length > 1
+                          ? `https://i.ibb.co/${favori.cityPic}`
+                          : favori.cityPic
+                      }
+                      className="tuktuk--favorites-image"
+                    />
+                  </Link>
+                  <p>{favori.destination}</p>
+                </div>
+              );
+            })
+          ) : (
+            <div className="favorites-placeholder mt-2">
+              <div>
+                <i className="fas fa-heart favorites" />
+              </div>
+              <div className="favorites-placeholder-text">
+                <p>Vous n'avez pas sauvegardé d'annonces...</p>
+                <p>Cliquez sur l'icone quand un voyage vous fait envie !</p>
+              </div>
             </div>
-          )
-        })
-      :
-      <div style={{marginLeft: '8px', textAlign: 'left'}}>
-      <span className="fas fa-heart favorites" />
-      <span style={{padding: '8px', fontSize: '12px'}}>Vous n'avez pas sauvegardé d'annonces</span>
+          )}
+        </div>
+      </div>
+    );
+  };
 
+  renderMyTravels = () => {
+    const { travels, userID } = this.props;
+    const myTravels = travels.filter(
+      (travel) => travel.IDuser_creator === userID
+    );
+    return (
+      <div>
+        {myTravels.length > 0 &&
+          React.Children.toArray(
+            myTravels.map((myTravel) => {
+              return (
+                <div className="liste-travel">
+                  <div
+                    className="fig-img-travel-cards"
+                    style={{
+                      backgroundImage:
+                        myTravel.cityPic.split("/").length > 1
+                          ? `url(https://i.ibb.co/${myTravel.cityPic})`
+                          : `url(${myTravel.cityPic})`,
+                    }}
+                  />
+                </div>
+              );
+            })
+          )}
       </div>
-      }
-      </div>
-    )
-  }
+    );
+  };
 
   render() {
-    // console.log("travel_user", this.state.travel_user)
-    // console.log('tadada', this.props.favorites)
-    const { favorites, travels } = this.props;
     return (
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
-        <span className='form-separator mb-2 mt-2' />
-        <div className="travel--container">
+        <span className="form-separator mb-2 mt-2" />
         <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
+        <div className="travel--container">
+          
           {React.Children.toArray(
             this.state.travel_user.map((res) => {
               return (
-                <div className="liste-travel">
+                <div className="liste-travel" key={res.id} >
                   {/* <figure
                     style={{
                       position: "relative",
@@ -108,26 +152,23 @@ class MyTravels extends Component {
                       alt="del"
                     ></img>
                   </figure> */}
-                  <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${res.cityPic})` }}>
-                    {/* <img
-                      className="img-travel-cards"
-                      alt={res.cityPic}
-                      src={res.cityPic}
-                    ></img> */}
+                  <div
+                    className="fig-img-travel-cards"
+                    style={{
+                      backgroundImage:
+                        res.cityPic.split("/").length > 1
+                          ? `url(https://i.ibb.co/${res.cityPic})`
+                          : `url(${res.cityPic})`,
+                    }}
+                  >
                   </div>
-                  
                   <Link
                     className="travel-cards-link"
                     to={{
                       pathname: "/mytraveldetails",
                       state: {
-                        cityPic: res.cityPic,
                         travelID: res.travelID,
-                        destination: res.destination,
                         IDuser_creator: res.IDuser_creator,
-                        start_date: res.start_date,
-                        end_date: res.end_date,
-                        description: res.description,
                         travelUserId: res.travel_user_id,
                       },
                     }}
@@ -148,8 +189,9 @@ class MyTravels extends Component {
               );
             })
           )}
-          
         </div>
+        <div className="title-travel-cards">Mes Annonces</div>
+        {this.renderMyTravels()}
         {this.renderFavorites()}
         <NavFooter />
       </div>
@@ -158,11 +200,15 @@ class MyTravels extends Component {
 }
 
 MyTravels.propTypes = {
+  favorites: PropTypes.array,
   history: PropTypes.shape({
-    push: PropTypes.func
+    push: PropTypes.func,
   }),
-  token: PropTypes.number,
+  token: PropTypes.string,
+  travels: PropTypes.array,
   userID: PropTypes.number,
-}
+  myTravels: PropTypes.array,
+  fetchMyTravels: PropTypes.func,
+};
 
 export default MyTravels;

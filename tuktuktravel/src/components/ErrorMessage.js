@@ -1,4 +1,5 @@
 /// @flow
+import PropTypes from "prop-types";
 import React, { PureComponent } from 'react';
 import { dynamicClassName } from 'utils/dynamicClassName';
 
@@ -17,6 +18,11 @@ class ErrorMessage extends PureComponent {
         className={classNames.build()}>{message}</span>
     );
   }
+}
+
+ErrorMessage.propTypes = {
+  forceDisplay: PropTypes.bool,
+  message: PropTypes.string
 }
 
 export default ErrorMessage;

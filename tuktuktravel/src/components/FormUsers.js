@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from  'react-redux';
 import axios from 'axios';
-import TextInput from 'components/input/TextInput'
-import SelectInput from 'components/input/SelectInput'
-import Button from 'components/fragments/Button'
-import { validateEmail, validatePhone } from '../utils/validatorUtils'
-import CountryList from './CountryList';
-import back from '../img/arrowb.png'
-import logoOk from '../img/logoOk.png';
+import TextInput from 'components/input/TextInput';
+import SelectInput from 'components/input/SelectInput';
+import Button from 'components/fragments/Button';
+import { validateEmail, validatePhone } from '../utils/validatorUtils';
+//import CountryList from './CountryList';
+import back from '../assets/img/arrowb.png';
+import logoOk from '../assets/img/logoOk.png';
 
 
 
@@ -202,19 +202,22 @@ class FormUsers extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const {...user} = this.state.profil
-    user.avatar = this.props.avatar
-    console.log(user)
-    axios.post('http://localhost:8000/api/users', user)
-    .then(res => {
-      this.setState({
-        isAdded: true,
-      })
-      setTimeout(() => {this.props.history.push("/userconnexion")}, 2000)
+    const {...userProfile} = this.state.profil;
+    userProfile.avatar = this.props.avatar;
+    const { postUserProfile } = this.props;
+
+    postUserProfile(userProfile);
+    setTimeout(() => {this.props.history.push("/userconnexion")}, 2000)
+    // axios.post('/api/users', userProfile)
+    // .then(res => {
+    //   this.setState({
+    //     isAdded: true,
+    //   })
+    //   setTimeout(() => {this.props.history.push("/userconnexion")}, 2000)
       
-    }).catch(event => {
-      console.error(event);
-    })
+    // }).catch(event => {
+    //   console.error(event);
+    // })
   }
 
   render() {
@@ -286,7 +289,8 @@ FormUsers.propTypes = {
   avatar: PropTypes.string,
   history: PropTypes.shape({
     push: PropTypes.func
-  })
+  }),
+  fetchUserProfile: PropTypes.func,
 }
 
 function mapStateToProps(state) {

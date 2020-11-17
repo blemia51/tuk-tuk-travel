@@ -1,5 +1,5 @@
 import React from 'react';
-import myLogo from '../img/tuk-tuk logo.png';
+import myLogo from '../assets/img/tuk-tuk logo.png';
 import { Link } from 'react-router-dom';
 
 const Home = () => {

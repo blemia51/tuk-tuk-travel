@@ -1,18 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import './assets/css/App.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import "./assets/css/App.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
-import { createStore } from  'redux'; // npm install --save redux
-import { Provider } from  'react-redux'; // npm install --save react-redux
-import allReducers from './reducers';
-const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import { Provider } from "react-redux"; // npm install --save react-redux
+import { store } from "store";
+
 
 ReactDOM.render(
-    <BrowserRouter><Provider  store={store}><App /></Provider></BrowserRouter>, 
-    document.getElementById('root')
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

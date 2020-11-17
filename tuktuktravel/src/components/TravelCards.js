@@ -4,7 +4,7 @@ import Moment from "react-moment";
 import NavFooter from "./NavFooter";
 import SearchInput from "components/input/SearchInput";
 import { Link } from "react-router-dom";
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 
 class TravelCards extends Component {
   constructor(props) {
@@ -17,55 +17,16 @@ class TravelCards extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8000/api/travels", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchTravelsSuccess(data);
-        this.setState({
-          travelsTemp: data,
-          travelsStore: data,
-        });
-      })
-      .catch();
-
-    fetch(`http://localhost:8000/api/users/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.props.fetchUserProfileSuccess(...data);
-        this.setState({
-          user: data,
-        });
-      })
-      .catch();
+    const { travels } = this.props;
+    this.setState({
+      travelsTemp: travels,
+      travelsStore: travels,
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.input !== this.state.input) {
-      this.searchCity()
+      this.searchCity();
     }
   }
 
@@ -79,45 +40,50 @@ class TravelCards extends Component {
   searchCity = (e) => {
     const { travelsStore, input } = this.state;
     if (input.length > 2) {
-      const result = travelsStore.filter((travel) =>
+      const searchResult = travelsStore.filter((travel) =>
         travel.destination.toLowerCase().includes(input.toLowerCase())
       );
-      this.setState({ travelsTemp: result });
+      this.setState({ travelsTemp: searchResult });
     } else {
       this.setState({ travelsTemp: travelsStore });
     }
   };
 
   render() {
+    if (!this.props.userProfile || !this.props.travels) {
+      return null;
+    }
     return (
       <div className="travel-cards">
         <div className="title-and-home">
           <div className="title-travel-cards">Tuk-tuk proposés</div>
           <div>
-            <Link className="link-back-arrow" to="/logout">
+            {/* <Link className="link-back-arrow" to="/logout">
               <figure className="fig-back-arrow-travelcards">
                 <img className="back-arrow" src={back} alt="Arrow to back" />
               </figure>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <SearchInput
           className='search'
-          placeholder='Ou part on?'
+          placeholder={`On part où ${this.props.userProfile.firstname} ?`}
           onChange={this.searchField}
         />
         <div className="travel--container">
         {React.Children.toArray(
           this.state.travelsTemp.map((travel) => {
             return (
-              
               <div className="liste-travel">
-                <div className="fig-img-travel-cards" style={{ backgroundImage: `url(${travel.cityPic})` }}>
-                  {/* <img
-                    className="img-travel-cards"
-                    alt={travel.cityPic}
-                    src={travel.cityPic}
-                  ></img> */}
+                <div 
+                  className="fig-img-travel-cards" 
+                  style={{ 
+                    backgroundImage: 
+                      travel.cityPic.split('/').length > 1 
+                        ? `url(https://i.ibb.co/${travel.cityPic})` 
+                        : `url(${travel.cityPic})`
+                    }}
+                  >
                 </div>
                 <Link
                   className="travel-cards-link"
@@ -143,13 +109,11 @@ class TravelCards extends Component {
                   </div>
                   <p>Places: {travel.number_of_travelers_max}</p>
                 </div>
-              </div>
-              
+              </div> 
             );
           })
         )}
         </div>
-
         <NavFooter />
       </div>
     );
@@ -163,6 +127,8 @@ TravelCards.propTypes = {
   }),
   token: PropTypes.string,
   userID: PropTypes.number,
+  travels: PropTypes.array,
+  userProfile: PropTypes.object
 }
 
 export default TravelCards;

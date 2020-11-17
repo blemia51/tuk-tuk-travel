@@ -1,8 +1,7 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { post } from "axios";
-import { connect } from "react-redux";
-import logoOk from "../img/logoOk.png";
-import { uploadCityPic } from "actions/cityPicActions";
+import logoOk from "../assets/img/logoOk.png";
 
 class UploadCityPic extends React.Component {
   constructor(props) {
@@ -15,9 +14,11 @@ class UploadCityPic extends React.Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:8000/uploaddufichier";
-    const formData = new FormData();
-    formData.append("file", this.state.file);
+    const url = `https://api.imgbb.com/1/upload`
+    //const url = "/uploaddufichier";
+    let formData = new FormData();
+    formData.set("key", "1910b2849afef3a616530c166ba655ce")
+    formData.append("image", this.state.file);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -25,11 +26,8 @@ class UploadCityPic extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      // this.props.dispatch({
-      //   type: "SEND_CITY_PIC",
-      //   cityPic: this.state.file.name,
-      // });
-      uploadCityPic(this.state.file.name)
+      let imageUrl = (response.data.data.image.url).split('/').slice(3).join('/');
+      this.props.uploadCityPic(imageUrl)
       this.setState({
         isUpload: true,
       });
@@ -67,6 +65,11 @@ class UploadCityPic extends React.Component {
       </div>
     );
   }
+}
+
+UploadCityPic.propTypes = {
+  onUpload: PropTypes.func,
+  uploadCityPic: PropTypes.func
 }
 
 export default UploadCityPic;

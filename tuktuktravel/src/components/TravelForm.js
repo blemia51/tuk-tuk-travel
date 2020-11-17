@@ -42,7 +42,7 @@ class TravelForm extends Component {
       return acc;
     }, []);
 
-    return inputs.map((input) => {
+    return React.Children.toArray(inputs.map((input) => {
       let date = ''
       if (input.split('_').join(' ').includes('date')) {
          date = 'JJ/MM/AAAA'
@@ -61,19 +61,19 @@ class TravelForm extends Component {
           // errorMessage={error}
         />
       )
-    })
+    }))
   }
 
   handleSubmit = () => {
     const {...destination} = this.state.travelForm;
     const { cityPic, userID } = this.props;
+    
     Object.assign(destination, {cityPic: cityPic, IDuser_creator: userID});
-    //console.log('destination', destination)
-    axios.post('http://localhost:8000/api/travels/', destination)
+    axios.post('/api/travels/', destination)
     .then(res => {
       this.props.history.push('/travelcards')
     }).catch(event => {
-      console.error(event)
+      return console.error(event)
     });
   }
 

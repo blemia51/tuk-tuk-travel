@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { PureComponent } from 'react';
 import { dynamicClassName } from '../utils/dynamicClassName';
 
@@ -35,6 +36,17 @@ class Favorites extends PureComponent {
       </div>
     )
   }
+}
+
+Favorites.propTypes = {
+  className: PropTypes.string,
+  isDisabled: PropTypes.bool,
+  isFavorites: PropTypes.bool,
+  isFull: PropTypes.bool,
+  isSecondary: PropTypes.bool,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
+  url: PropTypes.string
 }
 
 export default Favorites;

@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import back from "../img/arrowb.png";
+import back from "../assets/img/arrowb.png";
 import Moment from "react-moment";
 import Reservation from "./Reservation";
-import FavoritesContainer from "../container/FavoritesContainer"
+import FavoritesContainer from "../container/FavoritesContainer";
 import NavFooter from "./NavFooter";
 
 class TravelDetails extends Component {
@@ -17,11 +17,12 @@ class TravelDetails extends Component {
     };
   }
   componentDidMount() {
+    const { hasFavorites } = this.state;
     const { location } = this.props;
     const {
       state: { IDuser_creator, travelID },
     } = location;
-    fetch(`http://localhost:8000/api/users/${IDuser_creator}`, {
+    fetch(`/api/users/${IDuser_creator}`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -42,7 +43,7 @@ class TravelDetails extends Component {
       })
       .catch();
 
-    fetch(`http://localhost:8000/api/travels/${travelID}/users`, {
+    fetch(`/api/travels/${travelID}/users`, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + this.props.token,
@@ -62,72 +63,91 @@ class TravelDetails extends Component {
         });
       })
       .catch();
+
+    if (this.props.favorites.indexOf(travelID) !== -1) {
+      this.setState({ hasFavorites: !hasFavorites });
+    }
   }
 
   handleAddFavorites = () => {
     const { location } = this.props;
     const {
-      state: {
-        travelID,
-      },
+      state: { travelID },
     } = location;
     const { hasFavorites } = this.state;
-    const fav = this.props.favorites
-    console.log('favorites', fav)
-    console.log('travelID', travelID)
+    const fav = this.props.favorites;
 
     if (fav.indexOf(travelID) === -1) {
-      fav.push(travelID)
-      console.log('favorites', fav)
-      this.props.uploadFavorite(fav)
-      this.setState({ hasFavorites: !hasFavorites })
+      fav.push(travelID);
+      this.props.uploadFavorite(fav);
+      this.setState({ hasFavorites: !hasFavorites });
     }
-  }
+  };
 
   render() {
     if (this.state.userCreator === []) {
-      return null
+      return null;
     }
     const { location } = this.props;
     const {
-      state: {
-        travelID,
-      },
+      state: { travelID },
     } = location;
 
-    const travelDetail = this.props.travels.find((travelDetail) => 
-      travelDetail.travelID === travelID
-    )
-    console.log('travel', travelDetail)
+    const travelDetail = this.props.travels.find(
+      (travelDetail) => travelDetail.travelID === travelID
+    );
     const { userCreator, users, hasFavorites } = this.state;
     return (
       <div className="travel-details">
         <div className="img-travel-details">
           <figure className="container-city-picture">
-            <img className="city-picture" src={travelDetail.cityPic} alt={travelDetail.cityPic} />
+            <img
+              className="city-picture"
+              src={
+                travelDetail.cityPic.split("/").length > 1
+                  ? `https://i.ibb.co/${travelDetail.cityPic}`
+                  : travelDetail.cityPic
+              }
+              alt={travelDetail.cityPic}
+            />
           </figure>
-          <p className="travel-cards-link travel-cards-title">{travelDetail.destination} </p>
+          <p className="travel-cards-link travel-cards-title">
+            {travelDetail.destination}{" "}
+          </p>
         </div>
 
         <div className="travel-creator">
-          <img
-            src={!userCreator.avatar ? 'placeholder-profil.png' : userCreator.avatar}
-            alt="Avatar"
-            className="user-creator-avatar"
-          ></img>
+          <Link to={{
+            pathname: "/chat",
+            state: { avatar: userCreator.avatar },
+            }}>
+            <img
+              src={
+                !userCreator.avatar
+                  ? "placeholder-profil.png"
+                  : userCreator.avatar
+              }
+              alt="Avatar"
+              className="user-creator-avatar"
+            ></img>
+          </Link>
           <div className="travel-detail-container">
             <div className="link-back-arrow-details">
-              <Link to="/travelcards">
-                <img className="back-arrow" src={back} alt="Arrow to back" />
-              </Link>
+              {/* <Link to="/travelcards"> */}
+              <img
+                className="back-arrow"
+                src={back}
+                alt="Arrow to back"
+                onClick={() => this.props.history.goBack()}
+              />
+              {/* </Link> */}
             </div>
 
             <p className="firstname-traveldetails">{userCreator.firstname}</p>
             {/* <p>Contact: {userCreator.email}</p> */}
 
             <a href={`mailto:${userCreator.email}`}>
-              <i className="far fa-envelope"></i>
-              {' '}{userCreator.email}
+              <i className="far fa-envelope"></i> {userCreator.email}
             </a>
             <span className="form-separator w-70" />
 
@@ -147,7 +167,11 @@ class TravelDetails extends Component {
                   <div className="travel-user-description">
                     <div className="travel-user-avatar-box">
                       <img
-                        src={user.avatar}
+                        src={
+                          user.avatar 
+                            ? user.avatar 
+                            : 'placeholder-profil.png'
+                        }
                         alt="avatar"
                         className="travel-user-avatar"
                       ></img>
@@ -164,11 +188,11 @@ class TravelDetails extends Component {
               <p className="descr-traveldetails">{travelDetail.description} </p>
             </div>
           </div>
-          
+
           <div className="btn--travel-detail">
             <FavoritesContainer
               travelID={travelID}
-              className='fas fa-heart'
+              className="fas fa-heart"
               onClick={this.handleAddFavorites}
               isDisabled={hasFavorites}
             />
@@ -189,11 +213,11 @@ class TravelDetails extends Component {
 
 TravelDetails.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func
+    push: PropTypes.func,
   }),
-  location: PropTypes.string,
+  location: PropTypes.object,
   token: PropTypes.string,
   userID: PropTypes.number,
-}
+};
 
 export default TravelDetails;

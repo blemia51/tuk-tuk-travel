@@ -1,9 +1,6 @@
 import React from "react";
 import { post } from "axios";
-//import { connect } from "react-redux";
-import { getPublicAssets } from 'utils/assetsUtils'
-import logoOk from "../img/logoOk.png";
-import userReducer from "reducers/userReducer";
+import logoOk from "../assets/img/logoOk.png";
 
 class UploadAvatar extends React.Component {
   constructor(props) {
@@ -12,15 +9,13 @@ class UploadAvatar extends React.Component {
       file: "",
       isUpload: false,
     };
-    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
-  onFormSubmit(e) {
+  onFormSubmit = (e) => {
     e.preventDefault();
-    const { uploadAvatar } = this.props
-    const url = "http://localhost:8000/uploaddufichier";
+    const url = "/uploaddufichier";
     const formData = new FormData();
-    formData.append("file", this.state.file);
+    formData.append("image", this.state.file);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -28,14 +23,19 @@ class UploadAvatar extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      uploadAvatar(this.state.file.name);
       this.setState({
         isUpload: true,
       });
     });
   }
+
   handleChange = (e) => {
     this.setState({ file: e.target.files[0] });
+    if (e.target.files.length === 1) {
+      const file = e.target.files[0]
+      this.setState({ file: file });
+      this.props.uploadAvatar(file.name);
+    }
   }
 
   render() { 
@@ -54,9 +54,6 @@ class UploadAvatar extends React.Component {
         />
         </div>
         <label htmlFor="avatar">Modifier</label>
-        {/* <button className="send-form-users" onClick={this.onFormSubmit}>
-          Changer
-        </button> */}
         {this.state.isUpload && (
           <div className="okUser">
             <img src={logoOk} alt="logoOk" className="logoOk" />

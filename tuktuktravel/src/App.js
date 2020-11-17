@@ -5,26 +5,18 @@ import requireNotAuth from './hoc/requireNotAuth';
 import HomeIntroFirst from './components/HomeIntroFirst';
 import HomeIntroSec from './components/HomeIntroSec';
 import Home from './components/Home';
-import HomeConnectedContainer from './container/HomeConnectedContainer';
-import FormUsers from './components/FormUsers';
-//import UserProfile from './components/UserProfile'
-import UserProfileContainer from './container/UserProfileContainer';
-//import Login from './components/Login';
-import LoginContainer from './container/LoginContainer';
-//import TravelForm from './components/TravelForm'
-import TravelFormContainer from './container/TravelFormContainer';
-//import TravelCards from './components/TravelCards'
-import TravelCardContainer from './container/TravelCardContainer';
-
-//import TravelDetails from './components/TravelDetails'
-import TravelDetailContainer from './container/TravelDetailContainer';
-//import MyTravels from './components/MyTravels'
-import MyTravelsContainer from './container/MyTravelsContainer';
-//import MyTravelDetails from './components/MyTravelDetails'
-import MyTravelDetailContainer from './container/MyTravelDetailContainer';
+import HomeConnected from './container/HomeConnectedContainer';
+import FormUsers from './container/FormUsersContainer';
+import UserProfile from './container/UserProfileContainer';
+import Login from './container/LoginContainer';
+import TravelForm from './container/TravelFormContainer';
+import TravelCard from './container/TravelCardContainer';
+import TravelDetail from './container/TravelDetailContainer';
+import MyTravels from './container/MyTravelsContainer';
+import MyTravelDetail from './container/MyTravelDetailContainer';
 import Cgu from './components/Cgu';
-//import './App.css'
-import { connect } from 'react-redux';
+import Chat from './components/Chat'
+//import { connect } from 'react-redux';
 
 
 // function mapDispatchToProps(dispatch) {
@@ -59,26 +51,21 @@ function App(props) {
         }}/>
         <Route exact path="/introsecond" component={HomeIntroSec}/>
         <Route exact path="/home" component={Home}/>
-        <Route path="/formusers"component={FormUsers}/>
+        <Route path="/formusers" component={FormUsers}/>
         {/* <Route path="/profile"component={requireAuth(UserProfileContainer)}/> */}
-        <Route path="/profile"component={UserProfileContainer}/>
-
+        <Route path="/profile"component={UserProfile}/>
         <Route path="/cgu"component={Cgu}/>
-        <Route path="/userconnexion" component={requireNotAuth(LoginContainer)}/>
-
-        <Route path="/Accueil" component={HomeConnectedContainer} />
-
-        <Route exact path="/travelcards" component={requireAuth(TravelCardContainer)}/>
-        <Route exact path="/travelform" component={TravelFormContainer}/>
-        <Route exact path="/traveldetails" render={(props) => <TravelDetailContainer {...props}/>} />
-        <Route exact path="/mytravels" component={MyTravelsContainer}/>
-        <Route exact path="/mytraveldetails" component={MyTravelDetailContainer} />
+        <Route path="/userconnexion" component={requireNotAuth(Login)}/>
+        <Route path="/accueil" component={requireAuth(HomeConnected)} />
+        <Route exact path="/travelcards" component={requireAuth(TravelCard)}/>
+        <Route exact path="/travelform" component={TravelForm}/>
+        <Route exact path="/traveldetails" render={(props) => <TravelDetail {...props}/>} />
+        <Route exact path="/mytravels" component={MyTravels}/>
+        <Route exact path="/mytraveldetails" component={MyTravelDetail} />
+        <Route path="/chat" component={Chat} />
       </Switch> 
     </div>
   );
 }
 
-
-// export default connect(null, mapDispatchToProps)(App)
-export default App
-
+export default App;

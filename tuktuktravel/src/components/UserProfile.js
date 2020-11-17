@@ -4,9 +4,9 @@ import Moment from "react-moment";
 import axios from "axios";
 import Button from './fragments/Button'
 import NavFooter from "./NavFooter";
-import UploadAvatarContainer from "../container/UploadAvatarContainer";
+import UploadAvatar from "../container/UploadAvatarContainer";
 import TextInput from "./input/TextInput";
-import logoOk from "../img/logoOk.png";
+import logoOk from "../assets/img/logoOk.png";
 
 
 class UserProfile extends Component {
@@ -31,7 +31,14 @@ class UserProfile extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { lastname, firstname, city, email, phone_number, description } = props.userProfile;
+    const { 
+      lastname,
+      firstname,
+      city,
+      email,
+      phone_number,
+      description 
+    } = props.userProfile;
     const { 
       lastname: stateNom, 
       firstname: statePrenom, 
@@ -58,14 +65,13 @@ class UserProfile extends Component {
         }
       };
     }
-    console.log('state', state)
     return state;
   }
 
   // GET ONE USER
   componentDidMount() {
     fetch(
-      `http://localhost:8000/api/users/${this.props.userID}`,
+      `/api/users/${this.props.userID}`,
       {
         method: "GET",
         headers: {
@@ -91,16 +97,37 @@ class UserProfile extends Component {
 
   // UPDATE PROFIL
   handleSubmit = (e) => {
-    const { profil } = this.state
+    const { profil } = this.state;
     e.preventDefault();
     const update = {
       ...profil,
       userID: this.props.userID,
       avatar: this.props.avatar,
     };
-    console.log('update', update)
+    console.log(update)
+    //this.props.updateProfile(update)
+
+    // fetch(
+    //   `/api/user`,
+    //   { 
+    //     method: "PUT",
+    //     body: JSON.stringify({...profil}),
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     }
+    //   },
+    // )
+    // .then((res) => {
+    //   this.setState({
+    //     isAdded: true,
+    //   });
+    // })
+    // .catch((event) => {
+    //   console.error(event);
+    // });
+
     axios
-      .put(`http://localhost:8000/api/users`, update)
+      .put(`/api/users`, update)
       .then((res) => {
         this.setState({
           isAdded: true,
@@ -112,7 +139,7 @@ class UserProfile extends Component {
   };
 
   handleChange = (value, type) => {
-    const { profil } = this.state
+    const { profil } = this.state;
     this.setState({
       profil: {
         ...profil,
@@ -122,7 +149,7 @@ class UserProfile extends Component {
   }
 
   render() {
-    const { userProfile } = this.props
+    const { userProfile } = this.props;
     const { profil: stateProfil } = this.state;
     const inputs = Object.keys(stateProfil).reduce((acc, input) => {
       if (input !== 'password') {
@@ -130,46 +157,20 @@ class UserProfile extends Component {
       }
       return acc;
     }, []);
-    //console.log(userProfile)
+  
     return (
       <div>
         <div className="title-user-profile">PROFIL</div>
         <span className='form-separator mb-2 mt-2' />
-        {/* {React.Children.toArray(
-          this.state.user &&
-            this.state.user.map((res) => (
-              <div className="user-profile">
-                <div className="profile-picture-container">
-                  <img
-                    src={res.avatar}
-                    alt="profil"
-                    className="profile-picture"
-                  ></img>
-                </div>
-                <div>Nom : {res.lastname}</div>
-                <div>Prénom : {res.firstname}</div>
-                <div>
-                  Date de naissance :{" "}
-                  <Moment format="DD/MM/YYYY">{res.birthday}</Moment>
-                </div>
-                <div>Ville : {res.city}</div>
-                <div>{res.contry}</div>
-                <div>E-mail : {res.email}</div>
-                <div>Téléphone : {res.phone_number}</div>
-                <div>{res.description}</div>
-              </div>
-            ))
-        )} */}
-        
         <div className="profile-picture-container">
-          <UploadAvatarContainer userProfileAvatar={userProfile.avatar}/>
+          <UploadAvatar userProfileAvatar={userProfile.avatar} />
         </div>
         <div className="profil--general-container">
           <div className="profil--container">
             {React.Children.toArray(inputs.map((input) => {
               return (
                 <TextInput
-                  noEdit
+                  //noEdit
                   type={input}
                   label={input}
                   placeholder={input}
@@ -209,9 +210,8 @@ UserProfile.propTypes = {
   }),
   token: PropTypes.string,
   userID: PropTypes.number,
-  userProfile: PropTypes.shape({
-    avatar: PropTypes.string
-  })
+  userProfile: PropTypes.object,
+  updateUserProfile: PropTypes.func,
 }
 
 export default UserProfile;

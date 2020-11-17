@@ -14,6 +14,9 @@ const ExtractJwt = require('passport-jwt').ExtractJwt; // npm install passport-l
 const verifyToken = require('./verifyToken');
 const key = require('./key');
 const bcrypt = require('bcrypt'); // npm install bcrypt
+const path = require('path');
+//const axios = require('axios');
+
 //const port = 8000;
 
 require('dotenv').config();
@@ -24,14 +27,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(express.static(__dirname  +  '/public'));
-app.use(cors())
+//app.use(express.static(__dirname  +  '/public'));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.use((req, res, next)=> {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+
+// app.use((req, res, next)=> {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//   next();
+// });
 
 // PASSEPORT CONFIG STRATEGY
 passport.use(new LocalStrategy(
@@ -65,6 +70,11 @@ function (jwtPayload, cb) {
 app.get('/', (req, res) => {
   res.send('Bienvenue sur Express');
 });
+
+// app.get('/*', (req, res) => {
+//   res.send(path.join(__dirname+'/client/build/index.html'));
+// });
+
 
 //GET USERS
 app.get('/api/users', (req, res) => {
@@ -138,8 +148,8 @@ app.delete('/api/users/:userID', (req, res) => {
 
 
 // GET TRAVEL
-app.get('/api/travels', passport.authenticate('jwt', { session:  false }), (req, res) => {
-  connection.query('SELECT * from travels order by travelID desc', (err, results) => {
+app.get('/api/travels', (req, res) => {
+  connection.query('SELECT * from travels order by start_date desc', (err, results) => {
     if (err) {
       res.status(500).send('Erreur lors de la récupération des voyages');
     } else {
@@ -247,7 +257,7 @@ app.get('/api/travels/:travelID/users',(req, res) => {
 // app.get('/api/travels/:travelID/users', (req,res) => {
 // app.get('/api/users/:userID/travels', (req,res) => {
 // GET TRAVEL RESERVATION
-app.get('/api/travel_user/:userID', (req,res) => {
+app.get('/api/:userID/travel_user', (req,res) => {
   const userID = req.params.userID
   console.log(userID)
   connection.query('SELECT * FROM travels AS t INNER JOIN travel_user AS tu ON t.travelID = tu.id_travel WHERE tu.id_user = ?', [userID], (err, results) => {
@@ -277,7 +287,7 @@ app.delete('/api/travel_user/:travel_user_id', (req,res) => {
 
 // LOGIN & TOKEN
 
-app.post('/api/login', function(req, res)  {
+app.post('/api/login', (req, res) => {
   passport.authenticate('local',(err, users, info) => {
     if(err)
       return res.status(500).send(err)
@@ -305,20 +315,26 @@ const upload = multer({
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif|svg)$/)) {
       return cb(('Only images are allowed.'), false);
     }
-    cb(null, true);
+    //cb(null, true);
+    cb(null, file.originalname);
   } 
 });
 
-app.post('/uploaddufichier', upload.single('file'), function (req, res, next) {
-  fs.rename(req.file.path, '../tuktuktravel/public/' + req.file.originalname, function(err){
-    if (err) {
-      res.redirect(targetUrl)
-      res.send('problème durant le transfert');
-    } else {
-        res.send('Fichier transféré avec succès');
-    }
+app.post('/uploaddufichier', upload.single('image'), (req, res) => {
+  // fs.access('../tuktuktravel/public/'+ req.file.originalname, fs.constants.F_OK, (err) => {
+  //   console.log(`${req.file.name} ${err ? 'does not exist' : 'exists'}`);
+  //   if (!err) {
+  //     fs.unlinkSync('../tuktuktravel/public/'+ req.file.originalname);
+  //   }
+  fs.rename(req.file.path, '../tuktuktravel/public' + req.file.originalname, function(err) {
+  if (err) throw err;
+  //   //res.redirect(targetUrl)
+  //   //res.send('problème durant le transfert');
+  res.send('Fichier transféré avec succès');
+  console.log("filenewpath", req.file.path)
   });
-})
+});
+
 
 // app.listen(port, (err) => {
 //   if (err) {

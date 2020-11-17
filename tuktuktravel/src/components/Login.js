@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TextInput from "components/input/TextInput";
 import { validateEmail } from "utils/validatorUtils";
-import back from "../img/arrowb.png";
-import logoFaux from "../img/logoFaux.png";
+import back from "../assets/img/arrowb.png";
+import logoFaux from "../assets/img/logoFaux.png";
 
 class Login extends Component {
   constructor(props) {
@@ -22,19 +22,12 @@ class Login extends Component {
 
   handleChange = (value, type) => {
     const { login } = this.state;
-    console.log(login)
     if (type === 'email' && value !== '' && !validateEmail(value)) {
       this.setState({
         error: 'Veuillez insérer un email valide'
       });
      return;
     }
-    // if (type === 'email' && (validateEmail(value) || value === '')) {
-    //   this.setState({
-    //     error: ''
-    //   });
-    //   //return;
-    // }
     this.setState({
       login: {
         ...login,
@@ -46,7 +39,7 @@ class Login extends Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/api/login", {
+    fetch("/api/login", {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -64,9 +57,8 @@ class Login extends Component {
         }
       })
       .then((res) => {
-        console.log(res)
         this.props.saveToken(res.token, res.user.userID)
-        this.props.history.push("/Accueil");
+        this.props.history.push("/accueil");
         //this.setState({ flash: res.flash });
       })
       .catch((err) => this.setState({ flash: err.flash }));
@@ -80,13 +72,17 @@ class Login extends Component {
       return acc;
     }, []);
     return (
-      <div>
-        <div className="title-user-connexion">Connecte - toi ! </div>
-        <Link className="link-cgu-to-formuser" to="/Home">
-          <figure className="fig-back-arrow">
-            <img className="back-arrow" src={back} alt="Arrow to back" />
-          </figure>
-        </Link>
+      <div className="travel-cards">
+        <div className="title-and-home">
+          <div className="title-travel-cards">Connecte - toi ! </div>
+          <div>
+            <Link className="link-back-arrow" to="/Home">
+              <figure className="fig-back-arrow-travelcards">
+                <img className="back-arrow" src={back} alt="Arrow to back" />
+              </figure>
+            </Link>
+          </div>
+        </div>
         
         <form className="user_connexion" onSubmit={this.submitForm}>
           <div>

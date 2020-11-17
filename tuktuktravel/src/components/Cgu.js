@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import back from '../img/arrow-back.png'
-import Logo from '../img/tuk-tuk logo.png';
+import back from '../assets/img/arrow-back.png'
+import Logo from '../assets/img/tuk-tuk logo.png';
 
 
 
