@@ -26,8 +26,7 @@ class UploadCityPic extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      let imageUrl = (response.data.data.image.url).split('/').slice(3).join('/')
-      //this.props.uploadCityPic(this.state.file.name)
+      let imageUrl = (response.data.data.image.url).split('/').slice(3).join('/');
       this.props.uploadCityPic(imageUrl)
       this.setState({
         isUpload: true,

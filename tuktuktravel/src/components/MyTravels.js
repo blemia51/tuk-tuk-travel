@@ -15,28 +15,18 @@ class MyTravels extends Component {
   }
 
   componentDidMount() {
-    fetch(`/api/travel_user/${this.props.userID}`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.setState({
-          travel_user: data,
-        });
-        this.props.fetchMyTravelsSuccess(data)
-      })
-      .catch();
+    const { fetchMyTravels, userID, myTravels } = this.props
+    fetchMyTravels(userID);
+    if (myTravels) {
+      this.setState({ travel_user: myTravels });
+    }
   }
+
+   componentDidUpdate(prevProps) {
+     if (prevProps.myTravels !== this.props.myTravels) {
+       this.setState({ travel_user: this.props.myTravels });
+     }
+   }
 
   cancelTravelReservation = (id) => {
     axios
@@ -59,6 +49,7 @@ class MyTravels extends Component {
     const favoris = favorites.map((favorite) =>
       travels.find((travel) => travel.travelID === favorite)
     );
+
     return (
       <div>
         <div className="title-travel-cards">Mes Annonces sauvegardées</div>
@@ -66,7 +57,7 @@ class MyTravels extends Component {
           {favoris.length > 0 ? (
             favoris.map((favori) => {
               return (
-                <div className="favorites--container">
+                <div className="favorites--container" key={`id_${favori.travelID}`}>
                   <Link
                     to={{
                       pathname: "/traveldetails",
@@ -139,12 +130,13 @@ class MyTravels extends Component {
       <div className="travel-cards">
         <div className="title-travel-cards">Mes Tuk-tuk</div>
         <span className="form-separator mb-2 mt-2" />
+        <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
         <div className="travel--container">
-          <div className="title-travel-cards">Prochains Tuk-tuk Prévus</div>
+          
           {React.Children.toArray(
             this.state.travel_user.map((res) => {
               return (
-                <div className="liste-travel">
+                <div className="liste-travel" key={res.id} >
                   {/* <figure
                     style={{
                       position: "relative",
@@ -175,13 +167,8 @@ class MyTravels extends Component {
                     to={{
                       pathname: "/mytraveldetails",
                       state: {
-                        cityPic: res.cityPic,
                         travelID: res.travelID,
-                        destination: res.destination,
                         IDuser_creator: res.IDuser_creator,
-                        start_date: res.start_date,
-                        end_date: res.end_date,
-                        description: res.description,
                         travelUserId: res.travel_user_id,
                       },
                     }}
@@ -220,6 +207,8 @@ MyTravels.propTypes = {
   token: PropTypes.string,
   travels: PropTypes.array,
   userID: PropTypes.number,
+  myTravels: PropTypes.array,
+  fetchMyTravels: PropTypes.func,
 };
 
 export default MyTravels;

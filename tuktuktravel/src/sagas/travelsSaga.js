@@ -1,5 +1,6 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import request from '../utils/request'
+//import request from '../utils/request';
+import TravelsApi from '../api/TravelsApi'
 import { 
   FETCH_TRAVELS,
   fetchTravelsSuccess,
@@ -8,10 +9,10 @@ import {
  
   
 export function* getTravels() {
-  const url = '/api/travels'
+  //const url = '/api/travels'
+  const travelsApi = new TravelsApi()
   try {      
-    const travels = yield call(request, url);
-    console.log('travels', travels);
+    const travels = yield call(travelsApi.fetchTravels);
     yield put(fetchTravelsSuccess(travels));
   } catch (e) {
     if (e.response) {

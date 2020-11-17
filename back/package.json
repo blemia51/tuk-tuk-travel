@@ -11,7 +11,7 @@
     "test": "DB_NAME=tuktuk_test jest --detectOpenHandles",
     "test:watch": "DB_NAME=tuktuk_test jest --watchAll --detectOpenHandles"
   },
-  "author": "Herve Bourelle, Xenia Lecomte, Maxime Fery, Sylvie Lecrocq",
+  "author": "Herve Bourelle",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.0",

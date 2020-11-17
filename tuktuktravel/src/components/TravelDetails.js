@@ -117,7 +117,10 @@ class TravelDetails extends Component {
         </div>
 
         <div className="travel-creator">
-          <Link to="/chat">
+          <Link to={{
+            pathname: "/chat",
+            state: { avatar: userCreator.avatar },
+            }}>
             <img
               src={
                 !userCreator.avatar
@@ -164,7 +167,11 @@ class TravelDetails extends Component {
                   <div className="travel-user-description">
                     <div className="travel-user-avatar-box">
                       <img
-                        src={user.avatar}
+                        src={
+                          user.avatar 
+                            ? user.avatar 
+                            : 'placeholder-profil.png'
+                        }
                         alt="avatar"
                         className="travel-user-avatar"
                       ></img>
@@ -208,7 +215,7 @@ TravelDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
-  location: PropTypes.string,
+  location: PropTypes.object,
   token: PropTypes.string,
   userID: PropTypes.number,
 };

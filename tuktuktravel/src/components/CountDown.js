@@ -13,15 +13,15 @@ class CountDown extends Component {
   updateClock = () => {
     const { date } = this.props;
     const eventDate = Date.parse(date);
-    let difference = eventDate - new Date();
+    const remainingTime = eventDate - new Date();
   
-    if (difference < 1) {
+    if (remainingTime < 1) {
       this.setState({ timeUp: true });
     } else {
-      let days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-      let minutes = Math.floor((difference / (1000 * 60)) % 60);
-      let seconds = Math.floor((difference / 1000) % 60);
+      let days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+      let minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+      let seconds = Math.floor((remainingTime / 1000) % 60);
       this.setState({
         hours: hours > 9 ? hours : `0${hours}`,
         minutes: minutes > 9 ? minutes : `0${minutes}`,

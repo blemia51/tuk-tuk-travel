@@ -15,7 +15,7 @@ class UploadAvatar extends React.Component {
     e.preventDefault();
     const url = "/uploaddufichier";
     const formData = new FormData();
-    formData.append("file", this.state.file);
+    formData.append("image", this.state.file);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -23,14 +23,19 @@ class UploadAvatar extends React.Component {
     };
 
     post(url, formData, config).then((response) => {
-      this.props.uploadAvatar(this.state.file.name);
       this.setState({
         isUpload: true,
       });
     });
   }
+
   handleChange = (e) => {
     this.setState({ file: e.target.files[0] });
+    if (e.target.files.length === 1) {
+      const file = e.target.files[0]
+      this.setState({ file: file });
+      this.props.uploadAvatar(file.name);
+    }
   }
 
   render() { 
@@ -49,9 +54,6 @@ class UploadAvatar extends React.Component {
         />
         </div>
         <label htmlFor="avatar">Modifier</label>
-        {/* <button className="send-form-users" onClick={this.onFormSubmit}>
-          Changer
-        </button> */}
         {this.state.isUpload && (
           <div className="okUser">
             <img src={logoOk} alt="logoOk" className="logoOk" />

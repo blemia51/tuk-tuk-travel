@@ -1,4 +1,5 @@
 import 'whatwg-fetch'
+import axios from 'axios';
 // import { execute, makePromise } from 'apollo-link'
 // import { HttpLink } from 'apollo-link-http'
 // import { onError } from 'apollo-link-error'
@@ -16,7 +17,6 @@ function parseJSON(response) {
   if (response.status === 204) {
     return response
   }
-  console.log(response)
   return response.json()
 }
 
@@ -66,11 +66,18 @@ export default function request(url, options) {
   //   }
   //   optionsMerged.headers = headers
   // }
-  return fetch(url, options)
+
+  return axios(url, options)
     .then(checkStatus)
-    .then(parseJSON)
-    //.then(data => {console.log('data', data)})
+    .then(response => response.data)
 }
+
+
+  // return fetch(url, options)
+  //   .then(checkStatus)
+  //   .then(parseJSON)
+    //.then(data => {console.log('data', data)})
+//}
 
 /* eslint-disable no-console */
 

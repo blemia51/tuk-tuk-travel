@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Widget, addResponseMessage } from 'react-chat-widget';
-import herve from '../assets/img/herve.png'
 
 import 'react-chat-widget/lib/styles.css';
 
 class Chat extends Component {
   componentDidMount() {
-    addResponseMessage("Welcome to this awesome chat!");
+    addResponseMessage("Salut! si tu as des questions c'est ici!");
   }
 
   handleNewUserMessage = (newMessage) => {
@@ -16,11 +15,13 @@ class Chat extends Component {
   }
 
   render() {
+    const { location } = this.props;
+    const { state: { avatar } } = location;
     return (
       <div className="App">
         <Widget
           handleNewUserMessage={this.handleNewUserMessage}
-          profileAvatar={herve}
+          profileAvatar={avatar}
         />
       </div>
     );

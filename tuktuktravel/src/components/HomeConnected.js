@@ -5,7 +5,7 @@ import SearchInput from "components/input/SearchInput";
 import NavFooter from "./NavFooter";
 import CountDown from "../components/CountDown";
 import { Link } from "react-router-dom";
-import back from "../assets/img/arrowb.png";
+//import back from "../assets/img/arrowb.png";
 
 class HomeConnected extends PureComponent {
   state = {
@@ -15,7 +15,14 @@ class HomeConnected extends PureComponent {
   };
 
   componentDidMount() {
-    const { fetchUserProfile, fetchTravels, fetchMyTravels, userID, travels } = this.props;
+    const {
+      fetchUserProfile,
+      fetchTravels,
+      fetchMyTravels,
+      userID,
+      travels
+    } = this.props;
+    
     fetchUserProfile(userID)
     fetchTravels()
     if (travels) {
@@ -25,9 +32,6 @@ class HomeConnected extends PureComponent {
       });
     }
     fetchMyTravels(userID)
-    
-    //request(url)
-    //console.log(request(url))
 
     // fetch("/api/travels", {
     //   method: "GET",
@@ -133,7 +137,7 @@ class HomeConnected extends PureComponent {
       return null;
     }
     return (
-      <div className="travel--container">
+      <div className="my-next-travel--container">
         {React.Children.toArray(
           this.props.myTravels.map((res) => {
             return (
@@ -245,7 +249,8 @@ class HomeConnected extends PureComponent {
           <div>
             <Link className="link-back-arrow" to="/logout">
               <figure className="fig-back-arrow-travelcards">
-                <img className="back-arrow" src={back} alt="Arrow to back" />
+                {/* <img className="back-arrow" src={back} alt="Arrow to back" /> */}
+                <i className="fas fa-user-slash" style={{fontSize: '24px'}}></i>
               </figure>
             </Link>
           </div>

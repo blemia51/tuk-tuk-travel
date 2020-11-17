@@ -104,6 +104,27 @@ class UserProfile extends Component {
       userID: this.props.userID,
       avatar: this.props.avatar,
     };
+    console.log(update)
+    //this.props.updateProfile(update)
+
+    // fetch(
+    //   `/api/user`,
+    //   { 
+    //     method: "PUT",
+    //     body: JSON.stringify({...profil}),
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     }
+    //   },
+    // )
+    // .then((res) => {
+    //   this.setState({
+    //     isAdded: true,
+    //   });
+    // })
+    // .catch((event) => {
+    //   console.error(event);
+    // });
 
     axios
       .put(`/api/users`, update)
@@ -141,32 +162,6 @@ class UserProfile extends Component {
       <div>
         <div className="title-user-profile">PROFIL</div>
         <span className='form-separator mb-2 mt-2' />
-        {/* {React.Children.toArray(
-          this.state.user &&
-            this.state.user.map((res) => (
-              <div className="user-profile">
-                <div className="profile-picture-container">
-                  <img
-                    src={res.avatar}
-                    alt="profil"
-                    className="profile-picture"
-                  ></img>
-                </div>
-                <div>Nom : {res.lastname}</div>
-                <div>Prénom : {res.firstname}</div>
-                <div>
-                  Date de naissance :{" "}
-                  <Moment format="DD/MM/YYYY">{res.birthday}</Moment>
-                </div>
-                <div>Ville : {res.city}</div>
-                <div>{res.contry}</div>
-                <div>E-mail : {res.email}</div>
-                <div>Téléphone : {res.phone_number}</div>
-                <div>{res.description}</div>
-              </div>
-            ))
-        )} */}
-        
         <div className="profile-picture-container">
           <UploadAvatar userProfileAvatar={userProfile.avatar} />
         </div>
@@ -175,7 +170,7 @@ class UserProfile extends Component {
             {React.Children.toArray(inputs.map((input) => {
               return (
                 <TextInput
-                  noEdit
+                  //noEdit
                   type={input}
                   label={input}
                   placeholder={input}
@@ -216,6 +211,7 @@ UserProfile.propTypes = {
   token: PropTypes.string,
   userID: PropTypes.number,
   userProfile: PropTypes.object,
+  updateUserProfile: PropTypes.func,
 }
 
 export default UserProfile;

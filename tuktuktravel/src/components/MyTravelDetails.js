@@ -89,7 +89,6 @@ class TravelDetails extends Component {
     const travelDetail = this.props.travels.find(
       (travelDetail) => travelDetail.travelID === travelID
     );
-    console.log("travelDetail", travelDetail)
     const { userCreator, users } = this.state;
     return (
       <div className="travel-details">
@@ -135,11 +134,15 @@ class TravelDetails extends Component {
               </p>
             </div>
             <div className="travel-user-avatar-container">
-              {users.map((user) => (
+              {React.Children.toArray(users.map((user) => (
                 <div className="travel-user-description">
                   <div className="travel-user-avatar-box">
                     <img
-                      src={user.avatar}
+                      src={
+                        user.avatar 
+                          ? user.avatar 
+                          : 'placeholder-profil.png'
+                      }
                       alt="avatar"
                       className="travel-user-avatar"
                     />
@@ -148,7 +151,7 @@ class TravelDetails extends Component {
                     {user.firstname}
                   </p>
                 </div>
-              ))}
+              )))}
             </div>
             <p className="descr-traveldetails">{travelDetail.description} </p>
           </div>
@@ -170,8 +173,8 @@ TravelDetails.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  location: PropTypes.string,
-  token: PropTypes.number,
+  location: PropTypes.object,
+  token: PropTypes.string,
 }
 
 export default TravelDetails;

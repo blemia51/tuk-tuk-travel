@@ -772,10 +772,16 @@ a {
 }
 
 @media screen and (min-width: 768px) {
+  .my-next-travel--container {
+    display: flex;
+    width: 100%;
+    margin-left: 24px;
+  }
   .travel--container {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    width: 100%;
   }
   .liste-travel {
     width: 30%;
@@ -971,6 +977,7 @@ a {
 
 .favorites-placeholder p {
   margin: 0;
+  text-align: left;
 }
 
 .favorites-placeholder {

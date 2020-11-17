@@ -1,43 +1,50 @@
-function UserApi(executor) {
-  return {
-    fetchUserProfile,
-    //changeUserProfile,
-  };
+import axios from 'axios';
 
-  function fetchUserProfile(id) {
-    console.log('idididididididididi')
-    return (
+export default function UserApi() {
+  return ({
+    fetchUserProfile,
+    postUserProfile,
+    updateUserProfile,
+  });
+
+  function fetchUserProfile(userID, options) {
+    return axios.get(`/api/users/${userID}`, options)
+    .then((response) => response.data)
+    .catch(event => console.error(event))
+  }
+
+  function postUserProfile(userProfile) {
+    return axios.post(`/api/users`, userProfile)
+    .then((response) => response.data)
+    .catch(event => console.error(event))
+  }
+
+  function updateUserProfile(value) {
+    return axios.put(`/api/user`, value)
+    .then((response) => response.data)
+    .catch(event => console.error(event))
+  }
+
+}
+        
       
-      fetch(`http://localhost:8000/api/users/${id}`, {
-        method: "GET",
-        // headers: {
-        //   Authorization: "Bearer " + this.props.token,
-        //   "Content-Type": "application/json",
-        // },
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        return data;
-      })
+      
     
     // function fetchUserProfile(id) {
     //   let endpoint = `/api/users/${id}`;
 
     //   return executor
     //     .get(endpoint, {
-    //       timeout: 600000,
-    //       // headers: {
-    //       //   Authorization: `Basic ${FORM_CONTACT_TOKEN}`
-    //       // }
+    //      // headers: {
+        //   Authorization: "Bearer " + this.props.token,
+        //   "Content-Type": "application/json",
+        // },
     //     })
     //     .then(response => {
     //       return response;
     //     });
     // }
-    )
-  }
-}
+    
+ // }
+//}
 
-export default UserApi;

@@ -257,7 +257,7 @@ app.get('/api/travels/:travelID/users',(req, res) => {
 // app.get('/api/travels/:travelID/users', (req,res) => {
 // app.get('/api/users/:userID/travels', (req,res) => {
 // GET TRAVEL RESERVATION
-app.get('/api/travel_user/:userID', (req,res) => {
+app.get('/api/:userID/travel_user', (req,res) => {
   const userID = req.params.userID
   console.log(userID)
   connection.query('SELECT * FROM travels AS t INNER JOIN travel_user AS tu ON t.travelID = tu.id_travel WHERE tu.id_user = ?', [userID], (err, results) => {
@@ -326,7 +326,7 @@ app.post('/uploaddufichier', upload.single('image'), (req, res) => {
   //   if (!err) {
   //     fs.unlinkSync('../tuktuktravel/public/'+ req.file.originalname);
   //   }
-  fs.rename(req.file.path, 'client/build/' + req.file.originalname, function(err) {
+  fs.rename(req.file.path, '../tuktuktravel/public' + req.file.originalname, function(err) {
   if (err) throw err;
   //   //res.redirect(targetUrl)
   //   //res.send('problème durant le transfert');

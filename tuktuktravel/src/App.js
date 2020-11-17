@@ -6,7 +6,7 @@ import HomeIntroFirst from './components/HomeIntroFirst';
 import HomeIntroSec from './components/HomeIntroSec';
 import Home from './components/Home';
 import HomeConnected from './container/HomeConnectedContainer';
-import FormUsers from './components/FormUsers';
+import FormUsers from './container/FormUsersContainer';
 import UserProfile from './container/UserProfileContainer';
 import Login from './container/LoginContainer';
 import TravelForm from './container/TravelFormContainer';
@@ -51,7 +51,7 @@ function App(props) {
         }}/>
         <Route exact path="/introsecond" component={HomeIntroSec}/>
         <Route exact path="/home" component={Home}/>
-        <Route path="/formusers"component={FormUsers}/>
+        <Route path="/formusers" component={FormUsers}/>
         {/* <Route path="/profile"component={requireAuth(UserProfileContainer)}/> */}
         <Route path="/profile"component={UserProfile}/>
         <Route path="/cgu"component={Cgu}/>

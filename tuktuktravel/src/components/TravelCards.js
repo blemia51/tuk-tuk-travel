@@ -58,11 +58,11 @@ class TravelCards extends Component {
         <div className="title-and-home">
           <div className="title-travel-cards">Tuk-tuk proposés</div>
           <div>
-            <Link className="link-back-arrow" to="/logout">
+            {/* <Link className="link-back-arrow" to="/logout">
               <figure className="fig-back-arrow-travelcards">
                 <img className="back-arrow" src={back} alt="Arrow to back" />
               </figure>
-            </Link>
+            </Link> */}
           </div>
         </div>
         <SearchInput
