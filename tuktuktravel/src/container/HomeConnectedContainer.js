@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 
-import { fetchUserProfile, fetchUserProfileSuccess } from "../actions/userActions";
-import { fetchTravels, fetchTravelsSuccess } from "../actions/travelCardsActions"
-import { fetchMyTravels, fetchMyTravelsSuccess } from "../actions/myTravelsAction"
+import { fetchUserProfile } from "../actions/userActions";
+import { fetchTravels } from "../actions/travelCardsActions"
+import { fetchMyTravels } from "../actions/myTravelsAction"
 import HomeConnected from "../components/HomeConnected";
 
 export default connect(
@@ -14,10 +14,8 @@ export default connect(
     myTravels: state.myTravelsState.myTravels,
   }),
   (dispatch) => ({
-    fetchUserProfile: (userID) => dispatch(fetchUserProfile(userID)),
-    fetchUserProfileSuccess: (data) => dispatch(fetchUserProfileSuccess(data)),
+    fetchUserProfile: (userID, token) => dispatch(fetchUserProfile(userID, token)),
     fetchTravels: () => dispatch(fetchTravels()),
     fetchMyTravels: (userID) => dispatch(fetchMyTravels(userID)),
-    fetchMyTravelsSuccess: (travels) => dispatch(fetchMyTravelsSuccess(travels)),
   })
 )(HomeConnected);

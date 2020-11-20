@@ -5,6 +5,7 @@ import NavFooter from "./NavFooter";
 import SearchInput from "components/input/SearchInput";
 import { Link } from "react-router-dom";
 import back from "../assets/img/arrowb.png";
+import { persistor } from '../store'
 
 class TravelCards extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class TravelCards extends Component {
       travelsTemp: travels,
       travelsStore: travels,
     });
+    persistor.purge()
   }
 
   componentDidUpdate(prevProps, prevState) {

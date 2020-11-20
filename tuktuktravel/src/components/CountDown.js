@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+//import { formatFullDate } from '../utils/dateUtils'
 
 class CountDown extends Component {
   state = {
@@ -14,6 +15,7 @@ class CountDown extends Component {
     const { date } = this.props;
     const eventDate = Date.parse(date);
     const remainingTime = eventDate - new Date();
+    
   
     if (remainingTime < 1) {
       this.setState({ timeUp: true });
@@ -35,6 +37,7 @@ class CountDown extends Component {
     this.updateClock();
     let intervalId = setInterval(this.updateClock, 1000);
     this.setState({ intervalId: intervalId });
+    //console.log(formatFullDate(new Date))
   }
 
   componentWillUnmount() {

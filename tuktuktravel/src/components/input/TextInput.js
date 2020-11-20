@@ -4,24 +4,6 @@ import React, { Fragment, PureComponent } from 'react';
 import { dynamicClassName } from "utils/dynamicClassName"
 import ErrorMessage from '../ErrorMessage';
 
-// type Props = {
-//   id: string,
-//   placeholder?: string,
-//   className?: string,
-//   label: string,
-//   errorMessage?: string,
-//   hasError?: boolean,
-//   isDark?: boolean,
-//   isLight?: boolean,
-//   onChange?: (value: string) => void,
-//   type?: string,
-//   defaultValue?: string | null,
-//   disable?: boolean,
-//   onFocus?: () => void,
-//   onBlur?: () => void,
-//   noEdit?: boolean,
-// };
-
 class TextInputMaterial extends PureComponent {
 
   static defaultProps = {
