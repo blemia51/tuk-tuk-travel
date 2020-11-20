@@ -8,7 +8,9 @@ export default function TravelsApi() {
   });
 
   function fetchTravels() {
-    return axios.get('/api/travels')
+    return axios.get('/api/travels', {
+    headers: {}
+    })
     .then((response) => response.data)
     .catch((error) => console.log(error))
   }

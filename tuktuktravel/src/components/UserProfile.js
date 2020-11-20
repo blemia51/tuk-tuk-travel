@@ -68,44 +68,21 @@ class UserProfile extends Component {
     return state;
   }
 
-  // GET ONE USER
   componentDidMount() {
-    fetch(
-      `/api/users/${this.props.userID}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + this.props.token,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => {
-        if (!res.ok) {
-          this.props.history.push("/userconnexion");
-        } else {
-          return res.json();
-        }
-      })
-      .then((data) => {
-        this.setState({
-          user: data,
-        });
-      })
-      .catch();
+    const { userID, token, fetchUserProfile } = this.props;
+    fetchUserProfile(userID, token)
   }
 
   // UPDATE PROFIL
   handleSubmit = (e) => {
     const { profil } = this.state;
     e.preventDefault();
-    const update = {
+    const updateUserProfile = {
       ...profil,
       userID: this.props.userID,
       avatar: this.props.avatar,
     };
-    console.log(update)
-    //this.props.updateProfile(update)
+    this.props.updateUserProfile(updateUserProfile)
 
     // fetch(
     //   `/api/user`,
@@ -126,16 +103,16 @@ class UserProfile extends Component {
     //   console.error(event);
     // });
 
-    axios
-      .put(`/api/users`, update)
-      .then((res) => {
-        this.setState({
-          isAdded: true,
-        });
-      })
-      .catch((event) => {
-        console.error(event);
-      });
+    // axios
+    //   .put(`/api/users`, update)
+    //   .then((res) => {
+    //     this.setState({
+    //       isAdded: true,
+    //     });
+    //   })
+    //   .catch((event) => {
+    //     console.error(event);
+    //   });
   };
 
   handleChange = (value, type) => {

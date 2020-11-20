@@ -44,13 +44,15 @@ class TravelForm extends Component {
 
     return React.Children.toArray(inputs.map((input) => {
       let date = ''
+      let dateInput = null
       if (input.split('_').join(' ').includes('date')) {
          date = 'JJ/MM/AAAA'
+         dateInput = 'date'
       }
 
       return (
         <TextInput
-          type={input}
+          type={dateInput ? dateInput : 'text'}
           label={input.split('_').join(' ')}
           placeholder={date}
           className='select--material'

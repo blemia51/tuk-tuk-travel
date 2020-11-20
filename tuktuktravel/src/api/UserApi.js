@@ -7,8 +7,13 @@ export default function UserApi() {
     updateUserProfile,
   });
 
-  function fetchUserProfile(userID, options) {
-    return axios.get(`/api/users/${userID}`, options)
+  function fetchUserProfile(userID, token) {
+    return axios.get(`/api/users/${userID}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+       "Content-Type": "application/json",
+      },
+    })
     .then((response) => response.data)
     .catch(event => console.error(event))
   }
@@ -19,8 +24,8 @@ export default function UserApi() {
     .catch(event => console.error(event))
   }
 
-  function updateUserProfile(value) {
-    return axios.put(`/api/user`, value)
+  function updateUserProfile(userProfile) {
+    return axios.put(`/api/users`, userProfile)
     .then((response) => response.data)
     .catch(event => console.error(event))
   }

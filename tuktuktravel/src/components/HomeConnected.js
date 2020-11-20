@@ -20,10 +20,11 @@ class HomeConnected extends PureComponent {
       fetchTravels,
       fetchMyTravels,
       userID,
-      travels
+      travels,
+      token
     } = this.props;
-    
-    fetchUserProfile(userID)
+
+    fetchUserProfile(userID, token)
     fetchTravels()
     if (travels) {
       this.setState({ 
@@ -250,7 +251,7 @@ class HomeConnected extends PureComponent {
             <Link className="link-back-arrow" to="/logout">
               <figure className="fig-back-arrow-travelcards">
                 {/* <img className="back-arrow" src={back} alt="Arrow to back" /> */}
-                <i className="fas fa-user-slash" style={{fontSize: '24px'}}></i>
+                <i className="fas fa-user-alt" style={{fontSize: '24px', color: '#fa8c17'}}></i>
               </figure>
             </Link>
           </div>

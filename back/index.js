@@ -88,7 +88,7 @@ app.get('/api/users', (req, res) => {
 });
 
 //GET ONE USERS
-app.get('/api/users/:userID', (req, res) => {
+app.get('/api/users/:userID', passport.authenticate('jwt', { session:  false }), (req, res) => {
   const idUser = req.params.userID;
   connection.query('SELECT * from users WHERE userID = ?', [idUser], (err, results) => {
     if (err) {
